@@ -1,0 +1,79 @@
+<div class="flex">
+    <app-navbar></app-navbar>
+    <div class="bg-white">
+        <div class="pt-6 flex flex-wrap">
+    
+    
+            <!-- Image gallery -->
+            <div class=" mt-6 sm:px-6 lg:grid    lg:grid-cols-4 lg:gap-x-8 lg:px-8 w-[60vw] h-[20vh]">
+                <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block bg-black">
+                    <img src=""
+                        alt="..."
+                        class="h-full w-full object-cover object-center">
+                </div>
+                <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                    <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-black ">
+                        <img   src=""
+                            alt="...." class="h-full w-full object-cover object-center">
+                    </div>
+                    <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-black ">
+                        <img   src=""
+                            alt="..." class="h-full w-full object-cover object-center">
+                    </div>
+                </div>
+                <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w- bg-black 3 sm:overflow-hidden sm:rounded-lg">
+                    <img   src=""
+                        alt="...." class="h-full w-full object-cover object-center">
+                </div>
+                <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rou bg-black nded-lg lg:block">
+                    <img   src=""
+                        alt="...."
+                        class="h-full w-full object-cover object-center">
+                </div>
+    
+            </div>
+            
+    
+          
+            <!-- Product info -->
+            <div class="pb-16 pt-10 sm:px-6  lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16 w-[30vw]">
+                <div class="lg:col-span-2 lg:border-r lg:border-gray-200 ">
+                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{product.name}}</h1>
+                </div>
+    
+    
+    
+                <div class="lg:pb-16  lg:pt-6">
+                    <!-- Description and details -->
+                    <div>
+                        <h3 class="">{{product.price}}</h3>
+                    </div>
+    
+                    <div class="mt-10">
+                        <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+    
+                        <div class="mt-4">
+                            <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.brand}}</span></li>
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.category}}</span></li>
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.stock}}</span>
+                                </li>
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.gears}}</span></li>
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.brake_type}}</span></li>
+                                <li class="text-gray-400"><span class="text-gray-600">{{product.suspension}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                    <div class="mt-10">
+                        <h2 class="text-sm font-medium text-gray-900">Details</h2>
+    
+                        <div class="mt-4 space-y-6">
+                            <p class="text-sm text-gray-600">{{product.cycle_Details}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

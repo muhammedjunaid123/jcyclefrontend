@@ -1,0 +1,18 @@
+<app-nav-bar></app-nav-bar>
+<div
+  class="py-5 px-3 grid lg:grid-cols-3 xl2:grid-cols-5 xl:grid-cols-4 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
+
+  <div  *ngFor="let p of product"
+    class="overflow-hidden p-2 grid shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw]   sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg  hover:border-t-4 hover:border-b ">
+    <div>
+      <img src="../../../assets/Bicycle.jpeg" alt="..." class="">
+    </div>
+    <hr>
+    <div class="">
+      <p class="text-black break-normal hover:text-clip ">{{p.name}}</p>
+      <p><strong>PRICE:</strong> ₹{{p.price}}</p>
+
+    </div>
+  </div>
+
+</div>

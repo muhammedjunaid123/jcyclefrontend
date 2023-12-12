@@ -39,9 +39,9 @@
                 <div>
                     <label for="name" class="block text-sm font-medium leading-6 text-gray-900"> Name</label>
                     <div class="mt-1">
-                        <input id="name" name="name" type="name" autocomplete="name" required
+                        <input  id="name" name="name" type="name" autocomplete="name" required
                         formControlName="name"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                            class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
                             <div *ngIf="form.submitted && user?.name?.errors">
                                 <p class="text-danger">name is required</p>
                             </div>
@@ -50,9 +50,9 @@
                 <div>
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="mt-1">
-                        <input id="email" name="email" type="email" autocomplete="email" required
+                        <input  id="email" name="email" type="email" autocomplete="email" required
                         formControlName="email"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                            class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
                             <div *ngIf="form.submitted && user?.email?.errors?.required">
                                 <p class="text-danger">email is required</p>
                             </div>
@@ -64,9 +64,9 @@
                 <div >
                     <label for="Mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
                     <div class="mt-1">
-                        <input id="Mobile" name="Mobile" type="number  " autocomplete="Mobile" required
+                        <input  id="Mobile" name="Mobile" type="number  " autocomplete="Mobile" required
                         formControlName="Mobile"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                            class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
                             <div *ngIf="form.submitted && user?.Mobile?.errors">
                                 <p class="text-danger">Mobile is required and 10 digits!</p>
                             </div>
@@ -79,9 +79,9 @@
                         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                     </div>
                     <div class="mt-1">
-                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                        <input  id="password" name="password" type="password" autocomplete="current-password" required
                         formControlName="password"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                            class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
                             <div *ngIf="form.submitted && user?.password?.errors">
                                 <p class="text-danger">password is required and 6 digits!</p>
                             </div>

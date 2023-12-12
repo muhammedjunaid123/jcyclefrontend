@@ -9,7 +9,7 @@ import { OtpVerificationComponent } from './otp-verification/otp-verification.co
 import { BicycleComponent } from './bicycle/bicycle.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent&&NavBarComponent },
+  { path:'', component: HomeComponent},
 {path: 'login', component: LoginComponent },
 {path:'signup',component:SignupComponent},
 {path:'otp',component:OtpVerificationComponent},

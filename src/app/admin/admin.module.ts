@@ -12,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from './users/users.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { AdminLoginComponent } from './login/login.component';
 
 
 
@@ -24,14 +25,17 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     BrandComponent,
     CategoryComponent,
     UsersComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    AdminLoginComponent
 
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule
+    
+  
    
     
   ]

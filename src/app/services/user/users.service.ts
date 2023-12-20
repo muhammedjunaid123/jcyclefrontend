@@ -66,4 +66,7 @@ const user=localStorage.getItem(environment.UserSecret)
   filterProduct(value:any){
     return this._http.post(`/product/filter`,value)
   }
+  productDetail(id:any){
+    return this._http.get(`/product/productDetail?id=${id}`)
+  }
 }

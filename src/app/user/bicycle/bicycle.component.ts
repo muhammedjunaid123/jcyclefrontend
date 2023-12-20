@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
 
@@ -17,7 +18,9 @@ export class BicycleComponent implements OnInit {
   pSize=6
   currentPage=1
   constructor(private _userService: UsersService,
-    private _toastr: ToastrService,private _fb:FormBuilder) { }
+    private _toastr: ToastrService,private _fb:FormBuilder,
+    private _router:Router
+        ) { }
   ngOnInit(): void {
 
     this.productForm = this._fb.group({
@@ -107,6 +110,9 @@ export class BicycleComponent implements OnInit {
   
       }
     })
+  }
+  productDetails(id:string){
+    this._router.navigate(['/bicycleDetail', { id: id }])
   }
 }
 

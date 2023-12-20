@@ -1,0 +1,42 @@
+<app-nav-bar></app-nav-bar>
+@if(cartProduct.length===0){
+  <img src="../../../assets/not found list.svg"  class="w-[100vw] h-[100vh] flex justify-center" alt="">
+ }
+<div class="p-6 grid grid-cols-1 gap-3 ml-4 justify-center select-none">
+  <div *ngFor="let p of cartProduct" class=" rounded-3xl shadow-2xl w-[90vw] h-[30vh] hover:scale-105 duration-150 grid grid-flow-col p-2 ">
+    <div>
+      <img src="../../../assets/Bicycle.jpeg" alt="" class="w-[20vw] h-[100%] rounded-2xl shadow-2xl">
+    </div>
+    <div class="p-3 w-[50vw]">
+      <div class="mt-2 ">
+        <p><strong>NAME :</strong>{{p.id.name}}</p>
+        <p><strong>PRICE :</strong>₹{{p.id.price}}</p>
+      </div>
+      <h1 class="break-all">
+    {{p.id.cycle_Details}}
+      </h1>
+      <div class="flex justify-between">
+      <div class="flex justify-start">
+        <button (click)="removeCart(p.id)" class="bg-red-800 rounded-md border-solid text-white w-20 h-7 mt-2 justify-center flex">remove</button>
+      </div>
+      <div class="flex justify-end">
+       <div class="flex  justify-center gap-1">
+        <button class=" bg-red-400 rounded-full h-8 w-8" (click)="down(p.count)">
+            -
+        </button>
+        <div class="border border-solid w-10 h-8 flex rounded-lg justify-center ">
+           {{p.count}}
+        </div>
+        <button class=" bg-red-400 rounded-full h-8 w-8" (click)="up(p.count)">
+              +
+        </button>
+       </div>
+      </div>
+      </div>
+    </div>
+    <div class="flex py-10 ">
+      <p>Delivery by {{DeliveryDate|date}}</p>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

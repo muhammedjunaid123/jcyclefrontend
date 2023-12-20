@@ -1,0 +1,32 @@
+<app-nav-bar></app-nav-bar>
+@if(BestSeller.length===0){
+ <img src="../../../assets/not found list.svg"  class="w-[100vw] h-[100vh] flex justify-center" alt="">
+}
+<div class="p-5 grid gap-4 grid-cols-4 ">
+  
+    <div *ngFor="let p of BestSeller"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[45vh] rounded-lg hover:scale-105 duration-150 select-none">
+        <div><img src="../../../assets/Bicycle.jpeg" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
+        <div class="flex flex-col flex-wrap  pl-2">
+            <div><strong>NAME :</strong>{{p.id.name}}</div>
+            <div><strong>PRICE :</strong>₹{{p.id.price}}</div>
+        </div>
+        <div class=" p-0 hover:scale-110 flex text-white justify-center absolute w-[5vw] h-[5vh] bottom-0 left-0 rounded-bl-lg" (click)="wishlist(p.id._id)" >
+          
+         
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                    d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+            </svg>
+           
+            
+        </div>
+        <div
+            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p.id._id)">
+            🛒 Add to Cart
+        </div>
+    
+    </div>
+
+
+</div>
+<app-footer></app-footer>

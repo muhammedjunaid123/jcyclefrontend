@@ -1,2 +1,66 @@
 <app-nav-bar></app-nav-bar>
 
+<div >
+    <section >
+        
+        <div class="flex justify-center py-5">
+            <img src="../../../assets/anime-girls-cyclist-cycling-mountains-sport-hd-wallpaper-preview.jpg" alt="..." class="bg-red-500 shadow-lg w-[80vw]  h-[90vh]">
+        </div>
+    </section>
+    <section  >
+        <div class="flex ml-16">
+            <button class="relative border hover:border-sky-600 duration-500 group cursor-pointer text-sky-50  overflow-hidden h-14 w-56 rounded-md bg-red-800 p-2 flex justify-center items-center font-extrabold">
+                <div class="absolute z-10 w-48 h-48 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-red-900 delay-150 group-hover:delay-75"></div>
+                <div class="absolute z-10 w-40 h-40 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-red-800 delay-150 group-hover:delay-100"></div>
+                <div class="absolute z-10 w-32 h-32 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-red-700 delay-150 group-hover:delay-150"></div>
+                <div class="absolute z-10 w-24 h-24 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-red-600 delay-150 group-hover:delay-200"></div>
+                <div class="absolute z-10 w-16 h-16 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-red-500 delay-150 group-hover:delay-300"></div>
+                <p class="z-10">BEST SELLER</p>
+              </button>
+        </div>
+        <p-carousel [value]="BestSeller" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]="3000"  >
+            <ng-template let-product pTemplate="item">
+                <div class="flex h-[55vh]">
+                    <div *ngFor="let p of BestSeller"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[50vh] rounded-lg hover:scale-105 duration-150 select-none">
+                        <div><img src="../../../assets/Bicycle.jpeg" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
+                        <div class="flex flex-col flex-wrap  pl-2">
+                            <div><strong>NAME :</strong>{{p.name}}</div>
+                            <div><strong>PRICE :</strong>₹{{p.price}}</div>
+                            <div><strong>BRAND :</strong>{{p.brand.Brand_name}}</div>
+                        </div>
+                        <div class=" p-0 hover:scale-110 flex text-white justify-center absolute w-[5vw] h-[5vh] bottom-0 left-0 rounded-bl-lg" (click)="wishlist(p._id)" >
+                            @if (!p.wished) {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                                    <path fill="#ffffff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                        d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+                                </svg>
+                            }
+                           @else {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                                <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+                            </svg>
+                           }
+                            
+                        </div>
+                        <div
+                            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p._id)">
+                            🛒 Add to Cart
+                        </div>
+                    
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </section>
+
+    <div>
+
+    </div>
+
+</div>
+<app-footer></app-footer>
+
+
+
+

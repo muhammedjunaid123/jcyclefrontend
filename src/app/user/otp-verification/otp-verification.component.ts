@@ -5,6 +5,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-otp-verification',
@@ -74,7 +75,16 @@ export class OtpVerificationComponent implements OnInit {
     const user = this.otpVerification.getRawValue();
     if (this.otpVerification.valid && +this.otp === +user.otpCode) {
       this.verified = true
-      this.subscribe.add(this._userServices.loadHome())
+     
+     this._userServices.loadHome(this.id).subscribe({
+      next:()=>{
+        localStorage.setItem(environment.UserSecret,this.token)
+      this._router.navigate([''])
+      },error:(error)=>{
+        this._toastr.error(error.error.message)
+      }
+     })
+      
     } else {
       this._toastr.error('Invalid OTP', 'Jcycle');
     }

@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/services/user/users.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ this.user=this.login.controls
 if(this.login.valid){
  this._userService.userLogin(this.login.value)
  .subscribe({
-  next: () => {
+  next: (res:any) => {
+    localStorage.setItem(environment.UserSecret, res.access_token.toString());
     this._toastr.success('LOGIN SUCCESSFUL');
     this._router.navigate([''])
   },

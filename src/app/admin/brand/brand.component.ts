@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BrandComponent implements OnInit {
   brand: any = []
+  pagesize = 6
+  currentPage = 1
   constructor(private _adminservice: AdminService,private _Router:Router,private _toastr :ToastrService ) {
 
   }

@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,9 @@ adminLog(){
 if(this.adminLogin.valid){
   this._adminService.adminRegister(this.adminLogin.value)
   .subscribe({
-    next:()=>{
+    next:(res:any)=>{
+      localStorage.setItem(environment.AdminSecrect,res.access_token.toString())
+      
       this._toastr.success('LOGIN SUCCESSFUL');
      this._router.navigate(['/admin/product']);
     },

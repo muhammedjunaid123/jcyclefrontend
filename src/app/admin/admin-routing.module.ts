@@ -12,19 +12,20 @@ import { BrandEditComponent } from './brand-edit/brand-edit.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { adminGuard, adminGuardloged } from '../guard/adminGuard/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: AdminLoginComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'productDetail', component: ProductDetailComponent },
-  {path:'productAdd',component:ProductInputComponent},
-  {path:'brandAdd',component:BrandComponent},
-  {path:'categoryAdd',component:CategoryComponent },
-  {path:'users',component:UsersComponent},
-  {path:'brandUpdate',component:BrandEditComponent},
-  {path:'categoryUpdate',component:CategoryEditComponent},
-  {path:'user-details',component:UserDetailsComponent},
-  {path:'productedit',component:ProductEditComponent}
+  { path: '', component: AdminLoginComponent,canActivate:[adminGuardloged] },
+  { path: 'product', component: ProductComponent,canActivate:[adminGuard] },
+  { path: 'productDetail', component: ProductDetailComponent,canActivate:[adminGuard]  },
+  {path:'productAdd',component:ProductInputComponent,canActivate:[adminGuard]},
+  {path:'brandAdd',component:BrandComponent,canActivate:[adminGuard]},
+  {path:'categoryAdd',component:CategoryComponent,canActivate:[adminGuard] },
+  {path:'users',component:UsersComponent,canActivate:[adminGuard]},
+  {path:'brandUpdate',component:BrandEditComponent,canActivate:[adminGuard]},
+  {path:'categoryUpdate',component:CategoryEditComponent,canActivate:[adminGuard]},
+  {path:'user-details',component:UserDetailsComponent,canActivate:[adminGuard]},
+  {path:'productedit',component:ProductEditComponent,canActivate:[adminGuard]}
 ];
 
 @NgModule({

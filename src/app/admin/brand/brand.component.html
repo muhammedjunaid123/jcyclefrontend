@@ -4,7 +4,7 @@
     <div  class="w-full p-4">
         <ul *ngIf="brand" role="list" class=" pl-24 pr-24 divide-gray-100">
     
-            <div  *ngFor="let b of brand">
+            <div  *ngFor="let b of brand |paginate:{itemsPerPage:pagesize,currentPage:currentPage}">
     
             <li class="flex justify-between py-3">
                 <div class="flex min-w-0 gap-x-4">
@@ -13,16 +13,12 @@
                     </div>
                 </div>
                 <div class="flex gap-3">
-                <div *ngIf="b.isBlocked===true">
+                <div >
                     <button (click)="block_or_unblock(b._id,b.isBlocked)" class="bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
-                        unblock
+                        {{b.isBlocked?'unlist':'list'}}
                     </button>
                 </div>
-                <div *ngIf="b.isBlocked===false">
-                    <button (click)="block_or_unblock(b._id,b.isBlocked)" class="bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
-                        block
-                    </button>
-                </div>
+               
                 <button (click)="editBrand(b._id)" class="bg-red-800 rounded-lg w-20 text-white hover:scale-105">EDIT</button>
                 </div>
             </li>
@@ -48,3 +44,6 @@
     
     </div>
 </div>
+<div class="flex justify-center">
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+ </div>

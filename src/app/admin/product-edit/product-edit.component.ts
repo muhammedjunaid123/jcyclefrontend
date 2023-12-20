@@ -15,17 +15,27 @@ export class ProductEditComponent implements OnInit {
   brand: any = []
   category: any = []
   product:any=[]
+  productdata:any=[]
 
   constructor(private _adminService: AdminService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService,private _route:ActivatedRoute) { }
   productupdate(id:string){
     console.log(id);
-    
+     console.log(this.productForm.value);
+     if(this.productForm.value.stock<0){
+       this._toastr.error(' stock can not be a negative value')
+       return
+     } if(this.productForm.value.price<0){
+      this._toastr.error(' price can not be a negative value')
+    return
+    }
      if(this.productForm.valid){      
       this._adminService.updateProduct(id,this.productForm.value).subscribe({
         next:()=>{
           this._router.navigate(['/admin/product'])
         }
       })
+     }else{
+      this._toastr.warning('input can not be null!!!')
      }
   }
   ngOnInit(): void {
@@ -33,6 +43,18 @@ export class ProductEditComponent implements OnInit {
       this._adminService.productDetail(params['id']).subscribe({
         next: (res) => {
           this.product = res
+         this.productdata ={...this.product}
+        delete this.productdata['_id']
+        delete this.productdata['image']
+        delete this.productdata['isBlocked']
+        delete this.productdata['createdAt']
+        delete this.productdata['updatedAt']
+        delete this.productdata['updatedAt']
+        delete this.productdata['wished']
+        delete this.productdata['__v']
+        console.log(this.productdata);
+        
+          this.productForm.setValue(this.productdata)
         }
       })
     });
@@ -48,6 +70,7 @@ export class ProductEditComponent implements OnInit {
       suspension: ['', Validators.required],
       cycle_Details: ['', Validators.required]
     })
+  
 
     this._adminService.getBrand().subscribe({
       next: (res) => {
@@ -59,6 +82,9 @@ export class ProductEditComponent implements OnInit {
         this.category = res
       }
     })
+   
+    
+    
    
   }
 }

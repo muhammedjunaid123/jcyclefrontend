@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from './users/users.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AdminLoginComponent } from './login/login.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -33,7 +34,8 @@ import { AdminLoginComponent } from './login/login.component';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
     
   
    

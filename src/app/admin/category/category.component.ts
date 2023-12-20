@@ -12,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class CategoryComponent  implements OnInit {
   
   category:any=[]
-
+  pagesize = 6
+  currentPage = 1
   constructor(private _adminservice: AdminService,private _Router:Router ,private _toastr :ToastrService) {
 
   }

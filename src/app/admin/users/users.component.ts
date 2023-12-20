@@ -12,6 +12,8 @@ export class UsersComponent implements OnInit{
   
 
   users:any
+  pagesize = 3
+  currentPage = 1
 constructor(private _adminService:AdminService,private _Router:Router){}
 ngOnInit(): void {
   this._adminService.getUsers()

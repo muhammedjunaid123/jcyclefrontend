@@ -16,6 +16,7 @@ export class ProductInputComponent implements OnInit {
   files: File[] = [];
   selectedfiles: File[] = []
   productForm!:FormGroup
+  length!:number
 
  
   constructor(private _adminService: AdminService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
@@ -32,7 +33,7 @@ export class ProductInputComponent implements OnInit {
       brake_type: ['', Validators.required],
       suspension: ['', Validators.required],
       cycle_Details: ['', Validators.required],
-      image: ['', Validators.required]
+      image:[Validators.required]
     })
 
     this._adminService.getBrand().subscribe({
@@ -52,7 +53,6 @@ export class ProductInputComponent implements OnInit {
   }
 
   getFile(event: any) {
-
     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     if (event.target.files.length > 0) {
       const n = event.target.files.length
@@ -67,16 +67,54 @@ export class ProductInputComponent implements OnInit {
       }
       this.selectedfiles = event.target.files
     }
+    this.selectedfiles = Array.from(this.selectedfiles);   
+    this.length = this.selectedfiles.length;
   }
 
   productCreate() {
     if (this.productForm.valid) {
-
-      this._adminService.addProduct( this.productForm.value).subscribe({
+      const form =new FormData();
+      console.log('Initial FormData:', form);
+      let data = this.productForm.getRawValue()
+      console.log(data);
+      
+      form.append('name',data.name)
+      console.log(data.name);
+      console.log('Initial FormData:', form);
+      if(data.price<0){
+        this._toastr.error('price can not be a negative value')
+        return
+      }
+      form.append('price',data.price)
+      console.log('Initial FormData:', form);
+      if(data.stock<0){
+        this._toastr.error('stock can not be a negative value')
+        return
+      }
+      form.append('stock',data.stock)
+      form.append('brand',data.brand)
+      form.append('category',data.category)
+      form.append('gears',data.gears)
+      form.append('brake_type',data.brake_type)
+      form.append('suspension',data.suspension)
+      form.append('cycle_Details',data.cycle_Details)
+      for (let i = 0; i < this.length; i++) {
+        form.append('image', this.selectedfiles[i], this.selectedfiles[i].name);
+      }
+      console.log('imagesss');
+      
+      form.forEach((value, key) => {
+        console.log(key, value);
+      });
+      this._adminService.addProduct(form).subscribe({
         next: () => {
           this._router.navigate(['/admin/product'])
         }
       })
+    }else{
+      console.log(this.productForm.value);
+      
+      this._toastr.warning('input can not be null!!! ')
     }
     
 

@@ -4,7 +4,7 @@
     <section >
         
         <div class="flex justify-center py-5">
-            <img src="../../../assets/anime-girls-cyclist-cycling-mountains-sport-hd-wallpaper-preview.jpg" alt="..." class="bg-red-500 shadow-lg w-[80vw]  h-[90vh]">
+            <img src="../../../assets/pexels-markus-spiske-145399.jpg" alt="..." class=" shadow-lg w-[80vw]  h-[90vh]">
         </div>
     </section>
     <section  >
@@ -22,7 +22,7 @@
             <ng-template let-product pTemplate="item">
                 <div class="flex h-[55vh]">
                     <div *ngFor="let p of BestSeller"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[50vh] rounded-lg hover:scale-105 duration-150 select-none">
-                        <div><img src="../../../assets/Bicycle.jpeg" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
+                        <div (click)="productDetails(p._id)"><img [src]="p.image[0]" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
                         <div class="flex flex-col flex-wrap  pl-2">
                             <div><strong>NAME :</strong>{{p.name}}</div>
                             <div><strong>PRICE :</strong>₹{{p.price}}</div>
@@ -44,7 +44,7 @@
                             
                         </div>
                         <div
-                            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p._id)">
+                            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p._id,p.price)">
                             🛒 Add to Cart
                         </div>
                     

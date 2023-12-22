@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpInterceptorService } from './http-interceptors/http-interceptor.service'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+
 
  
 @NgModule({
@@ -31,6 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorService,multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule { }

@@ -19,8 +19,12 @@
         </div>
     </div>
     <div class="grid grid-cols-2">
-        <div class="">
-            <img src="../../../assets/Bicycle.jpeg" alt="...">
+        <div class="box-content px-10 pt-10 ">
+            <p-galleria [value]="product.image" [numVisible]="5"  [transitionInterval]="3000" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions"   [autoPlay]="true" [transitionInterval]="3000" >
+                <ng-template pTemplate="item" let-item class="box-content">
+                    <img class="hover:cursor-zoom-in w-[100vw] h-[70vh] " [src]="item" style="width: 100%; display: block;" />
+                </ng-template>
+            </p-galleria>
         </div>
         <div class="ml-[10vw]   align-text-top justify-items-end  mt-[20vh]">
             <h1 class=" text-4xl mb-3"><strong>{{product.name}}</strong></h1>
@@ -32,8 +36,8 @@
                    
                 </div>
             </div>
-            <div class=" pt-5 flex gap-4">
-                <div  (click)="Addcart(product._id)">
+            <div class=" pt-5 flex gap-4 mt-8 ">
+                <div  (click)="Addcart(product._id,product.price)">
                     <button class="bg-red-800 text-white rounded-md w-28 h-10 hover:scale-110 duration-150  ">ADD TO
                         CART </button>
                 </div>
@@ -41,6 +45,7 @@
             </div>
         </div>
     </div>
+
     <div class="py-10 flex justify-center">
         <div class="m-8 bg-red-700 w-[90%] h-[5vw] rounded-lg ">
         </div>

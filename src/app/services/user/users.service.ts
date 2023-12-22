@@ -36,9 +36,9 @@ export class UsersService {
   loadBestSeller(){
     return this._http.get(`/product/BestSeller`)
   }
-  addCart(id:string){
+  addCart(id:string,price:number){
 const user=localStorage.getItem(environment.UserSecret)
-    return this._http.post(`/users/cart`,{id,user})
+    return this._http.post(`/users/cart`,{id,user,price})
   }
   addWishlist(id:string){
     const user=localStorage.getItem(environment.UserSecret)
@@ -52,9 +52,9 @@ const user=localStorage.getItem(environment.UserSecret)
     const user=localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/cart?id=${user}`)
   }
-  removeCart(id:string){
+  removeCart(id:string,price:number,count:number){
     const user=localStorage.getItem(environment.UserSecret)
-    return this._http.patch(`/users/cart`,{id,user})
+    return this._http.patch(`/users/cart`,{id,user,price,count})
   }
   getBrand(){
     return this._http.get(`/product/brand`)
@@ -68,5 +68,11 @@ const user=localStorage.getItem(environment.UserSecret)
   }
   productDetail(id:any){
     return this._http.get(`/product/productDetail?id=${id}`)
+  }
+    updateCart(count:number,id:string,price:number){
+    const user=localStorage.getItem(environment.UserSecret)
+    console.log(price);
+    
+  return this._http.patch('/users/cartUpdate',{user,count,id,price})
   }
 }

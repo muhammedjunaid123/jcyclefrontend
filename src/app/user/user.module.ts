@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +15,11 @@ import { GalleriaModule } from 'primeng/galleria';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.component';
+
+import { register } from 'swiper/element/bundle';
+
+// register Swiper custom elements
+register();
 @NgModule({
   declarations: [
     LoginComponent,
@@ -36,8 +41,10 @@ import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.componen
     FormsModule,
    CarouselModule,
    GalleriaModule,
-   NgxPaginationModule
+   NgxPaginationModule,
 
-  ]
+
+  ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserModule { }

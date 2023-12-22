@@ -19,7 +19,7 @@
     <div *ngFor="let p of product |paginate:{itemsPerPage:pagesize,currentPage:currentPage}  "
       class="relative overflow-hidden p-2 grid shadow-inner drop-shadow-2xl lg:w-[30vw] lg:h-[50vh] xl:w-[20vw] md:w-[45vw]   sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg hover:border-b ">
       <div (click)="productDetail(p)">
-        <img src="../../../assets/Bicycle.jpeg" alt="..." class="">
+        <img [src]="p.image[0]" alt="..." class="">
       </div>
       <hr>
       <div class="">

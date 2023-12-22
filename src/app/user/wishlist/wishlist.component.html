@@ -5,7 +5,7 @@
 <div class="p-5 grid gap-4 grid-cols-4 ">
   
     <div *ngFor="let p of BestSeller"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[45vh] rounded-lg hover:scale-105 duration-150 select-none">
-        <div><img src="../../../assets/Bicycle.jpeg" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
+        <div><img [src]="p.id.image[0]" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
         <div class="flex flex-col flex-wrap  pl-2">
             <div><strong>NAME :</strong>{{p.id.name}}</div>
             <div><strong>PRICE :</strong>₹{{p.id.price}}</div>
@@ -21,7 +21,7 @@
             
         </div>
         <div
-            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p.id._id)">
+            class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p.id._id,p.id.price)">
             🛒 Add to Cart
         </div>
     

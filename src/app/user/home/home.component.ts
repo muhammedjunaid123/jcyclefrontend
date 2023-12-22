@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import {} from '../interFace.user'
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,7 @@ export class HomeComponent implements OnInit{
  BestSeller:any=[]
  products!: any[] 
  constructor(private _userService:UsersService,
-  private _toastr: ToastrService){}
+  private _toastr: ToastrService,private _router:Router){}
 ngOnInit(): void {
   
   this._userService.loadBestSeller().subscribe({
@@ -36,8 +38,13 @@ refersh(){
     }
   })
 }
-Addcart(id: string) {
-  this._userService.addCart(id).subscribe({
+Addcart(id: string,price:number) {
+  if(!localStorage.getItem(environment.UserSecret)){
+    this._toastr.info('user not logged')
+    this._router.navigate(['/login'])
+  return
+  }
+  this._userService.addCart(id,price).subscribe({
     next: (res) => {
       this._toastr.success("added")
     },
@@ -48,6 +55,11 @@ Addcart(id: string) {
   })
 }
 wishlist(id: string) {
+  if(!localStorage.getItem(environment.UserSecret)){
+    this._toastr.info('user not logged')
+    this._router.navigate(['/login'])
+  return
+  }
 
   this._userService.addWishlist(id).subscribe({
     next: (res) => {
@@ -63,7 +75,9 @@ wishlist(id: string) {
 }
 
 
-
+productDetails(id:string){
+  this._router.navigate(['/bicycleDetail', { id: id }])
+}
 
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
+import { count } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -10,15 +12,19 @@ import { UsersService } from 'src/app/services/user/users.service';
 export class CartComponent implements OnInit {
   DeliveryDate!: Date
   cartProduct: any=[]
-  constructor(private _userService: UsersService) { }
+  TotalAmount!:number
+  constructor(private _userService: UsersService,private _toastr:ToastrService) { }
+  //
   ngOnInit(): void {
 
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
+     this.TotalAmount=this.cartProduct['TotalAmount']
         this.cartProduct = this.cartProduct['product']
         console.log(this.cartProduct);
 
+        
       },
       error: (error) => {
         console.log(error);
@@ -31,18 +37,49 @@ export class CartComponent implements OnInit {
     this.DeliveryDate.setDate(this.DeliveryDate.getDate() + 10)
   }
   counter = 1
-  up(c:number) {
-    c++
-  }
-  down(c:number) {
-    if (c > 1) {
-      c--
+  // update cart 
+  up(c:number,id:string,stock:number,price:number) {
+         if(c<stock){
+      console.log(price);
+      
+     this._userService.updateCart(++c,id,price).subscribe({
+      next:()=>{
+        this.refersh()
+      },
+      error:(err)=>{
+   console.log(err);
+   
+      }
+     })
+    }else{
+      this._toastr.warning('this is the limit')
     }
   }
+   // update cart
+  down(c:number,id:string,price:number) {
+    if (c > 1) {
+     
+      console.log(price);
+      
+     this._userService.updateCart(--c,id,-price).subscribe({
+      next:()=>{
+        this.refersh()
+      },
+      error:(err)=>{
+   console.log(err);
+   
+      }
+     })
+    }else{
+      this.removeCart(id,price,c)
+    }
+  }
+  //refersh the page value
   refersh(){
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
+        this.TotalAmount=this.cartProduct['TotalAmount']
         this.cartProduct = this.cartProduct['product']
         console.log(this.cartProduct);
 
@@ -53,8 +90,9 @@ export class CartComponent implements OnInit {
       }
     })
   }
-  removeCart(id:string){
-   this._userService.removeCart(id).subscribe({
+  // remove cart value
+  removeCart(id:string,price:number,count:number){
+   this._userService.removeCart(id,price,count).subscribe({
     next:()=>{
       this.refersh()
     },

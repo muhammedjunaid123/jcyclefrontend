@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class WishlistComponent  implements OnInit{
   BestSeller:any=[]
-
+   i=0
   constructor(private _userService:UsersService,
     private _toastr: ToastrService ){}
  ngOnInit(): void {
@@ -35,8 +35,8 @@ export class WishlistComponent  implements OnInit{
     }
   })
  }
- Addcart(id:string){ 
-  this._userService.addCart(id).subscribe({
+ Addcart(id:string,price:number){ 
+  this._userService.addCart(id,price).subscribe({
     next:(res)=>{
     this._toastr.success("added")
       

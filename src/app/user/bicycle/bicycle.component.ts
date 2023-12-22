@@ -4,6 +4,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
 
@@ -68,8 +69,13 @@ export class BicycleComponent implements OnInit {
       }
     })
   }
-  Addcart(id: string) {
-    this._userService.addCart(id).subscribe({
+  Addcart(id: string,price:number) {
+    if(!localStorage.getItem(environment.UserSecret)){
+      this._toastr.info('user not logged')
+      this._router.navigate(['/login'])
+    return
+    }
+    this._userService.addCart(id,price).subscribe({
       next: (res) => {
         this._toastr.success("added")
 
@@ -81,7 +87,11 @@ export class BicycleComponent implements OnInit {
     })
   }
   wishlist(id: string) {
-
+    if(!localStorage.getItem(environment.UserSecret)){
+      this._toastr.info('user not logged')
+      this._router.navigate(['/login'])
+return
+    }
     this._userService.addWishlist(id).subscribe({
       next: (res) => {
       

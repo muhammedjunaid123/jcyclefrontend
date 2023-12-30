@@ -11,6 +11,7 @@ import { userGuard, userGuardloged } from '../guard/userGuard/user.guard';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.component';
+import { PlaceOrderComponent } from './checkout/place-order.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
 {path:'bicycle',component:BicycleComponent},
 {path:'bicycleDetail',component:BicycleDetailComponent},
 {path:'wishlist',component:WishlistComponent,canActivate:[userGuard]},
-{path:'cart',component:CartComponent,canActivate:[userGuard]}
+{path:'cart',component:CartComponent,canActivate:[userGuard]},
+{path:'checkout',component:PlaceOrderComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

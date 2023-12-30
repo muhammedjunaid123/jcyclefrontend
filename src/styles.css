@@ -6,3 +6,7 @@
 @import "primeng/resources/primeng.css";
 
 
+body{
+width: 100%;
+overflow-x: hidden;
+}

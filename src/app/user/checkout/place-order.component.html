@@ -1,0 +1,71 @@
+<app-nav-bar class="relative "></app-nav-bar>
+<div class="flex">
+    <div class="p-6  gap-3 ml-4 justify-center select-none ">
+        <div class="w-[100%] h-[10vh] bg-blue-700 flex p-3">
+            <div class="w-[2vw] h-[2vw] bg-white flex justify-center  ">
+                <p class=" text-blue-700">{{length }}</p>
+            </div>
+            <h1 class="text-white ml-2 mt-1  font-bold ">ORDER SUMMARY</h1>
+        </div>
+
+        <div *ngFor="let p of cartProduct"
+            class=" rounded-3xl shadow-2xl w-[60vw] h-[30vh] hover:scale-105 duration-150 grid grid-cols-3 p-2 mb-3 ">
+            <div>
+                <img [src]="p.id.image[0]" alt="" class="w-[15vw] h-[80%] rounded-2xl shadow-2xl">
+            </div>
+            <div class="p-3 w-[50vw]">
+                <div class="mt-2 ">
+                    <div class="grid grid-cols-2 ">
+                        <p><strong>NAME :</strong>{{p.id.name}}</p>
+                        <p>Delivery by {{DeliveryDate|date}}</p>
+                    </div>
+                    <div class="grid grid-cols-2 ">
+                        <div>
+                            <p><strong>PRICE :</strong>₹{{p.id.price}}</p>
+
+                        </div>
+
+                        <p><strong>QUANTITY :</strong>{{p.count}}</p>
+                        <div class="">
+                            <p><strong>TOTAL PRICE :</strong>₹{{p.id.price*p.count}}</p>
+                        </div>
+                        <button (click)="removeCart(p.id,p.id.price,p.count)"
+                            class="bg-red-800 rounded-md border-solid text-white w-20 h-7 mt-3 justify-center flex ">remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-96 min-h-full absolute right-0 ">
+        <div class=" w-96 min-h-full shadow-2xl  fixed flex justify-center ">
+            <div class=" bg-blue-100 w-[25vw] h-[50vh] mt-4 rounded-lg shadow-lg p-2">
+                <h1 class="text-black ml-5 mt-3 font-bold mb-1">PRICE DETAILS</h1>
+                <hr>
+                <div class=" grid grid-cols-3 mb-4">
+                    <p class="text-gray-600 ml-5 py-3 font-medium col-span-2">Price (5 items)</p>
+                    <p class="text-gray-600 ml-5 py-3 font-medium">₹{{TotalAmount}}</p>
+                    <p class="text-gray-600 ml-5 py-3 font-medium col-span-2">Delivery Charges</p>
+                    <div class="flex">
+                        <span class="text-gray-600 line-through ml-5 py-3 font-medium">₹160</span>
+                        <p class="text-green-600 ml-2 py-3 font-medium">Free</p>
+                    </div>
+                </div>
+                <hr>
+                <div class=" grid grid-cols-3 mb-4">
+                    <h1 class="text-gray-800 ml-5 mt-3 font-bold mb-1 col-span-2">Total Amount</h1>
+                    <p class="text-gray-800  ml-5 mt-3  font-medium">₹{{TotalAmount}}</p>
+                </div>
+                <hr>
+                <div class=" flex justify-end p-1 ">
+                    
+                    <button class="bg-red-800 text-white w-[6vw] h-[5vh] hover:scale-105 duration-150">
+                     PAY NOW
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-footer class="relative z-10"></app-footer>

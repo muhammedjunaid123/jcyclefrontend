@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
-import {} from '../interFace.user'
+import {HomeProduct } from '../types/user.types'
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';

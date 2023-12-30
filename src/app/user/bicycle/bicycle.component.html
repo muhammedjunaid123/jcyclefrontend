@@ -1,105 +1,117 @@
 <app-nav-bar></app-nav-bar>
+<div class=" bg-gray-100 w-[95%] rounded-lg h-[7vh] mx-5 my-3 shadow-md  flex  justify-between ">
+    <div class="p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
+    </div>
+    <div class="p-2">
+  <input type="text" class="w-[90vw] bg-gray-100 outline-none  ">
+    </div>
+</div>
 <div class="grid grid-flow-col ">
-<div class="   w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
-  <h1>filter</h1>
-  <form [formGroup]="productForm">
-  <div class="sm:col-span-3">
-    <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
-    <div class="mt-2">
-        <select id="brand" name="brand" autocomplete="brand" formControlName="brand"
+  <div class="   w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
+    <h1>filter</h1>
+    <form [formGroup]="productForm" (change)="filter()">
+      <div class="sm:col-span-3">
+        <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
+        <div class="mt-2">
+          <select id="brand" name="brand" autocomplete="brand" formControlName="brand" 
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
 
             <option *ngFor="let b of brand" [value]="b._id">{{ b.Brand_name }}</option>
 
-        </select>
-    </div>
-</div>
+          </select>
+        </div>
+      </div>
 
 
-<div class="sm:col-span-3">
-    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">category</label>
-    <div class="mt-2">
-        <select id="category" name="category" autocomplete="category" formControlName="category"
+      <div class="sm:col-span-3">
+        <label for="category" class="block text-sm font-medium leading-6 text-gray-900">category</label>
+        <div class="mt-2">
+          <select id="category" name="category" autocomplete="category" formControlName="category"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option *ngFor="let c of category"  [value]="c._id">{{c.category_name}}</option>
-        </select>
-    </div>
-</div>
+            <option *ngFor="let c of category" [value]="c._id">{{c.category_name}}</option>
+          </select>
+        </div>
+      </div>
 
 
-<div class="sm:col-span-3">
-    <label for="gears" class="block text-sm font-medium leading-6 text-gray-900">gears</label>
-    <div class="mt-2">
-        <select id="gears" name="gears" autocomplete="gears" formControlName="gears"
+      <div class="sm:col-span-3">
+        <label for="gears" class="block text-sm font-medium leading-6 text-gray-900">gears</label>
+        <div class="mt-2">
+          <select id="gears" name="gears" autocomplete="gears" formControlName="gears"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
             <option [value]="false">NO</option>
             <option [value]="true">Yes</option>
-        </select>
-    </div>
-</div>
-<div class="sm:col-span-3">
-    <label for="brake" class="block text-sm font-medium leading-6 text-gray-900">brake_type</label>
-    <div class="mt-2">
-        <select id="brake" name="brake" autocomplete="brake" formControlName="brake_type"
+          </select>
+        </div>
+      </div>
+      <div class="sm:col-span-3">
+        <label for="brake" class="block text-sm font-medium leading-6 text-gray-900">brake_type</label>
+        <div class="mt-2">
+          <select id="brake" name="brake" autocomplete="brake" formControlName="brake_type"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
             <option [value]="false">normal</option>
             <option [value]="true">disc brake</option>
-        </select>
-    </div>
-</div>
-<div class="sm:col-span-3">
-    <label for="suspension" class="block text-sm font-medium leading-6 text-gray-900">suspension</label>
-    <div class="mt-2">
-        <select id="suspension" name="suspension" autocomplete="suspension" formControlName="suspension"
+          </select>
+        </div>
+      </div>
+      <div class="sm:col-span-3">
+        <label for="suspension" class="block text-sm font-medium leading-6 text-gray-900">suspension</label>
+        <div class="mt-2">
+          <select id="suspension" name="suspension" autocomplete="suspension" formControlName="suspension"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
             <option [value]="false">NO</option>
             <option [value]="true">Yes</option>
-        </select>
-    </div>
-</div>
-</form>
-</div>
-<div
-  class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
-      
-  <div *ngFor="let p of product |paginate:{itemsPerPage:pSize,currentPage:currentPage}"
-    class="overflow-hidden p-2 grid select-none shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw] h-[50vh]  sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg   ">
-    <div  (click)="productDetails(p._id)">
-      <img [src]="p.image[0]" alt="..." class="">
-    </div>
-    <hr>
-    <div class="">
-      <p><strong>NAME :</strong>{{p.name}}</p>
-      <p><strong>PRICE :</strong> ₹{{p.price}}</p>
-      <p><strong>BRAND :</strong> {{p.brand.Brand_name}}</p>
-
-    </div>
-    <div class="p-1">
-      <div
-        class=" p-0 hover:scale-110 flex text-white justify-center absolute w-[5vw] h-[5vh] bottom-0 left-0 rounded-bl-lg"  (click)="wishlist(p._id)">
-        @if (!p.wished) {
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
-          <path fill="#ffffff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
-            d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
-        </svg>
-        }
-        @else {
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
-          <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
-            d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
-        </svg>
-        }
-
+          </select>
+        </div>
       </div>
-      <div
-        class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg" (click)="Addcart(p._id,p.price)">
-        🛒 Add to Cart
-      </div>
-    </div>
+    </form>
   </div>
+ 
+  <div
+    class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
 
+    <div *ngFor="let p of product| paginate:{itemsPerPage:pSize,currentPage:currentPage}"
+      class="overflow-hidden p-2 grid select-none shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw] h-[50vh]  sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg   ">
+      <div (click)="productDetails(p._id)">
+        <img [src]="p.image[0]" alt="..." class="">
+      </div>
+      <hr>
+      <div class="">
+        <p><strong>NAME :</strong>{{p.name}}</p>
+        <p><strong>PRICE :</strong> ₹{{p.price}}</p>
+        <p><strong>BRAND :</strong> {{p.brand.Brand_name}}</p>
+
+      </div>
+      <div class="p-1">
+        <div
+          class=" p-0 hover:scale-110 flex text-white justify-center absolute w-[5vw] h-[5vh] bottom-0 left-0 rounded-bl-lg"
+          (click)="wishlist(p._id)">
+          @if (!p.wished) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+            <path fill="#ffffff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+              d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+          </svg>
+          }
+          @else {
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+            <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+              d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+          </svg>
+          }
+
+        </div>
+        <div
+          class=" p-1 flex text-white justify-center absolute w-[15vw] h-[5vh] bottom-0 right-0 bg-red-800 rounded-br-lg"
+          (click)="Addcart(p._id,p.price)">
+          🛒 Add to Cart
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
-</div>
+
 <div class="flex justify-center">
 
   <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>

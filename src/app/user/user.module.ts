@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +17,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.component';
 
 import { register } from 'swiper/element/bundle';
+import { StoreModule } from '@ngrx/store';
+import { loadBicyclepage } from './store/user.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { BicycleEffects } from './store/user.effect';
+import { PlaceOrderComponent } from './checkout/place-order.component';
 
 // register Swiper custom elements
 register();
@@ -31,7 +37,8 @@ register();
     WishlistComponent,
     CartComponent,
     FooterComponent,
-    BicycleDetailComponent
+    BicycleDetailComponent,
+    PlaceOrderComponent
     
   ],
   imports: [
@@ -42,6 +49,7 @@ register();
    CarouselModule,
    GalleriaModule,
    NgxPaginationModule,
+  
 
 
   ],

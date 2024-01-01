@@ -68,22 +68,10 @@ export class OrdersListComponent {
     // })
   }
 
-  changeStatus(user: any, itemId: any, selectedValue: string) {
-   
-  this._userService.changeStatus(user,itemId,selectedValue).subscribe({
-    next:()=>{
-      this.refresh()
-    },
-    error:(err)=>{
-  console.log(err);
   
-    }
-  })
-
-
-  }
-  cancelled(user: any, itemId: any){
-    this._userService.changeStatus(user,itemId,'cancelled').subscribe({
+  cancelled(user: any, itemId: any,price:number,count:number){
+    const Total=price*count
+    this._userService.changeStatus(user,itemId,'cancelled',Total).subscribe({
       next:()=>{
         this.refresh()
       },
@@ -93,8 +81,9 @@ export class OrdersListComponent {
       }
     })
   }
-  return(user: any, itemId: any){
-    this._userService.changeStatus(user,itemId,'return').subscribe({
+  return(user: any, itemId: any,price:number,count:number){
+    const Total=price*count
+    this._userService.changeStatus(user,itemId,'return',Total).subscribe({
       next:()=>{
         this.refresh()
       },

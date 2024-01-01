@@ -16,16 +16,20 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let w of wallet" >
               
                 <tr>
-                  <td></td>
+                  <td>{{w.date |date}}</td>
+                @if (w.amount > 0) {
+                    <td class="text-success">₹{{w.amount}}</td>
+                }@else {
+                    <td class="text-danger">₹{{w.amount}}</td>
+                }
+                    
                 
-                    <td class="text-success">₹</td>
-                
-                    <td class="text-danger">₹</td>
+                    
                  
-                  <td></td>
+                  <td>{{w.description}}</td>
                 </tr>
              
             </tbody>

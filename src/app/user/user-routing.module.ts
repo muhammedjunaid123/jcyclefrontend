@@ -12,6 +12,9 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.component';
 import { PlaceOrderComponent } from './checkout/place-order.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { OrdersListComponent } from './orders-list/orders-list.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 
 
@@ -24,7 +27,10 @@ const routes: Routes = [
 {path:'bicycleDetail',component:BicycleDetailComponent},
 {path:'wishlist',component:WishlistComponent,canActivate:[userGuard]},
 {path:'cart',component:CartComponent,canActivate:[userGuard]},
-{path:'checkout',component:PlaceOrderComponent,canActivate:[userGuard]}
+{path:'checkout',component:PlaceOrderComponent,canActivate:[userGuard]},
+{path:'order-success',component:OrderSuccessComponent,canActivate:[userGuard]},
+{path:'order',component:OrdersListComponent,canActivate:[userGuard]},
+{path:'wallet',component:WalletComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

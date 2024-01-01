@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
+
+declare var Razorpay: any;
 
 @Component({
   selector: 'app-place-order',
@@ -13,8 +17,12 @@ export class PlaceOrderComponent implements OnInit {
   cartProduct: any = []
   TotalAmount!: number
   length!: number
+  userName!: string
+  userEmail!: string
+  userPhone!: string
 
-  constructor(private _userService: UsersService, private _toastr: ToastrService) { }
+  constructor(private _userService: UsersService, private _toastr: ToastrService,
+    private _router:Router) { }
   //
   ngOnInit(): void {
 
@@ -22,11 +30,15 @@ export class PlaceOrderComponent implements OnInit {
       next: (res) => {
         this.cartProduct = res
         this.TotalAmount = this.cartProduct['TotalAmount']
+        this.userName = this.cartProduct['user']['name']
+        this.userEmail = this.cartProduct['user']['email']
+        this.userPhone = this.cartProduct['user']['phone']
         this.cartProduct = this.cartProduct['product']
+
         console.log(this.cartProduct);
         this.length = this.cartProduct.length
-      
-        
+
+
 
 
       },
@@ -107,4 +119,68 @@ export class PlaceOrderComponent implements OnInit {
       }
     })
   }
+
+
+  verifyPayment(res: any) {
+
+    const orderDetails = {
+      user:localStorage.getItem(environment.UserSecret),
+      razorId: res,
+      paymentMethod: 'razor'
+    }
+
+  
+      this._userService.orderProduct(orderDetails).subscribe({
+        next: (res:any) => {
+          this._router.navigate(['order-success', res])
+          this._toastr.success('Booked Successsfully !')
+        },
+        error: (err:any) => {
+          this._toastr.error('Something went wrong', err.error.message)
+        }
+      })
+    
+
+  }
+
+
+  payNow() {
+    const RazorpayOptions = {
+      description: 'Sample Payment',
+      currency: 'INR',
+      amount: this.TotalAmount * 100,
+      name: 'JCYCLE',
+      key: environment.RAZOR_KEY,
+      handler: (res: any) => {
+        this.verifyPayment(res)
+       
+        
+      },
+      // image: '../../../assets/Screenshot 2023-11-29 100600.png',
+      prefill: {
+        name: this.userName,
+        email: this.userEmail,
+        phone: this.userPhone,
+      },
+      theme: {
+        color: '#800000',
+      },
+      modal: {
+        ondismiss: () => {
+          console.log('dismissed');
+        }
+      }
+    }
+    const pass = () => {
+      console.log('payment susssus');
+
+    }
+    const fail = () => {
+      console.log('payment fail');
+
+    }
+    Razorpay.open(RazorpayOptions, pass, fail)
+
+  }
 }
+

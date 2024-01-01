@@ -23,6 +23,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BicycleEffects } from './store/user.effect';
 import { PlaceOrderComponent } from './checkout/place-order.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { OrdersListComponent } from './orders-list/orders-list.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 // register Swiper custom elements
 register();
@@ -38,7 +41,10 @@ register();
     CartComponent,
     FooterComponent,
     BicycleDetailComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    OrderSuccessComponent,
+    OrdersListComponent,
+    WalletComponent
     
   ],
   imports: [

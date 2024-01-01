@@ -1,0 +1,69 @@
+<app-nav-bar></app-nav-bar>
+<div class="card w-[100vw]">
+    <div class="card-header text-black">
+        order List
+    </div>
+    <div class="card-body">
+        <div class="row ">
+            <div class="col-3">
+                <input type="text" class="form-control w-[80vw]" [(ngModel)]="filterObj.Name" placeholder="Search ">
+            </div>
+            <!-- <div class="col-3">
+        <input type="text" class="form-control" [(ngModel)]="filterObj.ContactNo" placeholder="Search By id">
+      </div>
+      <div class="col-3">
+        <input type="text" class="form-control" [(ngModel)]="filterObj.Email" placeholder="Search By Email">
+      </div> -->
+            <div class="col-3">
+                <!-- <app-my-button [text]="'Search'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="filetrorder($event)"> </app-my-button> -->
+
+                <!-- <button class="btn btn-sm btn-success" (click)="filetrorder()">Search</button> -->
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-10" style="float:right;text-align: right">
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <table class="table table-bordered table-striped table-hover" *ngFor="let items of order">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th> product Name</th>
+                            <th>City</th>
+                            <th>DeliveryDate</th>
+                            <th>status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of items['product']|paginate:{itemsPerPage:pagesize,currentPage:currentPage}">
+                            <td>{{item._id}}</td>
+                            <td>{{item.id.name || '--'}}</td>
+                            <td>{{item.id.city|| '--'}}</td>
+                            <td>{{item.DeliveryDate | date:'dd-MMM-yyyy'}}</td>
+                            <td>{{item.status }}</td>
+                            @if (item.status==='delivered') {
+                            <td><button (click)="return(items.user, item._id)" class=" hover:scale-110 duration-150 bg-red-800 text-white">return</button></td>
+                            }
+                            @else if (item.status==='cancelled') {
+                                <td>{{item.status }}</td>
+                            }@else if (item.status==='return') {
+                                <td>returned</td>
+                            }
+                            @else {
+                                <td><button (click)="cancelled(items.user, item._id)" class="hover:scale-110 duration-150 bg-red-800 text-white">cancelled</button></td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+    </div>
+
+</div>

@@ -16,6 +16,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewsInputComponent } from './reviews-input/reviews-input.component';
 
 
 
@@ -32,7 +33,8 @@ const routes: Routes = [
 {path:'order-success',component:OrderSuccessComponent,canActivate:[userGuard]},
 {path:'order',component:OrdersListComponent,canActivate:[userGuard]},
 {path:'wallet',component:WalletComponent,canActivate:[userGuard]},
-{path:'review',component:ReviewsComponent,canActivate:[userGuard]}
+{path:'review',component:ReviewsComponent,canActivate:[userGuard]},
+{path:'addReview',component:ReviewsInputComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

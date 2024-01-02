@@ -12,6 +12,12 @@ import { environment } from 'src/environments/environment.development';
 })
 export class BicycleDetailComponent implements OnInit {
   product: any = []
+  total!:number
+  Total!:number
+  obj:any
+
+
+
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -33,7 +39,11 @@ export class BicycleDetailComponent implements OnInit {
       this._userService.productDetail(params['id']).subscribe({
         next: (res) => {
           this.product = res
-          console.log(this.product);
+          this.total=Math.round(this.product['total'])
+          this.Total=Math.round(this.product['Total'])
+          this.obj=this.product['obj']
+          this.product=this.product['product']
+          console.log(this.product,this.total,this.obj);
 
         }
       })
@@ -87,14 +97,12 @@ export class BicycleDetailComponent implements OnInit {
       }
     })
   }
-  // getSeverity(status: string):string|any {
-  //   switch (status) {
-  //       case 'INSTOCK':
-  //           return 'success';
-  //       case 'LOWSTOCK':
-  //           return 'warning';
-  //       case 'OUTOFSTOCK':
-  //           return 'danger';
-  //   }
-  // }
+  showReview(id:string) {
+    this._router.navigate(['/review', { id: id }])
+  }
+  addReview(id:string) {
+    this._router.navigate(['/addReview', { id: id }])
+  }
+
+  
 }

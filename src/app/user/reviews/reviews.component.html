@@ -1,1 +1,72 @@
-<p>reviews works!</p>
+<app-nav-bar></app-nav-bar>
+<section class="grid grid-cols-5 ">
+    <div class="col-span-2 ">
+
+        <div class="grid grid-cols-1 fixed">
+            <div class="box-content px-10 pt-10 w-[30vw]">
+                <p-galleria [value]="product.image" [numVisible]="5" [transitionInterval]="3000" [circular]="true"
+                    [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions"
+                    [autoPlay]="true" [transitionInterval]="3000">
+                    <ng-template pTemplate="item" let-item class="box-content">
+                        <img class="hover:cursor-zoom-in w-[100vw] h-[60vh] " [src]="item"
+                            style="width: 100%; display: block;" />
+                    </ng-template>
+                </p-galleria>
+            </div>
+            <div class="px-10 pt-6 grid grid-cols-3">
+
+                <div (click)="Addcart(product._id,product.price)">
+                    <P><strong>PRICE :</strong>₹{{product.price}}</P>
+                    <button class="bg-red-800 text-white rounded-md w-28 h-10 hover:scale-110 duration-150  ">ADD TO
+                        CART </button>
+                </div>
+                <div class="  rounded-full p-0 hover:scale-110 flex text-white justify-center  w-[5 vw] h-[5vh]  rounded-bl-lg"
+                    (click)="wishlist(product._id)">
+                    @if (!product.wished) {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                        <path fill="#ffffff" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="4"
+                            d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+                    </svg>
+                    }
+                    @else {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                        <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="4"
+                            d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+                    </svg>
+                    }
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-span-3">
+        <div class=" align-text-top  grid  mt-[10vh] ">
+            <h1 class=" text-4xl mb-3"><strong>{{product.name}}</strong></h1>
+        </div>
+        <div class="shadow-inner w-[100vw] h-[100vh] p-3 ">
+            <div class="w-[50vw]   border"  *ngFor="let r of review">
+                <div class="rounded-md w-[7vh] h-[4vh] m-4 bg-green-600">
+                    <div class="flex">
+                        <p class="ml-2 text-white">{{r.ratings}}</p>
+                        <div class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path fill="white"
+                                    d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z" />
+                            </svg></div>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <p class="break-all">"{{r.review}}</p>
+                </div>
+                <p class=" p-3 font-bold text-gray-600">{{user.name}}</p>
+            </div>
+        </div>
+
+    </div>
+</section>

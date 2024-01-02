@@ -83,7 +83,7 @@
             <p class="font-semibold text-2xl  text-black ml-3 mt-2">Ratings & Reviews</p>
             <div class="">
                 <div class="font-medium text-1xl  text-black ml-10 mt-4">
-                    4.1★ <br>
+                    {{total}}★ <br>
                 </div>
                 <div class="font-thin text-sm  text-black ml-10">
                     Ratings &<br>
@@ -95,43 +95,44 @@
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black">5★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[5]/Total*100||0"
+                    ></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> 516</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[5]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 4★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[4]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> 180</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[4]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 3★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[3]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> 55</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[3]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 2★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"[style.width.%]="obj[2]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> 19</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[2]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black">1★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[1]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black">105</div>
+                <div class="mb-1 text-base font-medium text-black">{{obj[1]||0}}</div>
             </div>
         </div>
         <div>
             <div class="grid grid-cols-1 justify-center gap-6  p-4 ml-5">
-                <button class="h-[5vh] hover:scale-105 duration-150 border shadow-md">show Reviews</button>
-                <button  class="h-[5vh] hover:scale-105 duration-150 border shadow-md">add Reviews</button>
+                <button (click)=" showReview(product._id)" class="h-[5vh] hover:scale-105 duration-150 border shadow-md">show Reviews</button>
+                <button  (click)=" addReview(product._id)"  class="h-[5vh] hover:scale-105 duration-150 border shadow-md">add Reviews</button>
             </div>
         </div>
     </div>

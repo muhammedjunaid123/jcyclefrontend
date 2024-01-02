@@ -1,0 +1,53 @@
+<div class="flex">
+
+    <form [formGroup]="productForm" (ngSubmit)="reviewCreate()">
+        <div class=" flex  justify-center">
+    <div class=" p-28">
+        <label for="about" class="block text-sm font-medium leading-6 text-gray-900">ratings</label>
+            <div class="rating">
+                <input type="radio" id="star-1" name="star-radio" value="1" (click)="update(5)" >
+                <label for="star-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg>
+                </label>
+                <input type="radio" id="star-2" name="star-radio" value="2"(click)="update(4)">
+                <label for="star-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg>
+                </label>
+                <input type="radio" id="star-3" name="star-radio" value="3"(click)="update(3)">
+                <label for="star-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg>
+                </label>
+                <input type="radio" id="star-4" name="star-radio" value="4" (click)="update(2)">
+                <label for="star-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg>
+                </label>
+                <input type="radio" id="star-5" name="star-radio" value="5" (click)="update(1)">
+                <label for="star-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg>
+                </label>
+              </div>
+
+            </div>
+            <div class="border-b border-gray-900/10 pb-12  =">
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 w-[50vw] ">
+                    <div class="col-span-full">
+                        <label for="about" class="block text-sm font-medium leading-6 text-gray-900">review</label>
+                        <div class="mt-2">
+                            <textarea id="about" name="about" rows="3" formControlName="review"
+                                class="pl-3 h-[60vh] bg-blue-50 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button routerLink="/admin/product" type="button"
+                class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+            <button type="submit"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        </div>
+
+    </form>
+</div>

@@ -1,11 +1,14 @@
 <app-nav-bar></app-nav-bar>
 <div class=" bg-gray-100 w-[95%] rounded-lg h-[7vh] mx-5 my-3 shadow-md  flex  justify-between ">
-    <div class="p-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
-    </div>
-    <div class="p-2">
-  <input type="text" class="w-[90vw] bg-gray-100 outline-none  ">
-    </div>
+  <div class="p-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path fill="red"
+        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14" />
+    </svg>
+  </div>
+  <div class="p-2">
+    <input type="text" class="w-[90vw] bg-gray-100 outline-none  ">
+  </div>
 </div>
 <div class="grid grid-flow-col ">
   <div class="   w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
@@ -14,7 +17,7 @@
       <div class="sm:col-span-3">
         <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
         <div class="mt-2">
-          <select id="brand" name="brand" autocomplete="brand" formControlName="brand" 
+          <select id="brand" name="brand" autocomplete="brand" formControlName="brand"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
 
             <option *ngFor="let b of brand" [value]="b._id">{{ b.Brand_name }}</option>
@@ -67,7 +70,7 @@
       </div>
     </form>
   </div>
- 
+
   <div
     class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
 

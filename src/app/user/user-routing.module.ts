@@ -15,6 +15,7 @@ import { PlaceOrderComponent } from './checkout/place-order.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
 {path:'checkout',component:PlaceOrderComponent,canActivate:[userGuard]},
 {path:'order-success',component:OrderSuccessComponent,canActivate:[userGuard]},
 {path:'order',component:OrdersListComponent,canActivate:[userGuard]},
-{path:'wallet',component:WalletComponent,canActivate:[userGuard]}
+{path:'wallet',component:WalletComponent,canActivate:[userGuard]},
+{path:'review',component:ReviewsComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

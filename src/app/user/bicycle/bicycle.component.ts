@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +9,7 @@ import { filter } from '../types/user.types';
 import { Store, select } from '@ngrx/store';
 import { loadBicycle } from '../store/user.action';
 import { ProductData } from '../store/user.selector'
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
 
 @Component({
@@ -17,11 +17,12 @@ import { map } from 'rxjs';
   templateUrl: './bicycle.component.html',
   styleUrl: './bicycle.component.css'
 })
-export class BicycleComponent implements OnInit, AfterViewInit {
+export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
   product: any = []
   brand: any = []
   category: any = []
   productForm!: FormGroup
+  private subscribe: Subscription = new Subscription()
   pSize = 6
   currentPage = 1
 
@@ -31,6 +32,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
       private _router: Router,
       private _Store: Store) { }
   ngOnInit(): void {
+
     this._Store.dispatch(loadBicycle())
 
     this.productForm = this._fb.group({
@@ -54,19 +56,24 @@ export class BicycleComponent implements OnInit, AfterViewInit {
     //     }
     //   })
 
-    this._userService.getBrand().subscribe({
-      next: (res) => {
-        this.brand = res
-      }
-    })
+    this.subscribe.add(
+      this._userService.getBrand().subscribe({
+        next: (res) => {
+          this.brand = res
+        }
+      })
+    )
+    this.subscribe.add(
     this._userService.getCategory().subscribe({
       next: (res) => {
         this.category = res
       }
     })
+    )
 
   }
   ngAfterViewInit(): void {
+    this.subscribe.add(
     this._Store.pipe(select(ProductData)).subscribe({
       next: (res: any) => {
         this.product = res
@@ -76,12 +83,14 @@ export class BicycleComponent implements OnInit, AfterViewInit {
 
       }
     })
+    )
 
     console.log(this.product, 'after view init');
 
   }
   refersh() {
     this._Store.dispatch(loadBicycle())
+    this.subscribe.add(
     this._Store.pipe(select(ProductData)).subscribe({
       next: (res: any) => {
         this.product = res
@@ -91,6 +100,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
 
       }
     })
+    )
   }
   Addcart(id: string, price: number) {
     if (!localStorage.getItem(environment.UserSecret)) {
@@ -98,6 +108,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
       this._router.navigate(['/login'])
       return
     }
+    this.subscribe.add(
     this._userService.addCart(id, price).subscribe({
       next: (res) => {
         this._toastr.success("added")
@@ -108,6 +119,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
 
       }
     })
+    )
   }
   wishlist(id: string) {
     if (!localStorage.getItem(environment.UserSecret)) {
@@ -115,6 +127,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
       this._router.navigate(['/login'])
       return
     }
+    this.subscribe.add(
     this._userService.addWishlist(id).subscribe({
       next: (res) => {
 
@@ -128,6 +141,7 @@ export class BicycleComponent implements OnInit, AfterViewInit {
       }
 
     })
+    )
   }
   filter() {
 console.log('enther the  filter');
@@ -135,7 +149,14 @@ console.log('enther the  filter');
     const filter: filter = this.productForm.getRawValue()
     console.log(filter);
    
-    this._userService.filterProduct(filter).subscribe()
+    this._userService.filterProduct(filter).subscribe({
+      next:(res)=>{
+     this.product=res
+      },
+      error:(err)=>{
+        this._toastr.error(err.error.message)
+      }
+    })
 
 
 
@@ -146,6 +167,12 @@ console.log('enther the  filter');
   productDetails(id: string) {
     this._router.navigate(['/bicycleDetail', { id: id }])
   }
+
+ngOnDestroy(): void {
+  
+  this.subscribe.unsubscribe()
+}
+
 }
 
 

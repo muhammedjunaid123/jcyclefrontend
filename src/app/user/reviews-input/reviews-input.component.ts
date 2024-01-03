@@ -1,31 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reviews-input',
   templateUrl: './reviews-input.component.html',
   styleUrl: './reviews-input.component.css'
 })
-export class ReviewsInputComponent implements OnInit {
+export class ReviewsInputComponent implements OnInit,OnDestroy {
  
   productForm!:FormGroup
   ratings:number=0
   productID!:string
-
+  private subscribe: Subscription = new Subscription()
  
   constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService,private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    this.subscribe.add(
     this._route.params.subscribe(params => {
       console.log(params['id']);
        this.productID=params['id']
       
-    });
+    })
+    )
   
     this.productForm = this._fb.group({ 
       review: ['', Validators.required],
@@ -42,11 +44,13 @@ export class ReviewsInputComponent implements OnInit {
   reviewCreate() {
     if (this.productForm.valid&&this.ratings!==0) {
       const review=this.productForm.value 
+      this.subscribe.add(
       this._userService.addReview(review['review'],this.ratings,this.productID).subscribe({
         next: () => {
           this._router.navigate(['/bicycleDetail', { id: this.productID }])
         }
       })
+      )
     }else{
     
       
@@ -60,5 +64,7 @@ export class ReviewsInputComponent implements OnInit {
  this.ratings = val
    
   }
- 
+ ngOnDestroy(): void {
+   this.subscribe.unsubscribe()
+ }
 }

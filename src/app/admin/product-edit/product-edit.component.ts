@@ -43,7 +43,8 @@ export class ProductEditComponent implements OnInit {
       this._adminService.productDetail(params['id']).subscribe({
         next: (res) => {
           this.product = res
-         this.productdata ={...this.product}
+       
+         this.productdata ={...this.product }
         delete this.productdata['_id']
         delete this.productdata['image']
         delete this.productdata['isBlocked']

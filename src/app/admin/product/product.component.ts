@@ -1,36 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { AdminModule } from '../admin.module';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit,OnDestroy {
 
   constructor(private _router: Router, private _route: ActivatedRoute, private _adminService: AdminService) { }
-
+  private subscribe: Subscription = new Subscription()
   product: any = []
   pagesize = 6
   currentPage = 1
   ngOnInit(): void {
+    this.subscribe.add(
     this._adminService.getProduct().subscribe({
       next: (res) => {
         this.product = res
       }
     })
-
+    )
   }
   refersh() {
+    this.subscribe.add(
     this._adminService.getProduct().subscribe({
       next: (res) => {
         this.product = res
       }
     })
-
+    )
   }
 
   productDetail(product: any) {
@@ -49,6 +52,7 @@ export class ProductComponent implements OnInit {
 
 
     if (productBlockStatus === true) {
+      this.subscribe.add(
       this._adminService.product_block(id, false).subscribe({
         next: () => {
           this.refersh()
@@ -58,7 +62,9 @@ export class ProductComponent implements OnInit {
 
         }
       })
+      )
     } else {
+      this.subscribe.add(
       this._adminService.product_block(id, true).subscribe({
         next: () => {
           this.refersh()
@@ -68,9 +74,13 @@ export class ProductComponent implements OnInit {
 
         }
       })
+      )
     }
   }
   editProduct(id: any) {
     this._router.navigate(['/admin/productedit', { id: id }])
+  }
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
   }
 }

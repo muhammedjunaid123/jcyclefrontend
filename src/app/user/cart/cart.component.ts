@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
-import { count } from 'rxjs';
+import { Subscription, count } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -9,14 +9,15 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit,OnDestroy {
   DeliveryDate!: Date
   cartProduct: any=[]
   TotalAmount!:number
+  private subscribe: Subscription = new Subscription()
   constructor(private _userService: UsersService,private _toastr:ToastrService) { }
   //
   ngOnInit(): void {
-
+    this.subscribe.add(
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
@@ -31,6 +32,7 @@ export class CartComponent implements OnInit {
 
       }
     })
+    )
 
     this.DeliveryDate = new Date()
 
@@ -41,7 +43,7 @@ export class CartComponent implements OnInit {
   up(c:number,id:string,stock:number,price:number) {
          if(c<stock){
       console.log(price);
-      
+      this.subscribe.add(
      this._userService.updateCart(++c,id,price).subscribe({
       next:()=>{
         this.refersh()
@@ -51,6 +53,7 @@ export class CartComponent implements OnInit {
    
       }
      })
+      )
     }else{
       this._toastr.warning('this is the limit')
     }
@@ -60,7 +63,7 @@ export class CartComponent implements OnInit {
     if (c > 1) {
      
       console.log(price);
-      
+      this.subscribe.add(
      this._userService.updateCart(--c,id,-price).subscribe({
       next:()=>{
         this.refersh()
@@ -70,12 +73,14 @@ export class CartComponent implements OnInit {
    
       }
      })
+      )
     }else{
       this.removeCart(id,price,c)
     }
   }
   //refersh the page value
   refersh(){
+    this.subscribe.add(
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
@@ -89,9 +94,11 @@ export class CartComponent implements OnInit {
 
       }
     })
+    )
   }
   // remove cart value
   removeCart(id:string,price:number,count:number){
+    this.subscribe.add(
    this._userService.removeCart(id,price,count).subscribe({
     next:()=>{
       this.refersh()
@@ -101,5 +108,9 @@ export class CartComponent implements OnInit {
       
     }
    })
+    )
+  }
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
   }
 }

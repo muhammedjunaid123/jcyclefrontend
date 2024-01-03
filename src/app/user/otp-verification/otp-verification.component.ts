@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/user/users.service';
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './otp-verification.component.html',
   styleUrl: './otp-verification.component.css'
 })
-export class OtpVerificationComponent implements OnInit {
+export class OtpVerificationComponent implements OnInit,OnDestroy {
   verified: boolean = false
   otpVerification!: FormGroup
   otp!: number;
@@ -41,12 +41,14 @@ export class OtpVerificationComponent implements OnInit {
     })
   }
   sendMail(id: string) {
+    this.subscribe.add(
     this.subscribe.add(this._userServices.sendMail(id).subscribe({
       next: (res:any) => {
         this.otp = +res.otp
         this.token = res.access_token.toString()
       }
     }))
+    )
   }
   timer() {
     const time = setInterval(() => {
@@ -75,7 +77,7 @@ export class OtpVerificationComponent implements OnInit {
     const user = this.otpVerification.getRawValue();
     if (this.otpVerification.valid && +this.otp === +user.otpCode) {
       this.verified = true
-     
+      this.subscribe.add(
      this._userServices.loadHome(this.id).subscribe({
       next:()=>{
         localStorage.setItem(environment.UserSecret,this.token)
@@ -84,6 +86,7 @@ export class OtpVerificationComponent implements OnInit {
         this._toastr.error(error.error.message)
       }
      })
+      )
       
     } else {
       this._toastr.error('Invalid OTP', 'Jcycle');

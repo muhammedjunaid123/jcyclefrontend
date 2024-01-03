@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/user/users.service';
 
 @Component({
@@ -9,11 +10,11 @@ import { UsersService } from 'src/app/services/user/users.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnDestroy {
   user: any
+  private subscribe: Subscription = new Subscription()
   constructor(private _fb: FormBuilder, private _userService: UsersService,private _router:Router,private _toastr:ToastrService  ) {
     console.log('signup');
-
   }
   protected signupForm = this._fb.group({
     name: ['', Validators.required],
@@ -24,6 +25,7 @@ export class SignupComponent {
   signup() {
     this.user = this.signupForm.controls
     if (this.signupForm.valid) {
+      this.subscribe.add(
       this._userService.userRegister(this.signupForm.value)
       .subscribe({
         next: (res:any) => {    
@@ -35,6 +37,10 @@ export class SignupComponent {
           this._toastr.error( error.error.message);
         }
       })
+      )
     }
+  }
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
   }
 }

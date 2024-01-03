@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wallet',
@@ -8,17 +9,12 @@ import { UsersService } from 'src/app/services/user/users.service';
   styleUrl: './wallet.component.css'
 })
 export class WalletComponent implements OnInit {
-  wallet!:any
+  @Input() wallet:any=[]
+
   constructor (private _userService:UsersService){}
 ngOnInit(): void {
-  this._userService.loadWallet().subscribe({
-    next:(res)=>{
-     this.wallet=res
-    this.wallet=this.wallet['walletHistory']
-    },error:(err)=>{
- console.log(err);
- 
-    }
-  })
+  console.log(this.wallet,'this is the wallet');
+  
 }
+
 }

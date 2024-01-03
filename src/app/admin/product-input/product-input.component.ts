@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-input',
   templateUrl: './product-input.component.html',
   styleUrl: './product-input.component.css'
 })
-export class ProductInputComponent implements OnInit {
+export class ProductInputComponent implements OnInit,OnDestroy {
   brand: any = []
   category: any = []
   files: File[] = [];
   selectedfiles: File[] = []
   productForm!:FormGroup
   length!:number
-
+  private subscribe: Subscription = new Subscription()
  
   constructor(private _adminService: AdminService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
 
@@ -35,17 +36,20 @@ export class ProductInputComponent implements OnInit {
       cycle_Details: ['', Validators.required],
       image:[Validators.required]
     })
-
+    this.subscribe.add(
     this._adminService.getBrand().subscribe({
       next: (res) => {
         this.brand = res
       }
     })
+    )
+    this.subscribe.add(
     this._adminService.getCategory().subscribe({
       next: (res) => {
         this.category = res
       }
     })
+    )
   }
 
   getFileExtension(filename: string): any {
@@ -106,11 +110,13 @@ export class ProductInputComponent implements OnInit {
       form.forEach((value, key) => {
         console.log(key, value);
       });
+      this.subscribe.add(
       this._adminService.addProduct(form).subscribe({
         next: () => {
           this._router.navigate(['/admin/product'])
         }
       })
+      )
     }else{
       console.log(this.productForm.value);
       
@@ -156,6 +162,9 @@ export class ProductInputComponent implements OnInit {
       }
     }
     this.getFile(event)
+  }
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
   }
 }
 

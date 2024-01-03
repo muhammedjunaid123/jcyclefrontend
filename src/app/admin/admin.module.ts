@@ -14,6 +14,8 @@ import { UsersComponent } from './users/users.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AdminLoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { OrdersComponent } from './orders/orders.component';
+import { ListOrderComponent } from '../reusable-component/list-order/list-order.component';
 
 
 
@@ -27,7 +29,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CategoryComponent,
     UsersComponent,
     ProductEditComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    OrdersComponent,
+    ListOrderComponent
 
   ],
   imports: [

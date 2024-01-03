@@ -66,8 +66,8 @@ export class UsersService {
   }
   filterProduct(filter: filter) {
     const { brake_type, brand, category, gears, suspension } = filter
-    
-    return this._http.get(`/product/filter?brand=${brand}&brake_type=${brake_type}&category=${category}&gears=${gears}&suspension=${suspension}}`)
+
+    return this._http.get(`/product/filter?brand=${brand}&brake_type=${brake_type}&category=${category}&gears=${gears}&suspension=${suspension}`)
   }
   productDetail(id: any) {
     return this._http.get(`/product/productDetail?id=${id}`)
@@ -78,5 +78,37 @@ export class UsersService {
 
     return this._http.patch('/users/cartUpdate', { user, count, id, price })
   }
- 
+  orderProduct(orderDetails: any) {
+    console.log(orderDetails);
+
+    return this._http.post('/users/cheakout', orderDetails)
+  }
+  orderLoad(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/order?id=${user}`)
+  }
+  changeStatus(user:string,orderID:string,value:string,Total:number){
+return this._http.patch(`/users/orderStatus`,{user,orderID,value,Total})
+  }
+  loadWallet(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/wallet?id=${user}`)
+  }
+  addReview(review:string,ratings:number,productID:string){
+
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.post(`/users/review`,{user,review,ratings,productID})
+  }
+
+  productReview(id:string){ 
+    return this._http.get(`/users/review?id=${id}`)
+  }
+  userData(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/userData?id=${user}`)
+  }
+  saveName(name:string){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.post(`/users/updateName?id=${user}`,name)
+  }
 }

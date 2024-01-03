@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class AdminLoginComponent {
+export class AdminLoginComponent implements OnDestroy{
   user:any
+  private subscribe: Subscription = new Subscription()
 constructor(private _fb:FormBuilder,private _adminService:AdminService,private _router: Router,private _toastr :ToastrService ){}
 adminLogin=this._fb.group({
   email:['',[Validators.required,Validators.email]],
@@ -21,6 +23,7 @@ adminLogin=this._fb.group({
 adminLog(){
   this.user=this.adminLogin.controls
 if(this.adminLogin.valid){
+  this.subscribe.add(
   this._adminService.adminRegister(this.adminLogin.value)
   .subscribe({
     next:(res:any)=>{
@@ -34,6 +37,10 @@ if(this.adminLogin.valid){
     
     }
   })
+  )
 }
+}
+ngOnDestroy(): void {
+  this.subscribe.unsubscribe()
 }
 }

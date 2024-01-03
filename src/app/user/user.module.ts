@@ -28,6 +28,7 @@ import { OrdersListComponent } from './orders-list/orders-list.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsInputComponent } from './reviews-input/reviews-input.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // register Swiper custom elements
 register();
@@ -48,7 +49,8 @@ register();
     OrdersListComponent,
     WalletComponent,
     ReviewsComponent,
-    ReviewsInputComponent
+    ReviewsInputComponent,
+    ProfileComponent
     
   ],
   imports: [

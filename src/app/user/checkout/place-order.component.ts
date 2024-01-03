@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 declare var Razorpay: any;
 
@@ -12,7 +13,7 @@ declare var Razorpay: any;
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.css'
 })
-export class PlaceOrderComponent implements OnInit {
+export class PlaceOrderComponent implements OnInit,OnDestroy {
   DeliveryDate!: Date
   cartProduct: any = []
   TotalAmount!: number
@@ -20,12 +21,12 @@ export class PlaceOrderComponent implements OnInit {
   userName!: string
   userEmail!: string
   userPhone!: string
-
+  private subscribe: Subscription= new Subscription()
   constructor(private _userService: UsersService, private _toastr: ToastrService,
     private _router:Router) { }
   //
   ngOnInit(): void {
-
+    this.subscribe.add(
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
@@ -47,6 +48,7 @@ export class PlaceOrderComponent implements OnInit {
 
       }
     })
+    )
 
 
     this.DeliveryDate = new Date()
@@ -58,7 +60,7 @@ export class PlaceOrderComponent implements OnInit {
   up(c: number, id: string, stock: number, price: number) {
     if (c < stock) {
       console.log(price);
-
+      this.subscribe.add(
       this._userService.updateCart(++c, id, price).subscribe({
         next: () => {
           this.refersh()
@@ -68,6 +70,7 @@ export class PlaceOrderComponent implements OnInit {
 
         }
       })
+      )
     } else {
       this._toastr.warning('this is the limit')
     }
@@ -77,7 +80,7 @@ export class PlaceOrderComponent implements OnInit {
     if (c > 1) {
 
       console.log(price);
-
+      this.subscribe.add(
       this._userService.updateCart(--c, id, -price).subscribe({
         next: () => {
           this.refersh()
@@ -87,12 +90,14 @@ export class PlaceOrderComponent implements OnInit {
 
         }
       })
+      )
     } else {
       this.removeCart(id, price, c)
     }
   }
   //refersh the page value
   refersh() {
+    this.subscribe.add(
     this._userService.loadCart().subscribe({
       next: (res) => {
         this.cartProduct = res
@@ -106,9 +111,11 @@ export class PlaceOrderComponent implements OnInit {
 
       }
     })
+    )
   }
   // remove cart value
   removeCart(id: string, price: number, count: number) {
+    this.subscribe.add(
     this._userService.removeCart(id, price, count).subscribe({
       next: () => {
         this.refersh()
@@ -118,6 +125,7 @@ export class PlaceOrderComponent implements OnInit {
 
       }
     })
+    )
   }
 
 
@@ -129,7 +137,7 @@ export class PlaceOrderComponent implements OnInit {
       paymentMethod: 'razor'
     }
 
-  
+    this.subscribe.add(
       this._userService.orderProduct(orderDetails).subscribe({
         next: (res:any) => {
           this._router.navigate(['order-success', res])
@@ -139,7 +147,7 @@ export class PlaceOrderComponent implements OnInit {
           this._toastr.error('Something went wrong', err.error.message)
         }
       })
-    
+    )
 
   }
 
@@ -182,5 +190,8 @@ export class PlaceOrderComponent implements OnInit {
     Razorpay.open(RazorpayOptions, pass, fail)
 
   }
+ngOnDestroy(): void {
+  this.subscribe.unsubscribe()
+}
 }
 

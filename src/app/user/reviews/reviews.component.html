@@ -50,7 +50,7 @@
             <h1 class=" text-4xl mb-3"><strong>{{product.name}}</strong></h1>
         </div>
         <div class="shadow-inner w-[100vw] h-[100vh] p-3 ">
-            <div class="w-[50vw]   border"  *ngFor="let r of review">
+            <div class="w-[50vw]   border"  *ngFor="let r of review |paginate:{itemsPerPage:pSize,currentPage:currentPage}">
                 <div class="rounded-md w-[7vh] h-[4vh] m-4 bg-green-600">
                     <div class="flex">
                         <p class="ml-2 text-white">{{r.ratings}}</p>
@@ -67,6 +67,9 @@
                 <p class=" p-3 font-bold text-gray-600">{{user.name}}</p>
             </div>
         </div>
-
+        <div class="flex justify-center">
+        <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
     </div>
+    </div>
+    
 </section>

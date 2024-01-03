@@ -20,7 +20,7 @@ export class AdminService {
    
   }
   productDetail(id:any){
-    return this._http.get(`/product/productDetail?id=${id}`)
+    return this._http.get(`/product/productDetailAdmin?id=${id}`)
   }
   brandDetail(id:any){
     return this._http.get(`/product/brandDetails?id=${id}`)
@@ -79,6 +79,8 @@ export class AdminService {
     return this._http.patch(`/product/category/id?id=${id}`,{'name':categoryVal})
   }
   updateProduct(id:string,productVal:any){
+   console.log(productVal);
+   
     return this._http.patch(`/product/id?id=${id}`,productVal)
   }
 }

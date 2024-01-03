@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -10,17 +11,22 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit,OnDestroy {
   user:any
+  private subscribe: Subscription = new Subscription()
   constructor(private _adminService:AdminService,private _route:ActivatedRoute,private _Router:Router ){}
   ngOnInit(): void {
+    this.subscribe.add(
     this._route.params.subscribe(params => {
       this._adminService.userDetail(params['id']).subscribe({
         next: (res) => {
           this.user = res
         }
       })
-    });
+    }))
 
+}
+ngOnDestroy(): void {
+  this.subscribe.unsubscribe()
 }
 }

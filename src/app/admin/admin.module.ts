@@ -16,6 +16,7 @@ import { AdminLoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { OrdersComponent } from './orders/orders.component';
 import { ListOrderComponent } from '../reusable-component/list-order/list-order.component';
+import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 
 
 
@@ -39,8 +40,8 @@ import { ListOrderComponent } from '../reusable-component/list-order/list-order.
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule
-    
+    NgxPaginationModule,
+    SearchFilterPipe
   
    
     

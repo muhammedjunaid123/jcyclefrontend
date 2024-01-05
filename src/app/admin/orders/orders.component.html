@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row ">
                 <div class="col-3">
-                    <input type="text" class="form-control w-[80vw]" [(ngModel)]="filterObj.Name" placeholder="Search ">
+                    <input type="text"  [(ngModel)]="search" class="form-control w-[80vw]"  placeholder="Search ">
                 </div>
                 <!-- <div class="col-3">
             <input type="text" class="form-control" [(ngModel)]="filterObj.ContactNo" placeholder="Search By id">
@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let item of items['product']|paginate:{itemsPerPage:pagesize,currentPage:currentPage}">
+                                *ngFor="let item of items['product']|paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search">
                                 <td>{{item._id}}</td>
                                 <td>{{item.id.name || '--'}}</td>
                                 <td>{{items.user.name || '--'}}</td>
@@ -59,8 +59,11 @@
                                     <select id="status" name="status" #value 
                                         (change)="changeStatus(items.user, item._id,value.value,item.id.price,item.count)">
                                         <option value="">{{item.status}}</option>
-                                        <option *ngFor="let b of status">{{b}}
-                                        </option>
+                                      <option value="{{status[0]}}">{{status[0]}}</option>
+                                      <option value="{{status[1]}}">{{status[1]}}</option>
+                                      <option value="{{status[2]}}">{{status[2]}}</option>
+                                      <option value="{{status[3]}}">{{status[3]}}</option>
+                                      <option value="{{status[4]}}">{{status[4]}}</option>
                                     </select>
                                 }
                                 </td>

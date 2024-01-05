@@ -1,7 +1,17 @@
-<div class="flex">
-    <app-navbar></app-navbar>
-    <div class="px-6 bg-gray-50 border border-solid w-full pt-10">
-      <div *ngFor="let u of users |paginate:{itemsPerPage:pagesize,currentPage:currentPage}" class="flex justify-start items-center rounded-lg shadow-2xl bg-white mb-4 p-4">
+<div class="grid grid-cols-5">
+  <app-navbar></app-navbar>
+  <div class="col-span-4">
+
+  
+  <div class="grid grid-cols-1">
+    <div class="col-3 mt-4">
+      <input [(ngModel)]="search" type="text" class="form-control w-[50vw] flex justify-center"
+        placeholder="Search by product Name ">
+    </div>
+
+    <div class="px-6 bg-gray-50 border border-solid w-full pt-10 col-span-4">
+      <div *ngFor="let u of users |paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search"
+        class="flex justify-start items-center rounded-lg shadow-2xl bg-white mb-4 p-4">
         <div class="flex-grow">
           <div class="mb-2">
             <strong>NAME:</strong> {{ u.name }}
@@ -14,13 +24,14 @@
           </div>
         </div>
         <div class="flex items-center">
-     <div >
-        <button (click)="block_or_unblock(u._id,u.isBlocked)" class="bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
-          {{u.isBlocked?'unblock':'block'}}
-        </button>
-    </div>
-   
-      
+          <div>
+            <button (click)="block_or_unblock(u._id,u.isBlocked)"
+              class="bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
+              {{u.isBlocked?'unblock':'block'}}
+            </button>
+          </div>
+
+
           <button (click)="viewUser(u._id)" class="ml-4 bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
             View
           </button>
@@ -28,8 +39,10 @@
       </div>
     </div>
   </div>
-  
-  <div class="flex justify-center">
-    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
- </div>
-  
+</div>
+</div>
+
+
+<div class="flex justify-center">
+  <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+</div>

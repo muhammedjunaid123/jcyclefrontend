@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UsersService } from 'src/app/services/user/users.service';
 import { Refresh } from '@ngrx/store-devtools/src/actions';
 import { Subscription } from 'rxjs';
+import { Status } from '../types/ordertypes';
 
 @Component({
   selector: 'app-orders',
@@ -14,17 +15,12 @@ export class OrdersComponent  implements OnInit,OnDestroy{
   pagesize = 6
   currentPage = 1
   private subscribe: Subscription = new Subscription()
-  status=['processing','shipped','delivered','cancelled','return']
+
+  status=Status
   order: any = [];
   user:any =[];
+  search=''
   
-  filterObj = {
-    "Name": "",
-    "ContactNo": "",
-    "Email": "",
-    "PageNumber": 1,
-    "PageSize": 10
-  }
   pageTitle: string = 'Server Side Filter';
   constructor(private _userService:UsersService){}
   refresh(){
@@ -44,6 +40,7 @@ export class OrdersComponent  implements OnInit,OnDestroy{
     )
   }
   ngOnInit(): void {
+   
     this.subscribe.add(
     this._userService.orderLoad().subscribe({
       next:(res:any)=>{
@@ -60,21 +57,10 @@ export class OrdersComponent  implements OnInit,OnDestroy{
     )
   }
 
-  onPrevious() {
-    this.filterObj.PageNumber --;
-    this.filetrorder('');
-  }
-  onNext() {
-    this.filterObj.PageNumber ++;
-    this.filetrorder('');
-  }
+  
 
-  filetrorder(param: string) {
-    
-    // // this._http.post('',this.filterObj).subscribe((res:any)=> {
-    // //   this.order = res.data;
-    // })
-  }
+
+  
 
   changeStatus(user: any, itemId: any, selectedValue: string,price:number,count:number) {
    const Total=price*count

@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit,OnDestroy {
   product: any = []
   pagesize = 6
   currentPage = 1
+  search=''
   ngOnInit(): void {
     this.subscribe.add(
     this._adminService.getProduct().subscribe({

@@ -7,12 +7,15 @@
     </svg>
   </div>
   <div class="p-2">
-    <input type="text" class="w-[90vw] bg-gray-100 outline-none  ">
+    <input   [(ngModel)]="search" type="text" class="w-[90vw] bg-gray-100 outline-none  ">
   </div>
 </div>
 <div class="grid grid-flow-col ">
-  <div class="   w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
-    <h1>filter</h1>
+  <div class=" w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
+    <div class="grid grid-cols-2">
+      <h1>filter</h1>
+      <button (click)="refersh()" class="bg-red-700 text-white rounded-lg ">reset</button>
+    </div>
     <form [formGroup]="productForm" (change)="filter()">
       <div class="sm:col-span-3">
         <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
@@ -74,7 +77,7 @@
   <div
     class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
 
-    <div *ngFor="let p of product| paginate:{itemsPerPage:pSize,currentPage:currentPage}"
+    <div *ngFor="let p of product| paginate:{itemsPerPage:pSize,currentPage:currentPage} |searchFilter:search"
       class="overflow-hidden p-2 grid select-none shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw] h-[50vh]  sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg   ">
       <div (click)="productDetails(p._id)">
         <img [src]="p.image[0]" alt="..." class="">

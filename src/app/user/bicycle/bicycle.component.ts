@@ -17,10 +17,12 @@ import { Subscription, map } from 'rxjs';
   templateUrl: './bicycle.component.html',
   styleUrl: './bicycle.component.css'
 })
-export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
+export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
   product: any = []
+  Product: any = []
   brand: any = []
   category: any = []
+  search:string=''
   productForm!: FormGroup
   private subscribe: Subscription = new Subscription()
   pSize = 6
@@ -64,25 +66,26 @@ export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
       })
     )
     this.subscribe.add(
-    this._userService.getCategory().subscribe({
-      next: (res) => {
-        this.category = res
-      }
-    })
+      this._userService.getCategory().subscribe({
+        next: (res) => {
+          this.category = res
+        }
+      })
     )
 
   }
   ngAfterViewInit(): void {
     this.subscribe.add(
-    this._Store.pipe(select(ProductData)).subscribe({
-      next: (res: any) => {
-        this.product = res
-      },
-      error: (Error) => {
-        console.log(Error);
+      this._Store.pipe(select(ProductData)).subscribe({
+        next: (res: any) => {
+          this.product = res
+         this.Product =this.product
+        },
+        error: (Error) => {
+          console.log(Error);
 
-      }
-    })
+        }
+      })
     )
 
     console.log(this.product, 'after view init');
@@ -91,15 +94,15 @@ export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
   refersh() {
     this._Store.dispatch(loadBicycle())
     this.subscribe.add(
-    this._Store.pipe(select(ProductData)).subscribe({
-      next: (res: any) => {
-        this.product = res
-      },
-      error: (Error) => {
-        console.log(Error);
+      this._Store.pipe(select(ProductData)).subscribe({
+        next: (res: any) => {
+          this.product = res
+        },
+        error: (Error) => {
+          console.log(Error);
 
-      }
-    })
+        }
+      })
     )
   }
   Addcart(id: string, price: number) {
@@ -109,16 +112,16 @@ export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
       return
     }
     this.subscribe.add(
-    this._userService.addCart(id, price).subscribe({
-      next: (res) => {
-        this._toastr.success("added")
+      this._userService.addCart(id, price).subscribe({
+        next: (res) => {
+          this._toastr.success("added")
 
-      },
-      error: (error) => {
-        this._toastr.info(error.error.message)
+        },
+        error: (error) => {
+          this._toastr.info(error.error.message)
 
-      }
-    })
+        }
+      })
     )
   }
   wishlist(id: string) {
@@ -128,32 +131,32 @@ export class BicycleComponent implements OnInit, AfterViewInit,OnDestroy {
       return
     }
     this.subscribe.add(
-    this._userService.addWishlist(id).subscribe({
-      next: (res) => {
+      this._userService.addWishlist(id).subscribe({
+        next: (res) => {
 
-        this.refersh()
+          this.refersh()
 
-      },
-      error: (error) => {
+        },
+        error: (error) => {
 
-        this._toastr.info(error.error.message)
+          this._toastr.info(error.error.message)
 
-      }
+        }
 
-    })
+      })
     )
   }
   filter() {
-console.log('enther the  filter');
+    console.log('enther the  filter');
 
     const filter: filter = this.productForm.getRawValue()
     console.log(filter);
-   
+
     this._userService.filterProduct(filter).subscribe({
-      next:(res)=>{
-     this.product=res
+      next: (res) => {
+        this.product = res
       },
-      error:(err)=>{
+      error: (err) => {
         this._toastr.error(err.error.message)
       }
     })
@@ -168,11 +171,13 @@ console.log('enther the  filter');
     this._router.navigate(['/bicycleDetail', { id: id }])
   }
 
-ngOnDestroy(): void {
-  
-  this.subscribe.unsubscribe()
-}
+  ngOnDestroy(): void {
 
+    this.subscribe.unsubscribe()
+  }
+
+  
+  
 }
 
 

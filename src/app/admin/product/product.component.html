@@ -1,43 +1,53 @@
-<section class="flex ">
+<section class="grid grid-cols-5 ">
   <app-navbar></app-navbar>
-  
+
   <div
-    class=" py-5 px-3 grid lg:grid-cols-3 xl2:grid-cols-5 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
+    class=" col-span-4 py-5 px-3  ">
+
     <div class="fixed bottom-5 right-5 z-1 ">
+
       <button routerLink="/admin/productAdd" title="Add New"
         class="group cursor-pointer outline-none hover:rotate-90 duration-300">
         <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
-          class= "bg-white rounded-full stroke-red-700 fill-none group-hover:fill-red-800 group-active:stroke-green-200 group-active:fill-green-600 group-active:duration-0 duration-300">
+          class="bg-white rounded-full stroke-red-700 fill-none group-hover:fill-red-800 group-active:stroke-green-200 group-active:fill-green-600 group-active:duration-0 duration-300">
           <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
             stroke-width="1.5"></path>
           <path d="M8 12H16" stroke-width="1.5"></path>
           <path d="M12 16V8" stroke-width="1.5"></path>
         </svg>
       </button>
-  
-    </div>
-    <div *ngFor="let p of product |paginate:{itemsPerPage:pagesize,currentPage:currentPage}  "
-      class="relative overflow-hidden p-2 grid shadow-inner drop-shadow-2xl lg:w-[30vw] lg:h-[50vh] xl:w-[20vw] md:w-[45vw]   sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg hover:border-b ">
-      <div (click)="productDetail(p)">
-        <img [src]="p.image[0]" alt="..." class="">
-      </div>
-      <hr>
-      <div class="">
-        <div class="grid grid-cols-2 gap-5 mb-2">
-          <p class="text-black break-normal hover:text-clip ">{{p.name}}</p>
-          <button (click)="editProduct(p._id)" class="bg-red-700 text-white rounded-lg w-[5vw] h-[5vh]">EDIT</button>
-        </div>
-        <div class="grid grid-cols-2 gap-5">
-          <p><strong>PRICE:</strong> ₹{{p.price}}</p>
-          <button (click)="block_or_unblock(p._id,p.isBlocked)"
-            class="bg-red-700 text-white rounded-lg w-[5vw] h-[5vh]">{{p.isBlocked?'unlist':'list'}}</button>
-        </div>
-      </div>
     </div>
 
+    <div class="grid grid-cols-1">
+
+      <div class="col-3 mb-4">
+        <input [(ngModel)]="search" type="text" class="form-control w-[50vw] flex justify-center"
+          placeholder="Search by product Name ">
+      </div>
+   <div class="grid  lg:grid-cols-3 xl2:grid-cols-5 xl:grid-cols-3 gap-5 md:grid-cols-2 sm:grid-cols-1">
+      <div *ngFor="let p of product |paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search "
+        class="relative   overflow-hidden p-2 grid shadow-inner drop-shadow-2xl lg:w-[30vw] lg:h-[50vh] xl:w-[20vw] md:w-[45vw]   sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg hover:border-b ">
+        <div (click)="productDetail(p)">
+          <img [src]="p.image[0]" alt="..." class="">
+        </div>
+        <hr>
+        <div class="">
+          <div class="grid grid-cols-2 gap-5 mb-2">
+            <p class="text-black break-normal hover:text-clip ">{{p.name}}</p>
+            <button (click)="editProduct(p._id)" class="bg-red-700 text-white rounded-lg w-[5vw] h-[5vh]">EDIT</button>
+          </div>
+          <div class="grid grid-cols-2 gap-5">
+            <p><strong>PRICE:</strong> ₹{{p.price}}</p>
+            <button (click)="block_or_unblock(p._id,p.isBlocked)"
+              class="bg-red-700 text-white rounded-lg w-[5vw] h-[5vh]">{{p.isBlocked?'unlist':'list'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
-  
+
 </section>
 <div class="flex justify-center">
-   <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+  <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
 </div>

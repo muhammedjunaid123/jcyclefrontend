@@ -11,60 +11,62 @@ import { Subscription } from 'rxjs';
   templateUrl: './reviews-input.component.html',
   styleUrl: './reviews-input.component.css'
 })
-export class ReviewsInputComponent implements OnInit,OnDestroy {
- 
-  productForm!:FormGroup
-  ratings:number=0
-  productID!:string
+export class ReviewsInputComponent implements OnInit, OnDestroy {
+
+  productForm!: FormGroup
+  ratings: number = 0
+  productID!: string
   private subscribe: Subscription = new Subscription()
- 
-  constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService,private _route: ActivatedRoute) { }
+
+  constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.subscribe.add(
-    this._route.params.subscribe(params => {
-      console.log(params['id']);
-       this.productID=params['id']
-      
-    })
+      this._route.params.subscribe(params => {
+        console.log(params['id']);
+        this.productID = params['id']
+
+      })
     )
-  
-    this.productForm = this._fb.group({ 
+
+    this.productForm = this._fb.group({
       review: ['', Validators.required],
-     
+
     })
 
-    
-   
+
+
   }
 
- 
+
 
 
   reviewCreate() {
-    if (this.productForm.valid&&this.ratings!==0) {
-      const review=this.productForm.value 
+    if (this.productForm.valid && this.ratings !== 0) {
+      const review = this.productForm.value
       this.subscribe.add(
-      this._userService.addReview(review['review'],this.ratings,this.productID).subscribe({
-        next: () => {
-          this._router.navigate(['/bicycleDetail', { id: this.productID }])
-        }
-      })
+        this._userService.addReview(review['review'], this.ratings, this.productID).subscribe({
+          next: () => {
+            this._router.navigate(['/bicycleDetail', { id: this.productID }])
+          },
+          error: (err) => {
+            this._toastr.warning(err.error.message)
+          }
+        })
       )
-    }else{
-    
-      
+    } else {
+
       this._toastr.warning('input can not be null!!! ')
     }
-    
+
 
 
   }
-  update(val:number){
- this.ratings = val
-   
+  update(val: number) {
+    this.ratings = val
+
   }
- ngOnDestroy(): void {
-   this.subscribe.unsubscribe()
- }
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
+  }
 }

@@ -14,7 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { loadBicyclepage } from './user/store/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { BicycleEffects } from './user/store/user.effect';
-import { AppState } from './user/store/global/app.state'
+import { AppState } from './user/store/global/app.state';
+
 
  
 @NgModule({
@@ -33,7 +34,8 @@ import { AppState } from './user/store/global/app.state'
     ToastrModule.forRoot(),
     StoreModule.forRoot(AppState),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([BicycleEffects])
+    EffectsModule.forRoot([BicycleEffects]),
+   
 
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorService,multi:true}],

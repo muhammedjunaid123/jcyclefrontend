@@ -30,6 +30,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsInputComponent } from './reviews-input/reviews-input.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
+import { BicycleRentComponent } from './bicycle-rent/bicycle-rent.component';
+
 
 // register Swiper custom elements
 register();
@@ -51,7 +53,9 @@ register();
     WalletComponent,
     ReviewsComponent,
     ReviewsInputComponent,
-    ProfileComponent
+    ProfileComponent,
+    BicycleRentComponent,
+
     
   ],
   imports: [

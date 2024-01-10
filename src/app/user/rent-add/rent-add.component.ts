@@ -1,56 +1,37 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin/admin.service';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { brand, category } from 'src/app/user/types/user.types';
+import { UsersService } from 'src/app/services/user/users.service';
 
 @Component({
-  selector: 'app-product-input',
-  templateUrl: './product-input.component.html',
-  styleUrl: './product-input.component.css'
+  selector: 'app-rent-add',
+  templateUrl: './rent-add.component.html',
+  styleUrl: './rent-add.component.css'
 })
-export class ProductInputComponent implements OnInit,OnDestroy {
-  brand: brand[] = []
-  category: category[] = []
+export class RentAddComponent implements OnInit,OnDestroy {
   files: File[] = [];
   selectedfiles: File[] = []
   productForm!:FormGroup
   length!:number
   private subscribe: Subscription = new Subscription()
  
-  constructor(private _adminService: AdminService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
+  constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
 
   ngOnInit(): void {
 
     this.productForm = this._fb.group({
       name: ['', Validators.required],
       price: ['', Validators.required],
-      stock: ['', Validators.required],
-      brand: ['', Validators.required],
-      category: ['', Validators.required],
-      gears: ['', Validators.required],
-      brake_type: ['', Validators.required],
-      suspension: ['', Validators.required],
+      location: ['', Validators.required],
+      owner: ['', Validators.required],
       cycle_Details: ['', Validators.required],
       image:[Validators.required]
     })
-    this.subscribe.add(
-    this._adminService.getBrand().subscribe({
-      next: (res:brand[]) => {
-        this.brand = res
-      }
-    })
-    )
-    this.subscribe.add(
-    this._adminService.getCategory().subscribe({
-      next: (res:category[]) => {
-        this.category = res
-      }
-    })
-    )
+   
   }
 
   getFileExtension(filename: string): any {
@@ -84,24 +65,9 @@ export class ProductInputComponent implements OnInit,OnDestroy {
       console.log(data);
       
       form.append('name',data.name)
-      console.log(data.name);
-      console.log('Initial FormData:', form);
-      if(data.price<0){
-        this._toastr.error('price can not be a negative value')
-        return
-      }
       form.append('price',data.price)
-      console.log('Initial FormData:', form);
-      if(data.stock<0){
-        this._toastr.error('stock can not be a negative value')
-        return
-      }
-      form.append('stock',data.stock)
-      form.append('brand',data.brand)
-      form.append('category',data.category)
-      form.append('gears',data.gears)
-      form.append('brake_type',data.brake_type)
-      form.append('suspension',data.suspension)
+      form.append('location',data.location)
+      form.append('owner',data.owner)
       form.append('cycle_Details',data.cycle_Details)
       for (let i = 0; i < this.length; i++) {
         form.append('image', this.selectedfiles[i], this.selectedfiles[i].name);
@@ -112,9 +78,9 @@ export class ProductInputComponent implements OnInit,OnDestroy {
         console.log(key, value);
       });
       this.subscribe.add(
-      this._adminService.addProduct(form).subscribe({
+      this._userService.addrent(form).subscribe({
         next: () => {
-          this._router.navigate(['/admin/product'])
+          this._router.navigate(['/rent-add'])
         }
       })
       )

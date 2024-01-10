@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { filter } from '../types/user.types';
+import { bicycle, brand, category, filter } from '../types/user.types';
 import { Store, select } from '@ngrx/store';
 import { loadBicycle } from '../store/user.action';
 import { ProductData } from '../store/user.selector'
@@ -18,10 +18,10 @@ import { Subscription, map } from 'rxjs';
   styleUrl: './bicycle.component.css'
 })
 export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
-  product: any = []
-  Product: any = []
-  brand: any = []
-  category: any = []
+  product: bicycle[] = []
+  Product: bicycle[] = []
+  brand: brand[] = []
+  category: category[] = []
   search:string=''
   productForm!: FormGroup
   private subscribe: Subscription = new Subscription()
@@ -60,14 +60,14 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscribe.add(
       this._userService.getBrand().subscribe({
-        next: (res) => {
+        next: (res:brand[]) => {
           this.brand = res
         }
       })
     )
     this.subscribe.add(
       this._userService.getCategory().subscribe({
-        next: (res) => {
+        next: (res:category[]) => {
           this.category = res
         }
       })
@@ -77,7 +77,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.subscribe.add(
       this._Store.pipe(select(ProductData)).subscribe({
-        next: (res: any) => {
+        next: (res: bicycle[]) => {
           this.product = res
          this.Product =this.product
         },
@@ -95,8 +95,9 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._Store.dispatch(loadBicycle())
     this.subscribe.add(
       this._Store.pipe(select(ProductData)).subscribe({
-        next: (res: any) => {
+        next: (res: bicycle[]) => {
           this.product = res
+          this.Product =this.product
         },
         error: (Error) => {
           console.log(Error);
@@ -147,13 +148,12 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   filter() {
-    console.log('enther the  filter');
-
+   
     const filter: filter = this.productForm.getRawValue()
     console.log(filter);
 
     this._userService.filterProduct(filter).subscribe({
-      next: (res) => {
+      next: (res:bicycle[]) => {
         this.product = res
       },
       error: (err) => {

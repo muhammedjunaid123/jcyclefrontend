@@ -19,6 +19,9 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsInputComponent } from './reviews-input/reviews-input.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BicycleRentComponent } from './bicycle-rent/bicycle-rent.component';
+import { RentAddComponent } from './rent-add/rent-add.component';
+import { AddressComponent } from './address/address.component';
+import { AddAddressComponent } from './add-address/add-address.component';
 
 
 
@@ -38,7 +41,10 @@ const routes: Routes = [
 {path:'review',component:ReviewsComponent,canActivate:[userGuard]},
 {path:'addReview',component:ReviewsInputComponent,canActivate:[userGuard]},
 {path:'profile',component:ProfileComponent,canActivate:[userGuard]},
-{path:'rent',component:BicycleRentComponent}
+{path:'rent',component:BicycleRentComponent},
+{path:'rent-add',component:RentAddComponent,canActivate:[userGuard]},
+{path:'address',component:AddressComponent,canActivate:[userGuard]},
+{path:'add-address',component:AddAddressComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

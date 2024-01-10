@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { cart, cartProduct } from '../types/user.types';
 
 declare var Razorpay: any;
 
@@ -15,7 +16,7 @@ declare var Razorpay: any;
 })
 export class PlaceOrderComponent implements OnInit,OnDestroy {
   DeliveryDate!: Date
-  cartProduct: any = []
+  cartProduct: cartProduct[] = []
   TotalAmount!: number
   length!: number
   userName!: string
@@ -28,13 +29,13 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.subscribe.add(
     this._userService.loadCart().subscribe({
-      next: (res) => {
-        this.cartProduct = res
-        this.TotalAmount = this.cartProduct['TotalAmount']
-        this.userName = this.cartProduct['user']['name']
-        this.userEmail = this.cartProduct['user']['email']
-        this.userPhone = this.cartProduct['user']['phone']
-        this.cartProduct = this.cartProduct['product']
+      next: (res:cart) => {
+        
+        this.TotalAmount = res['TotalAmount']
+        this.userName = res['user']['name']
+        this.userEmail = res['user']['email']
+        this.userPhone = res['user']['phone']
+        this.cartProduct=res['product']
 
         console.log(this.cartProduct);
         this.length = this.cartProduct.length
@@ -55,56 +56,18 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
 
     this.DeliveryDate.setDate(this.DeliveryDate.getDate() + 10)
   }
-  counter = 1
-  // update cart 
-  up(c: number, id: string, stock: number, price: number) {
-    if (c < stock) {
-      console.log(price);
-      this.subscribe.add(
-      this._userService.updateCart(++c, id, price).subscribe({
-        next: () => {
-          this.refersh()
-        },
-        error: (err) => {
-          console.log(err);
-
-        }
-      })
-      )
-    } else {
-      this._toastr.warning('this is the limit')
-    }
-  }
-  // update cart
-  down(c: number, id: string, price: number) {
-    if (c > 1) {
-
-      console.log(price);
-      this.subscribe.add(
-      this._userService.updateCart(--c, id, -price).subscribe({
-        next: () => {
-          this.refersh()
-        },
-        error: (err) => {
-          console.log(err);
-
-        }
-      })
-      )
-    } else {
-      this.removeCart(id, price, c)
-    }
-  }
   //refersh the page value
   refersh() {
     this.subscribe.add(
     this._userService.loadCart().subscribe({
-      next: (res) => {
-        this.cartProduct = res
-        this.TotalAmount = this.cartProduct['TotalAmount']
-        this.cartProduct = this.cartProduct['product']
+      next: (res:cart) => { 
+        this.TotalAmount = res['TotalAmount']
+        this.userName = res['user']['name']
+        this.userEmail = res['user']['email']
+        this.userPhone = res['user']['phone']
+        this.cartProduct=res['product']
         console.log(this.cartProduct);
-
+        this.length = this.cartProduct.length
       },
       error: (error) => {
         console.log(error);

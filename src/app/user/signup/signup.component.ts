@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/user/users.service';
+import { user } from '../types/user.types';
 
 @Component({
   selector: 'app-signup',
@@ -28,8 +29,8 @@ export class SignupComponent implements OnDestroy {
       this.subscribe.add(
       this._userService.userRegister(this.signupForm.value)
       .subscribe({
-        next: (res:any) => {    
-          this._router.navigate(['otp'], { queryParams: { id: res.id } })
+        next: (res:user) => {    
+          this._router.navigate(['otp'], { queryParams: { id: res._id } })
         },
         error: (error:any) => {
           console.log(error);

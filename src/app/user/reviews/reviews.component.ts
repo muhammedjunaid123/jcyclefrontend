@@ -5,16 +5,17 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Subscription } from 'rxjs';
+import { bicycle, ratings_review, review, user } from '../types/user.types';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent implements OnInit,OnDestroy {
-  product: any = []
-  review: any = []
-  user: any = []
+export class ReviewsComponent implements OnInit, OnDestroy {
+  product!: bicycle
+  review!: ratings_review[]
+  user!: user
   private subscribe: Subscription = new Subscription()
   pSize = 3
   currentPage = 1
@@ -39,44 +40,36 @@ export class ReviewsComponent implements OnInit,OnDestroy {
   }
   refersh() {
     this.subscribe.add(
-    this._route.params.subscribe(params => {
-      this._userService.productReview(params['id']).subscribe({
-        next: (res) => {
-          console.log(params['id']);
+      this._route.params.subscribe(params => {
+        this._userService.productReview(params['id']).subscribe({
+          next: (res:review) => {
+            this.user = res['user']
+            this.review = res['ratings_review']
+            this.product = res['product']
+          }, error: (error) => {
+            console.log(error, 'this is the error');
 
-          this.product = res
-          console.log(this.product, 'this is review ');
-          this.user = this.product['user']
-          this.review = this.product['ratings_review']
-          this.product = this.product['product']
-
-
-        }, error: (error) => {
-          console.log(error, 'this is the error');
-
-        }
+          }
+        })
       })
-    })
     )
   }
   ngOnInit(): void {
     this.subscribe.add(
-    this._route.params.subscribe(params => {
-      this._userService.productReview(params['id']).subscribe({
-        next: (res) => {
-          this.product = res
-          console.log(this.product, 'this is review ');
-          this.user = this.product['user']
-          this.review = this.product['ratings_review']
-          this.product = this.product['product']
+      this._route.params.subscribe(params => {
+        this._userService.productReview(params['id']).subscribe({
+          next: (res:review) => {
+            this.user = res['user']
+            this.review = res['ratings_review']
+            this.product = res['product']
 
 
-        }, error: (error) => {
-          console.log(error, 'this is the error');
+          }, error: (error) => {
+            console.log(error, 'this is the error');
 
-        }
+          }
+        })
       })
-    })
     )
   }
   Addcart(id: string, price: number) {
@@ -86,16 +79,16 @@ export class ReviewsComponent implements OnInit,OnDestroy {
       return
     }
     this.subscribe.add(
-    this._userService.addCart(id, price).subscribe({
-      next: (res) => {
-        this._toastr.success("added")
+      this._userService.addCart(id, price).subscribe({
+        next: (res) => {
+          this._toastr.success("added")
 
-      },
-      error: (error) => {
-        this._toastr.info(error.error.message)
+        },
+        error: (error) => {
+          this._toastr.info(error.error.message)
 
-      }
-    })
+        }
+      })
     )
   }
   wishlist(id: string) {
@@ -105,19 +98,19 @@ export class ReviewsComponent implements OnInit,OnDestroy {
       return
     }
     this.subscribe.add(
-    this._userService.addWishlist(id).subscribe({
-      next: (res) => {
+      this._userService.addWishlist(id).subscribe({
+        next: (res) => {
 
-        this.refersh()
+          this.refersh()
 
-      },
-      error: (error) => {
+        },
+        error: (error) => {
 
-        this._toastr.info(error.error.message)
+          this._toastr.info(error.error.message)
 
-      }
+        }
 
-    })
+      })
     )
   }
   ngOnDestroy(): void {

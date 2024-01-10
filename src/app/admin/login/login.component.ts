@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './login.component.css'
 })
 export class AdminLoginComponent implements OnDestroy{
-  user:any
+  admin:any
   private subscribe: Subscription = new Subscription()
 constructor(private _fb:FormBuilder,private _adminService:AdminService,private _router: Router,private _toastr :ToastrService ){}
 adminLogin=this._fb.group({
@@ -21,7 +21,7 @@ adminLogin=this._fb.group({
   password:['',[Validators.required,Validators.minLength(6)]]
 })
 adminLog(){
-  this.user=this.adminLogin.controls
+  this.admin=this.adminLogin.controls
 if(this.adminLogin.valid){
   this.subscribe.add(
   this._adminService.adminRegister(this.adminLogin.value)

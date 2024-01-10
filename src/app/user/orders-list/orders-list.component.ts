@@ -2,19 +2,19 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { Subscription } from 'rxjs';
+import { order } from '../types/user.types';
+
 
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.component.html',
   styleUrl: './orders-list.component.css'
 })
-export class OrdersListComponent implements OnDestroy, OnInit {
-  @Input() order: any = []
+export class OrdersListComponent implements OnDestroy {
+  @Input() order: order[] = []
   pagesize = 6
   currentPage = 1
   search: string = ''
-  status = ['processing', 'shipped', 'delivered', 'cancelled', 'return'] //use enums
-
 
   private subscribe: Subscription = new Subscription()
 
@@ -23,7 +23,7 @@ export class OrdersListComponent implements OnDestroy, OnInit {
   refresh() {
     this.subscribe.add(
       this._userService.orderLoad().subscribe({
-        next: (res: any) => {
+        next: (res: order[]) => {
           this.order = res
           console.log(this.order);
 
@@ -35,19 +35,6 @@ export class OrdersListComponent implements OnDestroy, OnInit {
         }
       })
     )
-  }
-  ngOnInit(): void {
-
-
-  }
-
-
-
-  filetrorder(param: string) {
-
-    // // this._http.post('',this.filterObj).subscribe((res:any)=> {
-    // //   this.order = res.data;
-    // })
   }
 
 
@@ -81,6 +68,5 @@ export class OrdersListComponent implements OnDestroy, OnInit {
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()
-    this.order = []
   }
 }

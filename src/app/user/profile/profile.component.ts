@@ -5,6 +5,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { address, order, user, wallet } from '../types/user.types';
 
 @Component({
   selector: 'app-profile',
@@ -12,18 +13,23 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  wallet: any = []
-  order: any = [];
+  wallet: wallet[] = []
+  order: order[] = [];
+  address:address[]=[]
   user: any
-  userData: any
+  userData!:user
   edit = false
   nameForm!: FormGroup
+  
   ngOnInit(): void {
 
     this._userService.userData().subscribe({
-      next: (res) => {
+      next: (res:user) => {
         this.userData = res
-        this.nameForm.setValue(this.userData['name']);
+        if(this.edit===true){
+         const  name=this.userData['name']
+          this.nameForm.setValue({name:name});
+        }
       },
       error: (err) => {
         this._toastr.error(err.error.message)
@@ -36,9 +42,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.order = []
     this.subscribe.add(
       this._userService.loadWallet().subscribe({
-        next: (res) => {
-          this.wallet = res
-          this.wallet = this.wallet['walletHistory']
+        next: (res:user) => {
+          this.wallet = res['walletHistory']
+
         }, error: (err) => {
           console.log(err);
 
@@ -62,9 +68,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   refersh(){
     this._userService.userData().subscribe({
-      next: (res) => {
+      next: (res:user) => {
         this.userData = res
-        this.nameForm.setValue(this.userData['name']);
+        if(this.edit===true){
+         const  name=this.userData['name']
+          this.nameForm.setValue({name:name});
+        }
       },
       error: (err) => {
         this._toastr.error(err.error.message)
@@ -101,6 +110,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
         name: [this.userData['name'], Validators.required],
       })
     }
+  }
+  getAddrress(){
+    this.wallet=[]
+    this.order=[]
+    this.subscribe.add(this._userService.loadAddress().subscribe({
+      next: (res: any) => { 
+        this.address = res['address']
+      
+        
+      }, error: (err: any) => {
+        console.log(err);
+
+      }
+    }))
+    
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()

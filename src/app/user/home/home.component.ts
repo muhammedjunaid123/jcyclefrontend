@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
-import {HomeProduct } from '../types/user.types'
+import {HomeProduct, bicycle } from '../types/user.types'
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
@@ -14,16 +14,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit,OnDestroy{
- BestSeller:any=[]
- products!: any[] 
+ BestSeller:bicycle[]=[]
  private subscribe: Subscription = new Subscription()
  constructor(private _userService:UsersService,
   private _toastr: ToastrService,private _router:Router){}
 ngOnInit(): void {
   this.subscribe.add(
   this._userService.loadBestSeller().subscribe({
-    
-    next:(res)=>{
+    next:(res:bicycle[])=>{
       console.log(res);
       
     this.BestSeller=res
@@ -34,14 +32,14 @@ ngOnInit(): void {
 }
 refersh(){
   this.subscribe.add(
-  this._userService.loadBestSeller().subscribe({
-    next:(res)=>{
-      console.log(res);
-      
-    this.BestSeller=res
-    }
-  })
-  )
+    this._userService.loadBestSeller().subscribe({
+      next:(res:bicycle[])=>{
+        console.log(res);
+        
+      this.BestSeller=res
+      }
+    })
+    )
 }
 Addcart(id: string,price:number) {
   if(!localStorage.getItem(environment.UserSecret)){

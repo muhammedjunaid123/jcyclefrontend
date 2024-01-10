@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { wishProduct, wishlist } from '../types/user.types';
 
 @Component({
   selector: 'app-wishlist',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent  implements OnInit,OnDestroy{
-  BestSeller:any=[]
+  wishProduct!:wishProduct[]
    i=0
    private subscribe: Subscription = new Subscription()
   constructor(private _userService:UsersService,
@@ -18,10 +19,9 @@ export class WishlistComponent  implements OnInit,OnDestroy{
  ngOnInit(): void {
   this.subscribe.add(
    this._userService.loadwishlist().subscribe({
-     next:(res)=>{
-     this.BestSeller=res
-     this.BestSeller= this.BestSeller['product']
-     console.log(this.BestSeller);
+     next:(res:wishlist)=>{
+     this.wishProduct=res['product']
+     console.log(this.wishProduct);
      
      
      }
@@ -31,13 +31,12 @@ export class WishlistComponent  implements OnInit,OnDestroy{
  refersh(){
   this.subscribe.add(
   this._userService.loadwishlist().subscribe({
-    next:(res)=>{
-    this.BestSeller=res
-    this.BestSeller= this.BestSeller['product']
-    console.log(this.BestSeller);
-    
-    
-    }
+    next:(res:wishlist)=>{
+      this.wishProduct=res['product']
+      console.log(this.wishProduct);
+      
+      
+      }
   })
   )
  }

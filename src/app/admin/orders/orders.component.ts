@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { UsersService } from 'src/app/services/user/users.service';
 import { Refresh } from '@ngrx/store-devtools/src/actions';
 import { Subscription } from 'rxjs';
-import { Status } from '../types/ordertypes';
+import { AdminStatus } from '../types/admin.types';
+import { order, user } from 'src/app/user/types/user.types';
+
 
 @Component({
   selector: 'app-orders',
@@ -16,21 +18,20 @@ export class OrdersComponent  implements OnInit,OnDestroy{
   currentPage = 1
   private subscribe: Subscription = new Subscription()
 
-  status=Status
-  order: any = [];
-  user:any =[];
+  status=AdminStatus
+  order: order[] = [];
+  user:user[] =[];
   search=''
   
   pageTitle: string = 'Server Side Filter';
   constructor(private _userService:UsersService){}
+
   refresh(){
     this.subscribe.add(
     this._userService.orderLoad().subscribe({
-      next:(res:any)=>{
+      next:(res:order[])=>{
         this.order=res
-        console.log(this.order);
-      
-        console.log(this.order[0]);        
+       
       },
       error:(err)=>{
       console.log(err);
@@ -43,11 +44,9 @@ export class OrdersComponent  implements OnInit,OnDestroy{
    
     this.subscribe.add(
     this._userService.orderLoad().subscribe({
-      next:(res:any)=>{
+      next:(res:order[])=>{
         this.order=res
-        console.log(this.order);
-      
-        console.log(this.order[0]);        
+       
       },
       error:(err)=>{
       console.log(err);

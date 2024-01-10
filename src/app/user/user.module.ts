@@ -31,6 +31,9 @@ import { ReviewsInputComponent } from './reviews-input/reviews-input.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 import { BicycleRentComponent } from './bicycle-rent/bicycle-rent.component';
+import { RentAddComponent } from './rent-add/rent-add.component';
+import { AddressComponent } from './address/address.component';
+import { AddAddressComponent } from './add-address/add-address.component';
 
 
 // register Swiper custom elements
@@ -55,7 +58,9 @@ register();
     ReviewsInputComponent,
     ProfileComponent,
     BicycleRentComponent,
-
+    RentAddComponent,
+    AddressComponent,
+    AddAddressComponent
     
   ],
   imports: [

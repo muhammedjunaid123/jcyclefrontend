@@ -28,27 +28,13 @@
                             (click)="getOrders()">orders</button>
                     </div>
                     <div>
-                        <!-- <button
+                        <button
                             class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
-                            >add address</button> -->
+                            (click)="getAddrress()" >address</button>
                     </div>
                 </div>
             </div>
-            <!-- <div class="grid justify-center mt-2">
-                <div class="flex gap-2 ">
-                    <div>
-                        <button
-                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
-                           >rent</button>
-                    </div>
-                    <div>
-                        <button
-                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
-                            >service</button>
-                    </div>
-
-                </div>
-            </div> -->
+    
         </div>
 
         <div class="col-span-5">
@@ -56,7 +42,10 @@
             <app-wallet [wallet]="wallet"></app-wallet>
             }@else if (order.length>0) {
             <app-orders-list [order]="order"></app-orders-list>
-            }@else {
+            }@else if (address.length>0) {
+              <app-address [addressArr]="address"></app-address>
+            }
+            @else {
 
             <div>
                 <div>

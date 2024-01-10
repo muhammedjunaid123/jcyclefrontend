@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router,  } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { bicycle, brand, user } from 'src/app/user/types/user.types';
+import { adminBrand, adminCategory } from 'src/app/admin/types/admin.types';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +14,15 @@ export class AdminService {
   constructor(private _http:HttpClient,private _router: Router ) { }
   
  
-  getProduct(){
-    return this._http.get(`/admin/product`)
+  getProduct():Observable<bicycle[]>{
+    return this._http.get<bicycle[]>(`/admin/product`)
   }
   adminRegister(adminData:any){
     return this._http.post(`/admin/SignIn`,adminData)
    
   }
-  productDetail(id:any){
-    return this._http.get(`/product/productDetailAdmin?id=${id}`)
+  productDetail(id:any):Observable<bicycle>{
+    return this._http.get<bicycle>(`/product/productDetailAdmin?id=${id}`)
   }
   brandDetail(id:any){
     return this._http.get(`/product/brandDetails?id=${id}`)
@@ -28,17 +30,17 @@ export class AdminService {
   categoryDetail(id:any){
     return this._http.get(`/product/categoryDetails?id=${id}`)
   }
-  userDetail(id:string){
+  userDetail(id:string):Observable<user>{
     console.log(id);
     
-    return this._http.get(`/users/userDetails?id=${id}`)
+    return this._http.get<user>(`/users/userDetails?id=${id}`)
   }
-  getBrand(){
-    return this._http.get(`/product/brand`)
+  getBrand():Observable<adminBrand[]>{
+    return this._http.get<adminBrand[]>(`/product/brand`)
   
   }
-  getCategory(){
-    return this._http.get(`/product/category`)
+  getCategory():Observable<adminCategory[]>{
+    return this._http.get<adminCategory[]>(`/product/category`)
   }
   addCategory(category:any){
     return this._http.post(`/product/category`,{"name":category})
@@ -52,8 +54,8 @@ export class AdminService {
   return this._http.post(`/product`,product)
   }
 
-  getUsers(){
-    return this._http.get(`/admin/users`)
+  getUsers():Observable<user[]>{
+    return this._http.get<user[]>(`/admin/users`)
   }
   product_block(id:string,block_status:boolean){
     return this._http.patch(`/admin/productBlock?id=${id}`,{'isBlocked':block_status})

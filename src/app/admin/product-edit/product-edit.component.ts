@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { bicycle, brand, category } from 'src/app/user/types/user.types';
 
 @Component({
   selector: 'app-product-edit',
@@ -12,9 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductEditComponent implements OnInit {
   productForm!:FormGroup
-  brand: any = []
-  category: any = []
-  product:any=[]
+  brand: brand[] = []
+  category: category[] = []
+  product!:bicycle
   productdata:any=[]
 
   constructor(private _adminService: AdminService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService,private _route:ActivatedRoute) { }
@@ -41,10 +42,10 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this._adminService.productDetail(params['id']).subscribe({
-        next: (res) => {
+        next: (res:bicycle) => {
           this.product = res
        
-         this.productdata ={...this.product }
+         this.productdata ={...res }
         delete this.productdata['_id']
         delete this.productdata['image']
         delete this.productdata['isBlocked']
@@ -74,12 +75,12 @@ export class ProductEditComponent implements OnInit {
   
 
     this._adminService.getBrand().subscribe({
-      next: (res) => {
+      next: (res:brand[]) => {
         this.brand = res
       }
     })
     this._adminService.getCategory().subscribe({
-      next: (res) => {
+      next: (res:category[]) => {
         this.category = res
       }
     })

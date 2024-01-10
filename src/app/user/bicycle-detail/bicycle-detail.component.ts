@@ -5,6 +5,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Subscription } from 'rxjs';
+import {  bicycle, productDetails } from '../types/user.types';
 
 @Component({
   selector: 'app-bicycle-detail',
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './bicycle-detail.component.css'
 })
 export class BicycleDetailComponent implements OnInit,OnDestroy {
-  product: any = []
+  product!: bicycle
   total!: number
   Total!: number
   obj: any
@@ -39,12 +40,11 @@ export class BicycleDetailComponent implements OnInit,OnDestroy {
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.productDetail(params['id']).subscribe({
-          next: (res) => {
-            this.product = res
-            this.total = Math.round(this.product['total'])
-            this.Total = Math.round(this.product['Total'])
-            this.obj = this.product['obj']
-            this.product = this.product['product']
+          next: (res:productDetails) => {   
+            this.total = Math.round(res['total'])
+            this.Total = Math.round(res['Total'])
+            this.obj = res['obj']
+            this.product =res['product']
             console.log(this.product, this.total, this.obj);
 
           }
@@ -56,9 +56,12 @@ export class BicycleDetailComponent implements OnInit,OnDestroy {
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.productDetail(params['id']).subscribe({
-          next: (res) => {
-            this.product = res
-            console.log(this.product);
+          next: (res:productDetails) => {   
+            this.total = Math.round(res['total'])
+            this.Total = Math.round(res['Total'])
+            this.obj = res['obj']
+            this.product =res['product']
+            console.log(this.product, this.total, this.obj);
 
           }
         })

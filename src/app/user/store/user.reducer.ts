@@ -1,8 +1,8 @@
 import {createReducer,on} from '@ngrx/store'
-import { Product } from '../types/user.types'
+import {  bicycle } from '../types/user.types'
 import * as UserAction from './user.action'
  
-const ProductinitialSate:any[]=[]
+const ProductinitialSate:bicycle[]=[]
 
 export const loadBicyclepage= createReducer(
     ProductinitialSate,

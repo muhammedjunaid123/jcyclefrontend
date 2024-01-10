@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { AdminModule } from '../admin.module';
 import { Subscription } from 'rxjs';
+import { bicycle } from 'src/app/user/types/user.types';
 
 @Component({
   selector: 'app-product',
@@ -14,14 +15,14 @@ export class ProductComponent implements OnInit,OnDestroy {
 
   constructor(private _router: Router, private _route: ActivatedRoute, private _adminService: AdminService) { }
   private subscribe: Subscription = new Subscription()
-  product: any = []
+  product: bicycle[] = []
   pagesize = 6
   currentPage = 1
   search=''
   ngOnInit(): void {
     this.subscribe.add(
     this._adminService.getProduct().subscribe({
-      next: (res) => {
+      next: (res:bicycle[]) => {
         this.product = res
       }
     })
@@ -30,7 +31,7 @@ export class ProductComponent implements OnInit,OnDestroy {
   refersh() {
     this.subscribe.add(
     this._adminService.getProduct().subscribe({
-      next: (res) => {
+      next: (res:bicycle[]) => {
         this.product = res
       }
     })

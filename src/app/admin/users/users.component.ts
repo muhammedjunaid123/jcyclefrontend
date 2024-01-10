@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Router } from '@angular/router';
+import { user } from 'src/app/user/types/user.types';
 
 @Component({
   selector: 'app-users',
@@ -11,14 +12,14 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
 
   search = ''
-  users: any
+  users!: user[]
   pagesize = 3
   currentPage = 1
   constructor(private _adminService: AdminService, private _Router: Router) { }
   ngOnInit(): void {
     this._adminService.getUsers()
       .subscribe({
-        next: (res: any) => {
+        next: (res: user[]) => {
           this.users = res
         },
         error: (error: Error) => {
@@ -30,7 +31,7 @@ export class UsersComponent implements OnInit {
   refersh() {
     this._adminService.getUsers()
       .subscribe({
-        next: (res: any) => {
+        next: (res: user[]) => {
           this.users = res
         },
         error: (error: Error) => {

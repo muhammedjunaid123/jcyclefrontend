@@ -4,13 +4,15 @@ import { AdminService } from 'src/app/services/admin/admin.service';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { adminBrand } from '../types/admin.types';
+
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrl: './brand.component.css'
 })
 export class BrandComponent implements OnInit,OnDestroy {
-  brand: any = []
+  brand!: adminBrand[]
   pagesize = 6
   currentPage = 1
   private subscribe: Subscription = new Subscription()
@@ -20,7 +22,7 @@ export class BrandComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.subscribe.add(
     this._adminservice.getBrand().subscribe({
-      next: (res) => {
+      next: (res:adminBrand[]) => {
         this.brand = res
       },
       error: (error) => {
@@ -38,7 +40,7 @@ export class BrandComponent implements OnInit,OnDestroy {
   refersh(){
     this.subscribe.add(
     this._adminservice.getBrand().subscribe({
-      next: (res) => {
+      next: (res:adminBrand[]) => {
         this.brand = res
       },
       error: (error) => {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { user } from 'src/app/user/types/user.types';
 
 @Component({
   selector: 'app-user-details',
@@ -12,14 +13,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './user-details.component.css'
 })
 export class UserDetailsComponent implements OnInit,OnDestroy {
-  user:any
+  user!:user
   private subscribe: Subscription = new Subscription()
   constructor(private _adminService:AdminService,private _route:ActivatedRoute,private _Router:Router ){}
   ngOnInit(): void {
     this.subscribe.add(
     this._route.params.subscribe(params => {
       this._adminService.userDetail(params['id']).subscribe({
-        next: (res) => {
+        next: (res:user) => {
           this.user = res
         }
       })

@@ -1,7 +1,9 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import {  Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { ErrorHandleService } from '../services/error/error-handle.service';
 
 
 @Injectable({
@@ -9,15 +11,16 @@ import { environment } from 'src/environments/environment.development';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private _spinner: NgxSpinnerService,private _errorHandlerService: ErrorHandleService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this._spinner.show();
     const userToken = localStorage.getItem(environment.UserSecret);
     const servicerToken = localStorage.getItem(environment.servicerSecret);
     const adminToken = localStorage.getItem(environment.AdminSecrect);
     let newRequest =req
     let validToken:any
     if(userToken){
-validToken=userToken
+       validToken=userToken
     }else{
       validToken=servicerToken?servicerToken:adminToken
     }
@@ -26,8 +29,18 @@ validToken=userToken
       url: environment.APIuRL + req.url
     })
  
-
-     
-    return next.handle(newRequest)
+    return next.handle(newRequest).pipe(
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          this._spinner.hide();          
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this._spinner.hide();        
+        this._errorHandlerService.handleError(error);
+        return throwError(() => error);
+      })
+    );
+    
   }
 }

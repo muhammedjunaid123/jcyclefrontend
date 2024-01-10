@@ -28,7 +28,7 @@ export class LoginComponent implements OnDestroy {
         this._userService.userLogin(this.login.value)
           .subscribe({
             next: (res: any) => {
-              // localStorage.setItem(environment.UserSecret, res.access_token.toString());
+              localStorage.setItem(environment.UserSecret, res.access_token.toString());  
               this._toastr.success('LOGIN SUCCESSFUL');
               this._router.navigate([''])
             },

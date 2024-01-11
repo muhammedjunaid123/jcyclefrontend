@@ -16,10 +16,10 @@ export class ErrorHandleService {
          localStorage.clear() 
       }
       errorMessage = `An error occured: ${err.error.message}`
-    } else {
       errorMessage = err.error.message
+      this._toastr.error(errorMessage)
+    } else {
     }
-    this._toastr.error(errorMessage)
   }
 }
   

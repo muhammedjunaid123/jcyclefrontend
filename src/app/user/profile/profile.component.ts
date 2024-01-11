@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { address, order, user, wallet } from '../types/user.types';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-profile',
@@ -125,6 +126,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }))
     
+  }
+  logout(){
+    localStorage.removeItem(environment.UserSecret)
+    this._router.navigate([''])
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()

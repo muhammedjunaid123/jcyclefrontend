@@ -48,7 +48,7 @@ export class UsersService {
   }
   loadCart(): Observable<cart> {
     const user = localStorage.getItem(environment.UserSecret)
-    return this._http.get<cart>(`/users/cart?id=${user}`)
+    return  this._http.get<cart>(`/users/cart?id=${user}`)
   }
   removeCart(id: string, price: number, count: number) {
     const user = localStorage.getItem(environment.UserSecret)

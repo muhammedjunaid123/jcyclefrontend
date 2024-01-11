@@ -22,6 +22,7 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   userName!: string
   userEmail!: string
   userPhone!: string
+   flag!:boolean
   private subscribe: Subscription= new Subscription()
   constructor(private _userService: UsersService, private _toastr: ToastrService,
     private _router:Router) { }
@@ -115,7 +116,7 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   }
 
 
-  payNow() {
+  razor(){
     const RazorpayOptions = {
       description: 'Sample Payment',
       currency: 'INR',
@@ -123,11 +124,9 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
       name: 'JCYCLE',
       key: environment.RAZOR_KEY,
       handler: (res: any) => {
-        this.verifyPayment(res)
-       
-        
+        this.verifyPayment(res) 
       },
-      // image: '../../../assets/Screenshot 2023-11-29 100600.png',
+     
       prefill: {
         name: this.userName,
         email: this.userEmail,
@@ -150,8 +149,36 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
       console.log('payment fail');
 
     }
-    Razorpay.open(RazorpayOptions, pass, fail)
+    if(this.flag===false){  
+       return
+      }
+      Razorpay.open(RazorpayOptions, pass, fail)
 
+  }
+ async payNow() {
+    
+   
+ 
+    this.subscribe.add(
+      this._userService.loadCart().subscribe({
+        next: (res: cart) => {
+          if (this.cartProduct.length !== res['product'].length) {
+            this._toastr.error("There is some error, please refresh the page.")
+           return
+          } else {
+            this.razor()
+          }
+        },
+
+      })
+    )
+   
+
+   if(this.flag===false){
+
+   
+   }
+   
   }
 ngOnDestroy(): void {
   this.subscribe.unsubscribe()

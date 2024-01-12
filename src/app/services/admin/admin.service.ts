@@ -50,7 +50,7 @@ export class AdminService {
     return this._http.post(`/product/brand`,{"name":brand})
 
   }
-  addProduct(product:any){
+  addProduct(product:any){ 
   return this._http.post(`/product`,product)
   }
 
@@ -81,8 +81,11 @@ export class AdminService {
     return this._http.patch(`/product/category/id?id=${id}`,{'name':categoryVal})
   }
   updateProduct(id:string,productVal:any){
-   console.log(productVal);
-   
     return this._http.patch(`/product/id?id=${id}`,productVal)
+  }
+  imgDelete(index:number,id:string){
+    console.log(index,id);
+    
+ return this._http.patch(`/product/imgDelete`,{index,id})
   }
 }

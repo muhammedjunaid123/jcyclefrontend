@@ -18,7 +18,16 @@ export class NavBarComponent implements OnInit {
   cart:boolean=false
 
   ngOnInit(): void {
-     this.url=this.activeRoute.snapshot.url[0]['path']
+    try {
+      this.url=this.activeRoute.snapshot.url[0]['path']
+      this.home=false
+    } catch (error) {
+     
+      this.home=true
+      
+    }
+    
+     
   //
     if(this.url==='rent'){
       this.rent=true
@@ -26,11 +35,7 @@ export class NavBarComponent implements OnInit {
       this.rent=false
     }
     //
-    if(this.url===''){
-      this.home=true
-    }else{
-      this.home=false
-    }
+   
     //
     if(this.url==='bicycle'){
       this.product=true

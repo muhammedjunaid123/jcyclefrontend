@@ -37,6 +37,7 @@ export class BicycleDetailComponent implements OnInit,OnDestroy {
 
   constructor(private _route: ActivatedRoute, private _userService: UsersService, private _toastr: ToastrService, private _router: Router) { }
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.productDetail(params['id']).subscribe({

@@ -21,8 +21,8 @@
         <p-carousel [value]="BestSeller" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]="3000"  >
             <ng-template let-product pTemplate="item">
                 <div class="flex h-[55vh]">
-                    <div *ngFor="let p of BestSeller"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[50vh] rounded-lg hover:scale-105 duration-150 select-none">
-                        <div ><img [src]="p.image[0]" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
+                    <div *ngFor="let p of BestSeller" (click)="productDetails(p._id)"  class=" mx-10 snap-center relative shadow-2xl w-[20vw] h-[50vh] rounded-lg hover:scale-105 duration-150 select-none">
+                        <div  ><img [src]="p.image[0]" alt="..." class="bg-green-500 w-[70vw] h-[30vh]"></div>
                         <div class="flex flex-col flex-wrap  pl-2">
                             <div><strong>NAME :</strong>{{p.name}}</div>
                             <div><strong>PRICE :</strong>₹{{p.price}}</div>

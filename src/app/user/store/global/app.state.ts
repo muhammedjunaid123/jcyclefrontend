@@ -1,6 +1,8 @@
-import { loadBicyclepage } from "../user.reducer";
+import { datePiker, loadBicyclepage } from "../user.reducer";
 
 export const AppState =  {
     
-   productlist:loadBicyclepage
+   productlist:loadBicyclepage,
+   datepiker:datePiker
+
 }

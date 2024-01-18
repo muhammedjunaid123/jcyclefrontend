@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { address, bicycle, brand, cart, category, filter, order, productDetails, rent, review, user, wishlist } from 'src/app/user/types/user.types';
+import { address, bicycle, brand, cart, category, datePickerT, filter, order, productDetails, rent, rentorderDetails, review, user, wishlist } from 'src/app/user/types/user.types';
 
 
 @Injectable({
@@ -110,13 +110,14 @@ export class UsersService {
   }
 
   addrent(data: FormData) {
-
-    return this._http.post('/users/rent-add', data)
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.post(`/users/rent-add?id=${user}`, data)
   }
 
-  loadRentBicycle(): Observable<rent[]> {
-    const user = localStorage.getItem(environment.UserSecret)
-    return this._http.get<rent[]>(`/users/loadRentBicycle?id=${user}`)
+  loadRentBicycle(date:datePickerT): Observable<rent[]> {
+     
+      
+    return this._http.get<rent[]>(`/users/loadRentBicycle?start=${date.start}&end=${date.end}&location=${date.location}`)
   }
   addAddress(address: address): Observable<address> {
     const user = localStorage.getItem(environment.UserSecret)
@@ -125,5 +126,14 @@ export class UsersService {
   loadAddress(){
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/address?id=${user}`)
+  }
+  rentDetail(id:string):Observable<rent>{
+   return this._http.get<rent>(`/users/rentDetail?id=${id}`)
+  }
+  addRentOrder(orderDetails:any){
+     return this._http.post(`/users/rentOrder`,orderDetails)
+  }
+  getLocation(){
+    return this._http.get('/users/location')
   }
 }

@@ -17,13 +17,16 @@ export class ReviewsInputComponent implements OnInit, OnDestroy {
   ratings: number = 0
   productID!: string
   private subscribe: Subscription = new Subscription()
-
+marker=''
   constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.subscribe.add(
       this._route.params.subscribe(params => {
-        console.log(params['id']);
+     console.log(params,'params');
+   
+   
+      this.marker=params['marker']
         this.productID = params['id']
 
       })
@@ -47,7 +50,16 @@ export class ReviewsInputComponent implements OnInit, OnDestroy {
       this.subscribe.add(
         this._userService.addReview(review['review'], this.ratings, this.productID).subscribe({
           next: () => {
-            this._router.navigate(['/bicycleDetail', { id: this.productID }])
+            console.log(this.marker);
+            
+            if(this.marker=='rent'){
+              console.log('renterrr');
+              
+               this._router.navigate(['/rent-detail', { id: this.productID }])
+            }else{
+
+              this._router.navigate(['/bicycleDetail', { id: this.productID }])
+            }
           },
           error: (err) => {
             this._toastr.warning(err.error.message)

@@ -15,13 +15,6 @@ import { GalleriaModule } from 'primeng/galleria';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BicycleDetailComponent } from './bicycle-detail/bicycle-detail.component';
-
-import { register } from 'swiper/element/bundle';
-import { StoreModule } from '@ngrx/store';
-import { loadBicyclepage } from './store/user.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
-import { BicycleEffects } from './store/user.effect';
 import { PlaceOrderComponent } from './checkout/place-order.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
@@ -34,10 +27,17 @@ import { BicycleRentComponent } from './bicycle-rent/bicycle-rent.component';
 import { RentAddComponent } from './rent-add/rent-add.component';
 import { AddressComponent } from './address/address.component';
 import { AddAddressComponent } from './add-address/add-address.component';
+import { RentDetailsComponent } from './rent-details/rent-details.component';
+import { RentreviewComponent } from './rentreview/rentreview.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DatePikerComponent } from './date-piker/date-piker.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
 
-
-// register Swiper custom elements
-register();
 @NgModule({
   declarations: [
     LoginComponent,
@@ -60,7 +60,12 @@ register();
     BicycleRentComponent,
     RentAddComponent,
     AddressComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    RentDetailsComponent,
+    RentreviewComponent,
+    DatePikerComponent,
+    RentCheckoutComponent
+
     
   ],
   imports: [
@@ -71,9 +76,13 @@ register();
    CarouselModule,
    GalleriaModule,
    NgxPaginationModule,
-   SearchFilterPipe
-  
-
+   SearchFilterPipe,
+   MatFormFieldModule,
+   MatDatepickerModule,
+   MatNativeDateModule,
+   MatButtonModule,
+   MatStepperModule,
+   MatInputModule,
 
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

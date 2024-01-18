@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment.development';
 export class ErrorHandleService {
   constructor(private _toastr: ToastrService) { }
   public handleError(err: HttpErrorResponse) {
-    // localStorage.clear()
-   this._toastr.warning('your token has expired please try to sign in again')
+     // localStorage.clear()
+  
   }
 }
   

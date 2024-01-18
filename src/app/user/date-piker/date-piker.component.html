@@ -1,0 +1,54 @@
+
+<app-nav-bar></app-nav-bar>
+
+<div class="grid justify-center">
+    
+    <mat-stepper class="" orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup" class="">
+      <form [formGroup]="firstFormGroup">
+         <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [min]="minDate" >
+              <input   matStartDate formControlName="start"  placeholder="Start date">
+              <input matEndDate formControlName="end"  placeholder="End date" >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+            <div class="sm:col-span-3">
+                <label for="location" class="block text-sm font-medium leading-6 text-gray-900">location</label>
+                <div class="mt-2">
+                    <select  id="location" name="location" autocomplete="location" formControlName="location"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                          
+                            <option *ngFor="let c of locationforapi"  [value]="c">{{c}}</option>
+                        </select>
+                </div>
+            </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button (click)="valid()" mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Go up</button>
+        @if(submit){
+            <button mat-button (click)="submitfunc()">submit</button>
+        }
+    </div>
+    </mat-step>
+</mat-stepper>
+</div>

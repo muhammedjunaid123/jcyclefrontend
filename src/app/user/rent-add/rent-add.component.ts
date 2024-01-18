@@ -7,18 +7,21 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/services/user/users.service';
 
+
+
 @Component({
   selector: 'app-rent-add',
   templateUrl: './rent-add.component.html',
   styleUrl: './rent-add.component.css'
 })
-export class RentAddComponent implements OnInit,OnDestroy {
+export class RentAddComponent implements OnInit, OnDestroy {
   files: File[] = [];
   selectedfiles: File[] = []
-  productForm!:FormGroup
-  length!:number
+  productForm!: FormGroup
+  length!: number
+  locationforapi!: any
   private subscribe: Subscription = new Subscription()
- 
+
   constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -27,11 +30,17 @@ export class RentAddComponent implements OnInit,OnDestroy {
       name: ['', Validators.required],
       price: ['', Validators.required],
       location: ['', Validators.required],
-      owner: ['', Validators.required],
       cycle_Details: ['', Validators.required],
-      image:[Validators.required]
+      image: [Validators.required]
     })
-   
+
+    this._userService.getLocation().subscribe({
+      next: (res: any) => {
+        this.locationforapi = res[0]['city']
+        console.log(this.locationforapi);
+        
+      }
+    })
   }
 
   getFileExtension(filename: string): any {
@@ -53,43 +62,42 @@ export class RentAddComponent implements OnInit,OnDestroy {
       }
       this.selectedfiles = event.target.files
     }
-    this.selectedfiles = Array.from(this.selectedfiles);   
+    this.selectedfiles = Array.from(this.selectedfiles);
     this.length = this.selectedfiles.length;
   }
 
   productCreate() {
     if (this.productForm.valid) {
-      const form =new FormData();
+      const form = new FormData();
       console.log('Initial FormData:', form);
       let data = this.productForm.getRawValue()
       console.log(data);
-      
-      form.append('name',data.name)
-      form.append('price',data.price)
-      form.append('location',data.location)
-      form.append('owner',data.owner)
-      form.append('cycle_Details',data.cycle_Details)
+
+      form.append('name', data.name)
+      form.append('price', data.price)
+      form.append('location', data.location)
+      form.append('cycle_Details', data.cycle_Details)
       for (let i = 0; i < this.length; i++) {
         form.append('image', this.selectedfiles[i], this.selectedfiles[i].name);
       }
       console.log('imagesss');
-      
+
       form.forEach((value, key) => {
         console.log(key, value);
       });
       this.subscribe.add(
-      this._userService.addrent(form).subscribe({
-        next: () => {
-          this._router.navigate(['/rent-add'])
-        }
-      })
+        this._userService.addrent(form).subscribe({
+          next: () => {
+            this._router.navigate(['rent'])
+          }
+        })
       )
-    }else{
+    } else {
       console.log(this.productForm.value);
-      
+
       this._toastr.warning('input can not be null!!! ')
     }
-    
+
 
 
   }

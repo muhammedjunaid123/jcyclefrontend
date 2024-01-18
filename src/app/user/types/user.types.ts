@@ -15,12 +15,14 @@ export interface filter {
 }
 
 export interface rent {
+  _id:string,
   name: string,
   price: number,
   cycle_Details: string,
   location: string,
-  owner: string,
-  image: any
+  owner: any,
+  image: any,
+  bookedDate:any
 }
 
 export interface bicycle {
@@ -128,4 +130,18 @@ mobile:number,
 pin:number 
 state:string,
 email:string
+}
+
+export interface rentorderDetails{
+  user:any,
+  Date:any,
+  owner:any,
+  razorId: any,
+  paymentMethod:string,
+  totalAmount:number
+}
+export interface datePickerT{
+  start:Date,
+  end:Date,
+  location:string
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +22,11 @@ import { BicycleRentComponent } from './bicycle-rent/bicycle-rent.component';
 import { RentAddComponent } from './rent-add/rent-add.component';
 import { AddressComponent } from './address/address.component';
 import { AddAddressComponent } from './add-address/add-address.component';
+import { RentDetailsComponent } from './rent-details/rent-details.component';
+import { RentreviewComponent } from './rentreview/rentreview.component';
+import { DatePikerComponent } from './date-piker/date-piker.component';
+import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
+
 
 
 
@@ -44,7 +49,12 @@ const routes: Routes = [
 {path:'rent',component:BicycleRentComponent},
 {path:'rent-add',component:RentAddComponent,canActivate:[userGuard]},
 {path:'address',component:AddressComponent,canActivate:[userGuard]},
-{path:'add-address',component:AddAddressComponent,canActivate:[userGuard]}
+{path:'add-address',component:AddAddressComponent,canActivate:[userGuard]},
+{path:'rent-detail',component:RentDetailsComponent},
+{path:'rent-review',component:RentreviewComponent},
+{path:'datePicker',component:DatePikerComponent},
+{path:'rentCheckout',component:RentCheckoutComponent}
+
 ];
 
 @NgModule({

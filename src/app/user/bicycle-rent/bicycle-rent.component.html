@@ -10,69 +10,37 @@
         <input [(ngModel)]="search" type="text" class="w-[90vw] bg-gray-100 outline-none  ">
     </div>
 </div>
-<div class="grid grid-flow-col ">
-    <div class=" w-[20vw] h-[70vh] m-6  shadow-2xl bg-slate-50 hover:scale-110 duration-150 px-3">
-        <div class="grid grid-cols-2">
-            <h1>filter</h1>
-            <button (click)="refersh()" class="bg-blue-900 text-white rounded-lg ">reset</button>
+<div class="grid justify-center">
+    <div class="w-[80vw] h-[20vh] bg-gray-100   p-10 mr-5 grid grid-cols-2 ">
+        <div>
+            <mat-form-field>
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [min]="minDate">
+                    <input matStartDate formControlName="start" placeholder="Start date">
+                    <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
         </div>
-        <form [formGroup]="productForm" (change)="filter()">
-            <div class="sm:col-span-3">
-                <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
-                <div class="mt-2">
-                    <select id="brand" name="brand" autocomplete="brand" formControlName="brand"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-
-                        <option *ngFor="let b of brand" [value]="b._id">{{ b.Brand_name }}</option>
-
-                    </select>
-                </div>
+        <div class="">
+            <label for="location" class="block text-sm font-medium leading-6 text-gray-900">location</label>
+        
+            <div class="mt-2" [formGroup]="range">
+                <select id="location" name="location" autocomplete="location" formControlName="location"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                    <option *ngFor="let c of locationforapi" [value]="c">{{c}}</option>
+                </select>
             </div>
-
-
-            <div class="sm:col-span-3">
-                <label for="category" class="block text-sm font-medium leading-6 text-gray-900">category</label>
-                <div class="mt-2">
-                    <select id="category" name="category" autocomplete="category" formControlName="category"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                        <option *ngFor="let c of category" [value]="c._id">{{c.category_name}}</option>
-                    </select>
-                </div>
-            </div>
-
-
-            <div class="sm:col-span-3">
-                <label for="gears" class="block text-sm font-medium leading-6 text-gray-900">gears</label>
-                <div class="mt-2">
-                    <select id="gears" name="gears" autocomplete="gears" formControlName="gears"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                        <option [value]="false">NO</option>
-                        <option [value]="true">Yes</option>
-                    </select>
-                </div>
-            </div>
-            <div class="sm:col-span-3">
-                <label for="brake" class="block text-sm font-medium leading-6 text-gray-900">brake_type</label>
-                <div class="mt-2">
-                    <select id="brake" name="brake" autocomplete="brake" formControlName="brake_type"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                        <option [value]="false">normal</option>
-                        <option [value]="true">disc brake</option>
-                    </select>
-                </div>
-            </div>
-            <div class="sm:col-span-3">
-                <label for="suspension" class="block text-sm font-medium leading-6 text-gray-900">suspension</label>
-                <div class="mt-2">
-                    <select id="suspension" name="suspension" autocomplete="suspension" formControlName="suspension"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                        <option [value]="false">NO</option>
-                        <option [value]="true">Yes</option>
-                    </select>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
+    <button (click)="refersh()" class="bg-red-800 text-white">refersh</button>
+</div>
+<div class="grid grid-flow-col ">
+    <div>
+
+    </div>
+
 
     <div
         class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
@@ -83,14 +51,15 @@
                 <img [src]="p.image[0]" alt="..." class="">
             </div>
             <hr>
-            <div class="grid grid-cols-4">
-                <div class="col-span-3">
-                    <p><strong>NAME :</strong>{{p.name}}</p>
-                    <p><strong>OWNER :</strong> {{p.owner}}</p>
-                    <p><strong>LOCATION :</strong> {{p.location}}</p>
+            <div class="grid grid-cols-5 ">
+                <div class="col-span-4">
+                    <p>NAME:{{p.name}}</p>
+                    <p>OWNER:{{p.owner['name']}}</p>
+                    <p>LOCATION:{{p.location}}</p>
 
                 </div>
                 <div>
+
                     <div class="rounded-md w-[7vh] h-[4vh] m-4 bg-green-600">
                         <div class="flex">
                             <p class="ml-2 text-white">5</p>
@@ -103,12 +72,12 @@
                     </div>
                 </div>
             </div>
-            <div class=" grid grid-cols-2">
+            <div class=" grid grid-cols-2 ">
                 <div class="grid justify-start">
                     ₹{{p.price}} /day
                 </div>
-                <div class=" p-1 flex text-white justify-center absolute w-[10vw] bottom-0 right-0 bg-blue-900 rounded-br-lg"
-                    (click)="Addcart(p._id,p.price)">
+                <div
+                    class=" p-1 flex text-white justify-center absolute w-[10vw] bottom-0 right-0 bg-blue-900 rounded-br-lg">
                     DETAILS
                 </div>
             </div>

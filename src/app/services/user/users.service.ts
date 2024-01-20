@@ -136,4 +136,20 @@ export class UsersService {
   getLocation(){
     return this._http.get('/users/location')
   }
+  userRentHistory(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/rentHistory?id=${user}`)
+  }
+  getUserRentProduct(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/getUserRentProduct?id=${user}`)
+  }
+  blockRentProduct(id:string,isBlocked:boolean){
+    
+    return this._http.patch(`/users/blockRentProduct`,{id,isBlocked})
+  }
+  changeStatusRent(itemId:string,totalAmount:number,user:string){
+ 
+       return this._http.patch(`/users/changeStatusRent`,{itemId,totalAmount,user})
+  }
 }

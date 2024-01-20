@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router,  } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { bicycle, brand, user } from 'src/app/user/types/user.types';
+import { bicycle, brand, rent, user } from 'src/app/user/types/user.types';
 import { adminBrand, adminCategory } from 'src/app/admin/types/admin.types';
 
 @Injectable({
@@ -87,5 +87,13 @@ export class AdminService {
     console.log(index,id);
     
  return this._http.patch(`/product/imgDelete`,{index,id})
+  }
+  getRentProduct(){
+     return this._http.get(`/admin`)
+  }
+  blockRent(id:string,isBlocked:boolean){
+    console.log(id);
+    
+    return this._http.patch(`/admin/rentBlock`,{id,isBlocked})
   }
 }

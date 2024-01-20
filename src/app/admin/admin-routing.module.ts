@@ -14,6 +14,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { adminGuard, adminGuardloged } from '../guard/adminGuard/admin.guard';
 import { OrdersComponent } from './orders/orders.component';
+import { AdminRentComponent } from './admin-rent/admin-rent.component';
 
 const routes: Routes = [
   { path: '', component: AdminLoginComponent,canActivate:[adminGuardloged] },
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'categoryUpdate',component:CategoryEditComponent,canActivate:[adminGuard]},
   {path:'user-details',component:UserDetailsComponent,canActivate:[adminGuard]},
   {path:'productedit',component:ProductEditComponent,canActivate:[adminGuard]},
-  {path:'orders',component:OrdersComponent,canActivate:[adminGuard]}
+  {path:'orders',component:OrdersComponent,canActivate:[adminGuard]},
+  {path:'rent',component:AdminRentComponent,canActivate:[adminGuard]}
 ];
 
 @NgModule({

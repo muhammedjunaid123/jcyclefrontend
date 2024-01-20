@@ -17,6 +17,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { OrdersComponent } from './orders/orders.component';
 import { ListOrderComponent } from '../reusable-component/list-order/list-order.component';
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
+import { AdminRentComponent } from './admin-rent/admin-rent.component';
 
 
 
@@ -32,7 +33,8 @@ import { SearchFilterPipe } from '../pipe/search-filter.pipe';
     ProductEditComponent,
     AdminLoginComponent,
     OrdersComponent,
-    ListOrderComponent
+    ListOrderComponent,
+    AdminRentComponent
 
   ],
   imports: [

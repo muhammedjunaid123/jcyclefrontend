@@ -16,20 +16,28 @@ import { environment } from 'src/environments/environment.development';
 export class ProfileComponent implements OnInit, OnDestroy {
   wallet: wallet[] = []
   order: order[] = [];
-  address:address[]=[]
+  address: address[] = []
+  rentHistory: any = []
+  rentBbtn = false
+  ordernav = false
+  walletnav = false
+  addressnav = false
+  rentnav = false
   user: any
-  userData!:user
+  userData!: user
   edit = false
   nameForm!: FormGroup
-  
+  RentProduct: any = []
+  rentHostBbtn=true
+  rentHistoryHost:any=[]
   ngOnInit(): void {
 
     this._userService.userData().subscribe({
-      next: (res:user) => {
+      next: (res: user) => {
         this.userData = res
-        if(this.edit===true){
-         const  name=this.userData['name']
-          this.nameForm.setValue({name:name});
+        if (this.edit === true) {
+          const name = this.userData['name']
+          this.nameForm.setValue({ name: name });
         }
       },
       error: (err) => {
@@ -40,10 +48,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscribe: Subscription = new Subscription()
   constructor(private _fb: FormBuilder, private _userService: UsersService, private _router: Router, private _toastr: ToastrService) { }
   getwallet() {
+    this.rentHistory=[]
+    this.rentHistoryHost=[]
+    this.RentProduct=[]
     this.order = []
+    this.address = []
+    this.walletnav = true
+    this.ordernav = false
+    this.addressnav = false
+    
     this.subscribe.add(
       this._userService.loadWallet().subscribe({
-        next: (res:user) => {
+        next: (res: user) => {
           this.wallet = res['walletHistory']
 
         }, error: (err) => {
@@ -54,7 +70,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     )
   }
   getOrders() {
+    this.rentHistory=[]
+    this.rentHistoryHost=[]
+    this.RentProduct=[]
     this.wallet = []
+    this.address = []
+    this.ordernav = true
+    this.addressnav = false
+    this.walletnav = false
     this.subscribe.add(
       this._userService.orderLoad().subscribe({
         next: (res: any) => {
@@ -67,13 +90,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       })
     )
   }
-  refersh(){
+  refersh() {
     this._userService.userData().subscribe({
-      next: (res:user) => {
+      next: (res: user) => {
         this.userData = res
-        if(this.edit===true){
-         const  name=this.userData['name']
-          this.nameForm.setValue({name:name});
+        if (this.edit === true) {
+          const name = this.userData['name']
+          this.nameForm.setValue({ name: name });
         }
       },
       error: (err) => {
@@ -88,8 +111,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this._userService.saveName(this.nameForm.value)
           .subscribe({
             next: (res: any) => {
-             this.refersh()
-             this.edit=false
+              this.refersh()
+              this.edit = false
             },
             error: (error: any) => {
               console.log(error);
@@ -98,38 +121,99 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }
           })
       )
-    }else{
+    } else {
       this._toastr.warning('fill the input')
     }
   }
-  editchage(){
-    if(this.edit===true){
-      this.edit=false
-    }else{
-      this.edit=true
+  editchage() {
+    if (this.edit === true) {
+      this.edit = false
+    } else {
+      this.edit = true
       this.nameForm = this._fb.group({
         name: [this.userData['name'], Validators.required],
       })
     }
   }
-  getAddrress(){
-    this.wallet=[]
-    this.order=[]
+  getAddrress() {
+    this.wallet = []
+    this.order = []
+    this.rentHistory=[]
+    this.rentHistoryHost=[]
+    this.RentProduct=[]
+    this.addressnav = true
+    this.ordernav = false
+    this.walletnav = false
     this.subscribe.add(this._userService.loadAddress().subscribe({
-      next: (res: any) => { 
+      next: (res: any) => {
         this.address = res['address']
-      
-        
+
+
       }, error: (err: any) => {
         console.log(err);
 
       }
     }))
-    
+
   }
-  logout(){
+  getRent() {
+    this.wallet= []
+    this.order= [];
+    this.address= []
+    this.rentHistory = []
+    this.rentBbtn = false
+    this.ordernav = false
+    this.walletnav = false
+    this.addressnav = false
+    this.RentProduct= []
+    this.rentHostBbtn=true
+    this.rentHistoryHost=[]
+   this.rentnav=true
+   
+    this._userService.userRentHistory().subscribe({
+      next: (res) => {
+        this.rentHistory = res
+        console.log(this.rentHistory,this.rentnav);
+        
+      }
+    })
+  }
+  logout() {
     localStorage.removeItem(environment.UserSecret)
     this._router.navigate([''])
+  }
+  rentProductDetails() {
+    this.getRentProduct()
+    this.rentBbtn = true
+    
+  } 
+  rentHistoryDetails() {
+    this.RentProduct=[]
+    this.rentBbtn = false
+    this.getRent()
+    
+  }
+  getRentProduct() {
+    this.rentHostBbtn=true
+    this.rentHistoryHost=[]
+     this._userService.getUserRentProduct().subscribe({
+      next:(res)=>{
+        this.RentProduct= res
+        console.log(this.RentProduct);
+        
+      }
+     })
+  }
+  getRentHost() {
+this.rentHostBbtn=false
+    this.RentProduct=[]
+    this._userService.userRentHistory().subscribe({
+      next: (res) => {
+        this.rentHistoryHost = res
+        
+
+      }
+    })
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()

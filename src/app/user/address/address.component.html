@@ -1,32 +1,36 @@
-
-
-<section class="flex justify-center items-center min-h-screen">
-    <div class="w-full max-w-screen-xl bg-white shadow-lg p-8">
-        <div class="mb-8">
-            <h1 class="text-2xl font-bold">Address Details</h1>
-        </div>
-        <div class="flex justify-end mb-4">
-            <button routerLink="/add-address"  class="bg-red-800 rounded-sm text-white px-4 py-2 hover:scale-105 duration-150">Add New Address</button>
-        </div>
-        <hr class="mb-4">
-        <div *ngFor="let address of addressArr | paginate:{itemsPerPage:pSize,currentPage:currentPage}; let i = index" class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4">
-            <div class="md:col-span-2 mb-4">
-                <h1 class="text-gray-600">Address {{i+1}}</h1>
+@if(addressArr.length===0){
+    <img src="../../../assets/not found list.svg"  class="w-[100vw] h-[100vh] flex justify-center" alt="">
+}
+@else{
+    <section class="flex justify-center items-center min-h-screen">
+        <div class="w-full max-w-screen-xl bg-white shadow-lg p-8">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold">Address Details</h1>
             </div>
-            <div class="md:col-span-3">
-                <p class="text-gray-600">Name :{{ address.fname }} {{ address.lname }}</p>
-                <p class="text-gray-600">House Name: {{ address.housename }}</p>
-                <p class="text-gray-600">City: {{ address.city }}</p>
-                <p class="text-gray-600">State: {{ address.state }}</p>
-                <p class="text-gray-600">District: {{ address.district }}</p>
-                <p class="text-gray-600">Country: {{ address.country }}</p>
-                <p class="text-gray-600">Email: {{ address.email }}</p>
-                <p class="text-gray-600">Phone: {{ address.mobile }}</p>
-                <p class="text-gray-600">Pin Code: {{ address.pin }}</p>
+            <div class="flex justify-end mb-4">
+                <button routerLink="/add-address"  class="bg-red-800 rounded-sm text-white px-4 py-2 hover:scale-105 duration-150">Add New Address</button>
+            </div>
+            <hr class="mb-4">
+            <div *ngFor="let address of addressArr | paginate:{itemsPerPage:pSize,currentPage:currentPage}; let i = index" class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4">
+                <div class="md:col-span-2 mb-4">
+                    <h1 class="text-gray-600">Address {{i+1}}</h1>
+                </div>
+                <div class="md:col-span-3">
+                    <p class="text-gray-600">Name :{{ address.fname }} {{ address.lname }}</p>
+                    <p class="text-gray-600">House Name: {{ address.housename }}</p>
+                    <p class="text-gray-600">City: {{ address.city }}</p>
+                    <p class="text-gray-600">State: {{ address.state }}</p>
+                    <p class="text-gray-600">District: {{ address.district }}</p>
+                    <p class="text-gray-600">Country: {{ address.country }}</p>
+                    <p class="text-gray-600">Email: {{ address.email }}</p>
+                    <p class="text-gray-600">Phone: {{ address.mobile }}</p>
+                    <p class="text-gray-600">Pin Code: {{ address.pin }}</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+}
 <div class="flex justify-center">
 
     <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>

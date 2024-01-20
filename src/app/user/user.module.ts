@@ -37,6 +37,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
+import { RentHistoryComponent } from './rent-history/rent-history.component';
+import { RentUserproductHistoryComponent } from './rent-userproduct-history/rent-userproduct-history.component';
+import { HostRentHistoryComponent } from './host-rent-history/host-rent-history.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
     RentDetailsComponent,
     RentreviewComponent,
     DatePikerComponent,
-    RentCheckoutComponent
+    RentCheckoutComponent,
+    RentHistoryComponent,
+    RentUserproductHistoryComponent,
+    HostRentHistoryComponent
 
     
   ],

@@ -1,0 +1,46 @@
+
+<div  class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1">
+
+    <div *ngFor="let p of RentProduct| paginate:{itemsPerPage:pSize,currentPage:currentPage} "
+        class="overflow-hidden p-2 grid select-none shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw] h-[50vh]  sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg   ">
+        <div>
+            <img [src]="p.image[0]" alt="..." class="">
+        </div>
+        <hr>
+        <div class="grid grid-cols-5 ">
+            <div class="col-span-4">
+                <p>NAME:{{p.name}}</p>
+                <p>OWNER:{{p.owner['name']}}</p>
+                <p>LOCATION:{{p.location}}</p>
+
+            </div>
+            <div>
+
+                <div class="rounded-md w-[7vh] h-[4vh] m-4 bg-green-600">
+                    <div class="flex">
+                        <p class="ml-2 text-white">5</p>
+                        <div class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path fill="white"
+                                    d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z" />
+                            </svg></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" grid grid-cols-2 ">
+            <div class="grid justify-start">
+                ₹{{p.price}} /day
+            </div>
+            <div
+                (click)="blockRentProduct(p._id,p.isBlocked)" class=" p-1 flex text-white justify-center absolute w-[10vw] bottom-0 right-0 bg-blue-900 rounded-br-lg">
+               {{p.isBlocked?'blocked':'block'}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-center">
+
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+</div>

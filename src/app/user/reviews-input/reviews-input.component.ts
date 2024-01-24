@@ -47,25 +47,47 @@ marker=''
   reviewCreate() {
     if (this.productForm.valid && this.ratings !== 0) {
       const review = this.productForm.value
-      this.subscribe.add(
-        this._userService.addReview(review['review'], this.ratings, this.productID).subscribe({
-          next: () => {
-            console.log(this.marker);
-            
-            if(this.marker=='rent'){
-              console.log('renterrr');
+      if(this.marker=='rent'){
+          this.subscribe.add(
+          this._userService.addRentReview(review['review'], this.ratings, this.productID).subscribe({
+            next: () => {
+              console.log(this.marker);
               
-               this._router.navigate(['/rent-detail', { id: this.productID }])
-            }else{
-
-              this._router.navigate(['/bicycleDetail', { id: this.productID }])
+              if(this.marker=='rent'){
+                console.log('renterrr');
+                
+                 this._router.navigate(['/rent-detail', { id: this.productID }])
+              }else{
+  
+                this._router.navigate(['/bicycleDetail', { id: this.productID }])
+              }
+            },
+            error: (err) => {
+              this._toastr.warning(err.error.message)
             }
-          },
-          error: (err) => {
-            this._toastr.warning(err.error.message)
-          }
-        })
-      )
+          })
+          )
+        }else{
+          this.subscribe.add(
+          this._userService.addReview(review['review'], this.ratings, this.productID).subscribe({
+            next: () => {
+              console.log(this.marker);
+              
+              if(this.marker=='rent'){
+                console.log('renterrr');
+                
+                 this._router.navigate(['/rent-detail', { id: this.productID }])
+              }else{
+  
+                this._router.navigate(['/bicycleDetail', { id: this.productID }])
+              }
+            },
+            error: (err) => {
+              this._toastr.warning(err.error.message)
+            }
+          })
+          )
+        }
     } else {
 
       this._toastr.warning('input can not be null!!! ')

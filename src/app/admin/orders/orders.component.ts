@@ -13,67 +13,66 @@ import { order, user } from 'src/app/user/types/user.types';
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })
-export class OrdersComponent  implements OnInit,OnDestroy{
+export class OrdersComponent implements OnInit, OnDestroy {
   pagesize = 6
   currentPage = 1
   private subscribe: Subscription = new Subscription()
-
-  status=AdminStatus
+  status = AdminStatus
   order: order[] = [];
-  user:user[] =[];
-  search=''
-  
-  pageTitle: string = 'Server Side Filter';
-  constructor(private _userService:UsersService){}
+  user: user[] = [];
+  search = ''
 
-  refresh(){
+  pageTitle: string = 'Server Side Filter';
+  constructor(private _userService: UsersService) { }
+
+  refresh() {
     this.subscribe.add(
-    this._userService.orderLoad().subscribe({
-      next:(res:order[])=>{
-        this.order=res
-       
-      },
-      error:(err)=>{
-      console.log(err);
-    
-      }
-    })
+      this._userService.orderLoad().subscribe({
+        next: (res: order[]) => {
+          this.order = res
+
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      })
     )
   }
   ngOnInit(): void {
-   
+
     this.subscribe.add(
-    this._userService.orderLoad().subscribe({
-      next:(res:order[])=>{
-        this.order=res
-       
-      },
-      error:(err)=>{
-      console.log(err);
-    
-      }
-    })
+      this._userService.orderLoad().subscribe({
+        next: (res: order[]) => {
+          this.order = res
+
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      })
     )
   }
 
-  
 
 
-  
 
-  changeStatus(user: any, itemId: any, selectedValue: string,price:number,count:number) {
-   const Total=price*count
-   this.subscribe.add(
-  this._userService.changeStatus(user,itemId,selectedValue,Total).subscribe({
-    next:()=>{
-      this.refresh()
-    },
-    error:(err)=>{
-  console.log(err);
-  
-    }
-  })
-   )
+
+
+  changeStatus(user: any, itemId: any, selectedValue: string, price: number, count: number) {
+    const Total = price * count
+    this.subscribe.add(
+      this._userService.changeStatus(user, itemId, selectedValue, Total).subscribe({
+        next: () => {
+          this.refresh()
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      })
+    )
 
 
   }

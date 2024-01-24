@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { address, bicycle, brand, cart, category, datePickerT, filter, order, productDetails, rent, rentorderDetails, review, user, wishlist } from 'src/app/user/types/user.types';
+import { service } from 'src/app/servicer/types/servicer.types';
 
 
 @Injectable({
@@ -48,7 +49,7 @@ export class UsersService {
   }
   loadCart(): Observable<cart> {
     const user = localStorage.getItem(environment.UserSecret)
-    return  this._http.get<cart>(`/users/cart?id=${user}`)
+    return this._http.get<cart>(`/users/cart?id=${user}`)
   }
   removeCart(id: string, price: number, count: number) {
     const user = localStorage.getItem(environment.UserSecret)
@@ -114,42 +115,69 @@ export class UsersService {
     return this._http.post(`/users/rent-add?id=${user}`, data)
   }
 
-  loadRentBicycle(date:datePickerT): Observable<rent[]> {
-     
-      
+  loadRentBicycle(date: datePickerT): Observable<rent[]> {
+
+
     return this._http.get<rent[]>(`/users/loadRentBicycle?start=${date.start}&end=${date.end}&location=${date.location}`)
   }
   addAddress(address: address): Observable<address> {
     const user = localStorage.getItem(environment.UserSecret)
-    return this._http.post<address>(`/users/address`, {address,user})
+    return this._http.post<address>(`/users/address`, { address, user })
   }
-  loadAddress(){
+  loadAddress() {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/address?id=${user}`)
   }
-  rentDetail(id:string):Observable<rent>{
-   return this._http.get<rent>(`/users/rentDetail?id=${id}`)
+  rentDetail(id: string){
+    return this._http.get(`/users/rentDetail?id=${id}`)
   }
-  addRentOrder(orderDetails:any){
-     return this._http.post(`/users/rentOrder`,orderDetails)
+  addRentOrder(orderDetails: any) {
+    return this._http.post(`/users/rentOrder`, orderDetails)
   }
-  getLocation(){
+  getLocation() {
     return this._http.get('/users/location')
   }
-  userRentHistory(){
+  userRentHistory() {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/rentHistory?id=${user}`)
   }
-  getUserRentProduct(){
+  getUserRentProduct() {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/getUserRentProduct?id=${user}`)
   }
-  blockRentProduct(id:string,isBlocked:boolean){
-    
-    return this._http.patch(`/users/blockRentProduct`,{id,isBlocked})
+  blockRentProduct(id: string, isBlocked: boolean) {
+
+    return this._http.patch(`/users/blockRentProduct`, { id, isBlocked })
   }
-  changeStatusRent(itemId:string,totalAmount:number,user:string){
- 
-       return this._http.patch(`/users/changeStatusRent`,{itemId,totalAmount,user})
+  changeStatusRent(itemId: string, totalAmount: number, user: string) {
+
+    return this._http.patch(`/users/changeStatusRent`, { itemId, totalAmount, user })
+  }
+  getAllService():Observable<service[]>{
+    return this._http.get<service[]>('/users/getAllService')
+  }
+  addServiceOrder(data:any){
+    return this._http.post('/users/addServiceOrder',data)
+  }
+  getUserserviceHistory(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/getUserserviceHistory?id=${user}`)
+  }
+  serviceOrderCancel(itemId:string,userId:string,price:number){
+ return this._http.patch(`/users/serviceOrderCancel`,{itemId,userId,price})
+  }
+  RentReview(id:string){
+    return this._http.get<review>(`/users/rentreview?id=${id}`)
+  }
+  addRentReview(review: string, ratings: number, productID: string) {
+
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.post(`/users/rentreview`, { user, review, ratings, productID })
+  }
+  updateRent(id:string,data:any){
+    return this._http.patch(`/users/rentEdit?id=${id}`,data)
+  }
+  imgDelete(index:number,id:string){
+    return this._http.patch(`/users/RentimgDelete`, { index, id })
   }
 }

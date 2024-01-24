@@ -44,7 +44,9 @@ export class RentDetailsComponent implements OnInit, OnDestroy {
   });
 
   private subscribe: Subscription = new Subscription()
-
+  total!: number
+  Total!: number
+  obj: any
   constructor(private _route: ActivatedRoute, private _userService: UsersService, private _toastr: ToastrService, private _router: Router, private _Store: Store) { }
 
   responsiveOptions: any[] = [
@@ -63,31 +65,34 @@ export class RentDetailsComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit(): void {
-    this._Store.pipe(select(datepikerData)).subscribe({
-      next: (res: datePickerT) => {
-        this.dateData = res
-
-        if (!this.dateData.start && !this.dateData.end && !this.dateData.location) {
-          this._router.navigate(['datePicker'])
-          return
+    this.subscribe.add(
+      this._Store.pipe(select(datepikerData)).subscribe({
+        next: (res: datePickerT) => {
+          this.dateData = res
+  
+          if (!this.dateData.start && !this.dateData.end && !this.dateData.location) {
+            this._router.navigate(['datePicker'])
+            return
+          }
+        },
+        error: (Error) => {
+          console.log(Error);
+  
         }
-      },
-      error: (Error) => {
-        console.log(Error);
-
-      }
-    })
+      })
+    )
 
     window.scrollTo(0, 0);
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.rentDetail(params['id']).subscribe({
-          next: (res: rent) => {
+          next: (res: any) => { 
+        console.log(res);
 
-            this.product = res
-            this.totalAmount = this.product.price
-            this.showAmount = this.totalAmount
-            this.filterDateData = res['bookedDate']
+        this.total = Math.round(res['total'])
+        this.Total = Math.round(res['Total'])
+        this.obj = res['obj']
+        this.product =res['product']
 
 
 
@@ -138,9 +143,11 @@ export class RentDetailsComponent implements OnInit, OnDestroy {
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.rentDetail(params['id']).subscribe({
-          next: (res: rent) => {
-
-            this.product = res
+          next: (res: any) => {
+            this.total = Math.round(res['total'])
+            this.Total = Math.round(res['Total'])
+            this.obj = res['obj']
+            this.product =res['product']
           }
         })
       })

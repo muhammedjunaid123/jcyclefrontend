@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -33,13 +33,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DatePikerComponent } from './date-piker/date-piker.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
 import { RentHistoryComponent } from './rent-history/rent-history.component';
 import { RentUserproductHistoryComponent } from './rent-userproduct-history/rent-userproduct-history.component';
 import { HostRentHistoryComponent } from './host-rent-history/host-rent-history.component';
+import { ServiceComponent } from './service/service.component';
+import { TimeConvertPipe } from '../pipe/time-convert.pipe';
+import { SreviceListComponent } from './srevice-list/srevice-list.component';
+import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.component';
 
 @NgModule({
   declarations: [
@@ -70,27 +74,31 @@ import { HostRentHistoryComponent } from './host-rent-history/host-rent-history.
     RentCheckoutComponent,
     RentHistoryComponent,
     RentUserproductHistoryComponent,
-    HostRentHistoryComponent
+    HostRentHistoryComponent,
+    ServiceComponent,
+    SreviceListComponent,
+    RentProductEditComponent
 
-    
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-   CarouselModule,
-   GalleriaModule,
-   NgxPaginationModule,
-   SearchFilterPipe,
-   MatFormFieldModule,
-   MatDatepickerModule,
-   MatNativeDateModule,
-   MatButtonModule,
-   MatStepperModule,
-   MatInputModule,
+    CarouselModule,
+    GalleriaModule,
+    NgxPaginationModule,
+    SearchFilterPipe,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatInputModule,
+    TimeConvertPipe,
+   
 
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserModule { }

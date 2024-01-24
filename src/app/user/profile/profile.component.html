@@ -43,7 +43,7 @@
                     <div>
                         <button
                             class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
-                            (click)="getOrders()">orders</button>
+                            (click)="getService()">service</button>
                     </div>
 
 
@@ -99,6 +99,8 @@
                     
                     <app-rent-history [rentHistory]="rentHistory"></app-rent-history>
                 }
+            }@else if(servicenav!==false&&service.length>0){
+               <app-srevice-list [service]="service"></app-srevice-list>
             }
             @else {
 

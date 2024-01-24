@@ -12,9 +12,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-address.component.html',
   styleUrl: './add-address.component.css'
 })
-export class AddAddressComponent implements OnInit,OnDestroy {
+export class AddAddressComponent implements OnInit, OnDestroy {
   constructor(private _userService: UsersService, private _fb: FormBuilder, private _router: Router, private _toastr: ToastrService) { }
-  addressForm!:FormGroup
+  addressForm!: FormGroup
   private subscribe: Subscription = new Subscription()
   ngOnInit(): void {
     this.addressForm = this._fb.group({
@@ -30,16 +30,16 @@ export class AddAddressComponent implements OnInit,OnDestroy {
       pin: ['', Validators.required]
     })
   }
-  addressCreate(){
-    if(this.addressForm.valid){
-    this.subscribe.add( this._userService.addAddress(this.addressForm.value).subscribe({
-      next:(res:address)=>{
-             this._router.navigate(['/profile'])
-      }
-    })
+  addressCreate() {
+    if (this.addressForm.valid) {
+      this.subscribe.add(this._userService.addAddress(this.addressForm.value).subscribe({
+        next: (res: address) => {
+          this._router.navigate(['/profile'])
+        }
+      })
       )
-   
-    }else{
+
+    } else {
       this._toastr.warning('input can be null!!')
     }
   }

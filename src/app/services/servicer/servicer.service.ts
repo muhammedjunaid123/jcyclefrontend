@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { service } from 'src/app/servicer/types/servicer.types';
 import { user } from 'src/app/user/types/user.types';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +21,34 @@ export class ServicerService {
   }
   loadHome(id: string) {
     return this._http.patch(`/servicer/verified?id=${id}`, {})
+  }
+  getLocation() {
+    return this._http.get('/users/location')
+  }
+  addService(data: any) {
+    let servicer = localStorage.getItem(environment.servicerSecret)
+    return this._http.post('/servicer/addService', { data, servicer })
+  }
+  userLogin(data: any) {
+    return this._http.post('/servicer/login', data)
+  }
+  getservice(): Observable<service[]> {
+    return this._http.get<service[]>('/servicer/Service')
+  }
+  blockService(id:string,isBlocked:boolean){
+    return this._http.patch('/servicer/blockService',{id,isBlocked})
+  }
+  getServiceById(id:string):Observable<service>{
+    return this._http.get<service>(`/servicer/getServiceById?id=${id}`)
+  }
+  editService(id:string,data:service){
+  return this._http.patch('/servicer/editService',{id,data})
+  }
+  getUserserviceHistory(){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/servicer/getUserserviceHistory?id=${user}`)
+  }
+  serviceOrderCancel(itemId:string,userId:string,price:number){
+ return this._http.patch(`/servicer/serviceOrderCancel`,{itemId,userId,price})
   }
 }

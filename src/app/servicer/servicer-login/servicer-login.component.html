@@ -1,1 +1,63 @@
-<p>servicer-login works!</p>
+<div class="img flex gap-1 bg-no-repeat bg-cover flex-row-reverse pt-16 h-[100vh]">
+
+
+    <div class="shadow-2xl flex flex-col  px-6 py-12 lg:px-8 w-[30vw] lg:h-[75vh] mr-44 transition hover:-translate-y-1 hover:scale-30 duration-300  bg-white rounded-sm
+">
+        <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">servicer</h1>
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm h-9">
+            <img class="mx-auto h-10 w-auto" src="../../../../assets/Screenshot 2023-11-29 100600.png"
+                alt="Your Company">
+            <h2 class="mt-1  text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your
+                account</h2>
+        </div>
+
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-6" [formGroup]="login" #form="ngForm" (ngSubmit)="Login()">
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <div class="mt-2">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            formControlName="email"
+                            class=" px-3  block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                        <div *ngIf="form.submitted && servicer?.email?.errors?.required" class="mt-1">
+                            <p class="text-red-700 underline">email is required!</p>
+                        </div>
+                        <div *ngIf="form.submitted && servicer?.email?.errors?.email">
+                            <p class="text-red-700 underline">invalid email format!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <!-- <div class="text-sm">
+                            <a href="#" class="font-semibold text-red-600 hover:text-red-500">Forgot password?</a>
+                        </div> -->
+                    </div>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            formControlName="password"
+                            class=" px-3  block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+
+                        <div *ngIf="form.submitted && servicer?.password?.errors" class="mt-1">
+                            <p class="text-red-700 underline">password is required and 6 digits!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Sign
+                        in</button>
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm text-black">
+                Don't have an account?
+                <button routerLink="/signup" class="font-semibold leading-6  text-red-600 hover:text-red-500">SIGN
+                    UP</button>
+            </p>
+        </div>
+    </div>
+</div>

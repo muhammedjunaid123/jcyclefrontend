@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './rentreview.component.html',
   styleUrl: './rentreview.component.css'
 })
-export class RentreviewComponent implements OnInit,OnDestroy {
+export class RentreviewComponent implements OnInit, OnDestroy {
   product!: rent
   review!: ratings_review[]
   user!: user
@@ -42,7 +42,7 @@ export class RentreviewComponent implements OnInit,OnDestroy {
     this.subscribe.add(
       this._route.params.subscribe(params => {
         this._userService.productReview(params['id']).subscribe({
-          next: (res:review) => {
+          next: (res: review) => {
             this.user = res['user']
             this.review = res['ratings_review']
             this.product = res['product']
@@ -57,16 +57,16 @@ export class RentreviewComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.subscribe.add(
       this._route.params.subscribe(params => {
-        this._userService.productReview(params['id']).subscribe({
-          next: (res:review) => {
-            console.log(res);
-            
+        this._userService.RentReview(params['id']).subscribe({
+          next: (res: review) => {
+            console.log(res,'respons');
+
             this.user = res['user']
             this.review = res['ratings_review']
             this.product = res['product']
-       console.log(this.product,'product from rentreview');
+            console.log(this.product, 'product from rentreview');
 
-       
+
 
           }, error: (error) => {
             console.log(error, 'this is the error');
@@ -76,46 +76,14 @@ export class RentreviewComponent implements OnInit,OnDestroy {
       })
     )
   }
-  Addcart(id: string, price: number) {
+  paynow() {
     if (!localStorage.getItem(environment.UserSecret)) {
-      this._toastr.info('user not logged')
       this._router.navigate(['/login'])
       return
     }
-    this.subscribe.add(
-      this._userService.addCart(id, price).subscribe({
-        next: (res) => {
-          this._toastr.success("added")
 
-        },
-        error: (error) => {
-          this._toastr.info(error.error.message)
+    this._router.navigate(['/rentCheckout', { id: this.product._id }])
 
-        }
-      })
-    )
-  }
-  wishlist(id: string) {
-    if (!localStorage.getItem(environment.UserSecret)) {
-      this._toastr.info('user not logged')
-      this._router.navigate(['/login'])
-      return
-    }
-    this.subscribe.add(
-      this._userService.addWishlist(id).subscribe({
-        next: (res) => {
-
-          this.refersh()
-
-        },
-        error: (error) => {
-
-          this._toastr.info(error.error.message)
-
-        }
-
-      })
-    )
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()

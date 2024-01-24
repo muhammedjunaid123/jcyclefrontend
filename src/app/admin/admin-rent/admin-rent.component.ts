@@ -30,49 +30,54 @@ export class AdminRentComponent implements OnInit, OnDestroy {
       private _Store: Store) { }
 
   ngOnInit(): void {
-    this._adminService.getRentProduct().subscribe({
-      next: (res: any) => {
-        console.log('heloooooooooo');
-
-        this.product = res
-        console.log(this.product, 'admin rent ');
-
-      },
-      error: (Error) => {
-        console.log(Error);
-        console.log(Error.message);
-
-      }
-    })
+    this.subscribe.add(
+      this._adminService.getRentProduct().subscribe({
+        next: (res: any) => {
+          console.log('heloooooooooo');
+  
+          this.product = res
+          console.log(this.product, 'admin rent ');
+  
+        },
+        error: (Error) => {
+          console.log(Error);
+          console.log(Error.message);
+  
+        }
+      })
+    )
 
 
   }
 
 
   refersh() {
-    this._adminService.getRentProduct().subscribe({
-      next: (res: any) => {
-        console.log('heloooooooooo');
-
-        this.product = res
-        console.log(this.product, 'admin rent ');
-
-      },
-      error: (Error) => {
-        console.log(Error);
-        console.log(Error.message);
-
-      }
-    })
+    this.subscribe.add (
+      this._adminService.getRentProduct().subscribe({
+        next: (res: any) => {
+          console.log('heloooooooooo');
+  
+          this.product = res
+          console.log(this.product, 'admin rent ');
+  
+        },
+        error: (Error) => {
+          console.log(Error);
+          console.log(Error.message);
+  
+        }
+      })
+    )
   }
 
   blockRent(id: string,isBlocked:boolean) {
-  
+  this.subscribe.add(
     this._adminService.blockRent(id,isBlocked).subscribe({
       next: () => {
         this.refersh()
       }
     })
+  )
   }
 
   ngOnDestroy(): void {

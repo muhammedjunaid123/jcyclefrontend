@@ -18,7 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { datePiker } from './user/store/user.reducer';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -34,6 +35,7 @@ import { datePiker } from './user/store/user.reducer';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxSpinnerModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot(AppState),
@@ -44,6 +46,8 @@ import { datePiker } from './user/store/user.reducer';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    
     
 
   ],

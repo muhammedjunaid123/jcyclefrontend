@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   RentProduct: any = []
   rentHostBbtn=true
   rentHistoryHost:any=[]
+  servicenav=false
+  service:any=[]
   ngOnInit(): void {
 
     this._userService.userData().subscribe({
@@ -56,7 +58,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.walletnav = true
     this.ordernav = false
     this.addressnav = false
-    
+    this.servicenav=false
+    this.service=[]
     this.subscribe.add(
       this._userService.loadWallet().subscribe({
         next: (res: user) => {
@@ -78,6 +81,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.ordernav = true
     this.addressnav = false
     this.walletnav = false
+    this.servicenav=false
+    this.service=[]
     this.subscribe.add(
       this._userService.orderLoad().subscribe({
         next: (res: any) => {
@@ -144,6 +149,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.addressnav = true
     this.ordernav = false
     this.walletnav = false
+    this.servicenav=false
+    this.service=[]
     this.subscribe.add(this._userService.loadAddress().subscribe({
       next: (res: any) => {
         this.address = res['address']
@@ -169,7 +176,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.rentHostBbtn=true
     this.rentHistoryHost=[]
    this.rentnav=true
-   
+   this.servicenav=false
+    this.service=[]
     this._userService.userRentHistory().subscribe({
       next: (res) => {
         this.rentHistory = res
@@ -214,6 +222,31 @@ this.rentHostBbtn=false
 
       }
     })
+  }
+  getService(){
+    this.wallet= []
+    this.order= [];
+    this.address= []
+    this.rentHistory = []
+    this.rentBbtn = false
+    this.ordernav = false
+    this.walletnav = false
+    this.addressnav = false
+    this.RentProduct= []
+    this.rentHostBbtn=true
+    this.rentHistoryHost=[]
+   this.rentnav=true
+  this.rentnav=false
+  this.servicenav=true
+    this._userService.getUserserviceHistory().subscribe(
+      {
+        next:(res)=>{
+          this.service=res
+          console.log(this.service,'servicehistoerr');
+          
+        }
+      }
+    )
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()

@@ -1,1 +1,77 @@
-<p>service-edit works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="flex justify-center w-[100vw] h[100vh]  p-[5vw]">
+
+    <form [formGroup]="serviceForm" (ngSubmit)="(getValue())">
+        <div class=" flex">
+            <div class="border-b border-gray-900/10 pb-12">
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 w-[50vw]">
+                    <div class="sm:col-span-3">
+                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">title</label>
+                        <div class="mt-2">
+                            <input type="text" name="name" id="name" autocomplete="family-name"
+                                formControlName="name"
+                                class="pl-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="price" class="block text-sm font-medium leading-6 text-gray-900">booking fee</label>
+                        <div class="mt-2">
+                            <input type="number" name="price" id="price" autocomplete="family-name"
+                                formControlName="price"
+                                class="pl-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="location" class="block text-sm font-medium leading-6 text-gray-900">location</label>
+                        <div class="mt-2">
+                            <select  id="location" name="location" autocomplete="location" formControlName="location"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                  
+                                    <option *ngFor="let c of locationforapi"  [value]="c">{{c}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input formControlName="date" matInput [matDatepicker]="picker" [min]="minDate">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <div class="flex gap-5">
+                            <div>
+                                <input formControlName="time" [readonly]="isReadOnly" placeholder="time"
+                                    [ngxTimepicker]="piker" class="border">
+                                <ngx-material-timepicker #piker></ngx-material-timepicker>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-span-full">
+                        <label for="about"
+                            class="block text-sm font-medium leading-6 text-gray-900">service_Details</label>
+                        <div class="mt-2">
+                            <textarea id="about" name="about" rows="3" formControlName="service_Details"
+                                class="pl-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button routerLink="/admin/product" type="button"
+                class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+            <button type="submit"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        </div>
+
+    </form>
+
+
+
+</div>

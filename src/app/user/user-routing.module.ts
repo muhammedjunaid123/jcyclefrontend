@@ -26,6 +26,8 @@ import { RentDetailsComponent } from './rent-details/rent-details.component';
 import { RentreviewComponent } from './rentreview/rentreview.component';
 import { DatePikerComponent } from './date-piker/date-piker.component';
 import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
+import { ServiceComponent } from './service/service.component';
+import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.component';
 
 
 
@@ -53,8 +55,9 @@ const routes: Routes = [
 {path:'rent-detail',component:RentDetailsComponent},
 {path:'rent-review',component:RentreviewComponent},
 {path:'datePicker',component:DatePikerComponent},
-{path:'rentCheckout',component:RentCheckoutComponent}
-
+{path:'rentCheckout',component:RentCheckoutComponent,canActivate:[userGuard]},
+{path:'service',component:ServiceComponent},
+{path:'rentEdit',component:RentProductEditComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

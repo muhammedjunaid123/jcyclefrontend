@@ -33,7 +33,7 @@ export class RentAddComponent implements OnInit, OnDestroy {
       cycle_Details: ['', Validators.required],
       image: [Validators.required]
     })
-
+  this.subscribe.add(
     this._userService.getLocation().subscribe({
       next: (res: any) => {
         this.locationforapi = res[0]['city']
@@ -41,6 +41,7 @@ export class RentAddComponent implements OnInit, OnDestroy {
         
       }
     })
+  )
   }
 
   getFileExtension(filename: string): any {

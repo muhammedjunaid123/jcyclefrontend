@@ -20,6 +20,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
 
     this._spinner.show();
+   
+    
     const userToken = localStorage.getItem(environment.UserSecret);
     const servicerToken = localStorage.getItem(environment.servicerSecret);
     const adminToken = localStorage.getItem(environment.AdminSecrect);
@@ -38,6 +40,8 @@ export class HttpInterceptorService implements HttpInterceptor {
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
         
+          
+          this._spinner.hide();
         }
       }),
      

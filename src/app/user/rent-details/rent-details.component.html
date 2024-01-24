@@ -57,37 +57,38 @@
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black">5★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[5]/Total*100||0"
+                    ></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> as</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[5]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 4★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[4]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> as</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[4]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 3★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[3]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> as</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[3]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black"> 2★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"[style.width.%]="obj[2]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black"> as</div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[2]||0}}</div>
             </div>
             <div class="flex ">
                 <div class="mb-1 text-base font-medium text-black">1★</div>
                 <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"></div>
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[1]/Total*100||0"></div>
                 </div>
-                <div class="mb-1 text-base font-medium text-black">as</div>
+                <div class="mb-1 text-base font-medium text-black">{{obj[1]||0}}</div>
             </div>
         </div>
         <div>

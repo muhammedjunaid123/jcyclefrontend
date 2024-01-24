@@ -22,7 +22,7 @@ export class ServicersignupComponent implements OnDestroy {
   protected signupForm = this._fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    Mobile: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   })
   signup() {

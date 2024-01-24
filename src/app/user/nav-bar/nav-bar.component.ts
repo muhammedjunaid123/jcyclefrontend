@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
   product:boolean=false
   wishlist:boolean=false
   cart:boolean=false
-
+  service:boolean=false
   ngOnInit(): void {
     try {
       this.url=this.activeRoute.snapshot.url[0]['path']
@@ -53,6 +53,12 @@ export class NavBarComponent implements OnInit {
       this.wishlist=true
     }else{
       this.wishlist=false
+    }
+
+    if(this.url==='service'){
+      this.service=true
+    }else{
+      this.service=false
     }
     
   }

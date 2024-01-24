@@ -8,8 +8,6 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductInputComponent } from './product-input/product-input.component';
 import { BrandComponent } from './brand/brand.component';
 import { CategoryComponent } from './category/category.component';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from './users/users.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AdminLoginComponent } from './login/login.component';
@@ -18,6 +16,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { ListOrderComponent } from '../reusable-component/list-order/list-order.component';
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 import { AdminRentComponent } from './admin-rent/admin-rent.component';
+import { AdminServicersComponent, } from './servicers/servicers.component';
+
 
 
 
@@ -34,7 +34,8 @@ import { AdminRentComponent } from './admin-rent/admin-rent.component';
     AdminLoginComponent,
     OrdersComponent,
     ListOrderComponent,
-    AdminRentComponent
+    AdminRentComponent,
+    AdminServicersComponent
 
   ],
   imports: [

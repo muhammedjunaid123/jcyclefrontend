@@ -38,10 +38,7 @@ cancelled(itemId:string,totalAmount:number,user:string) {
       next: () => {
         this.refresh()
       },
-      error: (err) => {
-        console.log(err);
-
-      }
+    
     })
   )
 }

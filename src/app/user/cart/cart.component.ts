@@ -24,10 +24,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.TotalAmount = res['TotalAmount']
           this.cartProduct = res['product']
         },
-        error: (error) => {
-          console.log(error);
-
-        }
+       
       })
     )
     this.DeliveryDate = new Date()
@@ -43,10 +40,7 @@ export class CartComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err) => {
-            console.log(err);
-
-          }
+         
         })
       )
     } else {
@@ -63,10 +57,7 @@ export class CartComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err) => {
-            console.log(err);
-
-          }
+        
         })
       )
     } else {
@@ -81,10 +72,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.TotalAmount = res['TotalAmount']
           this.cartProduct = res['product']
         },
-        error: (error) => {
-          console.log(error);
-
-        }
+       
       })
     )
   }
@@ -95,10 +83,7 @@ export class CartComponent implements OnInit, OnDestroy {
         next: () => {
           this.refersh()
         },
-        error: (er) => {
-          console.log(er);
-
-        }
+       
       })
     )
   }

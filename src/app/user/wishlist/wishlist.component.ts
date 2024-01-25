@@ -47,10 +47,7 @@ export class WishlistComponent  implements OnInit,OnDestroy{
     this._toastr.success("added")
       
     },
-    error:(error)=>{
-      this._toastr.info(error.error.message)
-       
-    }
+    
   })
   )
  }
@@ -61,9 +58,7 @@ this._userService.addWishlist(id).subscribe({
   next:(res)=>{
     this.refersh()  
   },
-  error:(error)=>{
-    this._toastr.info(error.error.message)
-  }
+ 
 })
   )
  }

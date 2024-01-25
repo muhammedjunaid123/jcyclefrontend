@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { cart, cartProduct } from '../types/user.types';
+import { address, cart, cartProduct } from '../types/user.types';
 
 declare var Razorpay: any;
 
@@ -15,6 +15,7 @@ declare var Razorpay: any;
   styleUrl: './place-order.component.css'
 })
 export class PlaceOrderComponent implements OnInit,OnDestroy {
+  selectedAddress: any = null;
   DeliveryDate!: Date
   cartProduct: cartProduct[] = []
   TotalAmount!: number
@@ -23,6 +24,7 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   userEmail!: string
   userPhone!: string
    flag!:boolean
+   addressArr!:address[]
   private subscribe: Subscription= new Subscription()
   constructor(private _userService: UsersService, private _toastr: ToastrService,
     private _router:Router) { }
@@ -41,14 +43,17 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
         console.log(this.cartProduct);
         this.length = this.cartProduct.length
 
-
-
+       this._userService.loadAddress().subscribe({
+        next:(res:any)=>{      
+         this.addressArr=res['address']
+         console.log(this.addressArr);
+         
+        }
+       })
+        
 
       },
-      error: (error) => {
-        console.log(error);
-
-      }
+     
     })
     )
 
@@ -70,10 +75,7 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
         console.log(this.cartProduct);
         this.length = this.cartProduct.length
       },
-      error: (error) => {
-        console.log(error);
-
-      }
+    
     })
     )
   }
@@ -84,10 +86,7 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
       next: () => {
         this.refersh()
       },
-      error: (er) => {
-        console.log(er);
-
-      }
+      
     })
     )
   }
@@ -107,14 +106,15 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
           this._router.navigate(['order-success', res])
           this._toastr.success('Booked Successsfully !')
         },
-        error: (err:any) => {
-          this._toastr.error('Something went wrong', err.error.message)
-        }
+       
       })
     )
 
   }
-
+  selectAddress(address: any) {
+    this.selectedAddress = address;
+  }
+  
 
   razor(){
     const RazorpayOptions = {

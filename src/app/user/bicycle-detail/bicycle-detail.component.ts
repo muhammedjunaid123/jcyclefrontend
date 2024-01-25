@@ -82,11 +82,7 @@ export class BicycleDetailComponent implements OnInit,OnDestroy {
           this.refersh()
 
         },
-        error: (error) => {
-
-          this._toastr.info(error.error.message)
-
-        }
+      
 
       })
     )
@@ -103,10 +99,7 @@ export class BicycleDetailComponent implements OnInit,OnDestroy {
           this._toastr.success("added")
 
         },
-        error: (error) => {
-          this._toastr.info(error.error.message)
-
-        }
+       
       })
     )
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { address, bicycle, brand, cart, category, datePickerT, filter, order, productDetails, rent, rentorderDetails, review, user, wishlist } from 'src/app/user/types/user.types';
+import { IServicerDetailsResponse, address, bicycle, brand, cart, category, datePickerT, filter, order, productDetails, rent, rentorderDetails, review, user, wishlist } from 'src/app/user/types/user.types';
 import { service } from 'src/app/servicer/types/servicer.types';
 
 
@@ -128,7 +128,7 @@ export class UsersService {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/address?id=${user}`)
   }
-  rentDetail(id: string){
+  rentDetail(id: string) {
     return this._http.get(`/users/rentDetail?id=${id}`)
   }
   addRentOrder(orderDetails: any) {
@@ -153,20 +153,20 @@ export class UsersService {
 
     return this._http.patch(`/users/changeStatusRent`, { itemId, totalAmount, user })
   }
-  getAllService():Observable<service[]>{
+  getAllService(): Observable<service[]> {
     return this._http.get<service[]>('/users/getAllService')
   }
-  addServiceOrder(data:any){
-    return this._http.post('/users/addServiceOrder',data)
+  addServiceOrder(data: any) {
+    return this._http.post('/users/addServiceOrder', data)
   }
-  getUserserviceHistory(){
+  getUserserviceHistory() {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get(`/users/getUserserviceHistory?id=${user}`)
   }
-  serviceOrderCancel(itemId:string,userId:string,price:number){
- return this._http.patch(`/users/serviceOrderCancel`,{itemId,userId,price})
+  serviceOrderCancel(itemId: string, userId: string, price: number) {
+    return this._http.patch(`/users/serviceOrderCancel`, { itemId, userId, price })
   }
-  RentReview(id:string){
+  RentReview(id: string) {
     return this._http.get<review>(`/users/rentreview?id=${id}`)
   }
   addRentReview(review: string, ratings: number, productID: string) {
@@ -174,10 +174,31 @@ export class UsersService {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.post(`/users/rentreview`, { user, review, ratings, productID })
   }
-  updateRent(id:string,data:any){
-    return this._http.patch(`/users/rentEdit?id=${id}`,data)
+  updateRent(id: string, data: any) {
+    return this._http.patch(`/users/rentEdit?id=${id}`, data)
   }
-  imgDelete(index:number,id:string){
+  imgDelete(index: number, id: string) {
     return this._http.patch(`/users/RentimgDelete`, { index, id })
+  }
+  getRecentChats(id: string): Observable<any> {
+    return this._http.get<any>(`/users/getRecentChats?id=${id}`)
+  }
+  servicerDetails(id: string): Observable<IServicerDetailsResponse> {
+    return this._http.get<IServicerDetailsResponse>(`/users/servicerDetails?id=${id}`)
+  }
+  getAddress(id: string) {
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/users/getAddress?id=${id}&user=${user}`)
+  }
+  updateAddress(id:string,data:address){
+    const user = localStorage.getItem(environment.UserSecret)
+   return this._http.patch(`/users/updateAddress?user=${user}`,{id,data})
+  }
+  addressDelete(id:string){
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.patch(`/users/addressDelete`,{id,user})
+  }
+  getService(id:string):Observable<service>{
+    return this._http.get<service>(`/users/getService?id=${id}`)
   }
 }

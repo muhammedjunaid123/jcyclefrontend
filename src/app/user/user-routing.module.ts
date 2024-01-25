@@ -28,6 +28,9 @@ import { DatePikerComponent } from './date-piker/date-piker.component';
 import { RentCheckoutComponent } from './rent-checkout/rent-checkout.component';
 import { ServiceComponent } from './service/service.component';
 import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.component';
+import { ChatComponent } from './chat/chat.component';
+import { AddressEditComponent } from './address-edit/address-edit.component';
+import { OrderServicePageComponent } from './order-service-page/order-service-page.component';
 
 
 
@@ -57,7 +60,10 @@ const routes: Routes = [
 {path:'datePicker',component:DatePikerComponent},
 {path:'rentCheckout',component:RentCheckoutComponent,canActivate:[userGuard]},
 {path:'service',component:ServiceComponent},
-{path:'rentEdit',component:RentProductEditComponent,canActivate:[userGuard]}
+{path:'rentEdit',component:RentProductEditComponent,canActivate:[userGuard]},
+{ path: 'chat', title: 'Chat Page', component: ChatComponent, canActivate: [userGuard] },
+{path:'edit-address',component:AddressEditComponent,canActivate:[userGuard]},
+{path:'serviceCheckout',component:OrderServicePageComponent,canActivate:[userGuard]}
 ];
 
 @NgModule({

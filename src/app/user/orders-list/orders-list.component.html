@@ -11,16 +11,9 @@
                 <div class="col-3">
                     <input [(ngModel)]="search" type="text" class="form-control w-[80vw]"  placeholder="Search by product Name ">
                 </div>
-                <!-- <div class="col-3">
-            <input type="text" class="form-control" [(ngModel)]="filterObj.ContactNo" placeholder="Search By id">
-          </div>
-          <div class="col-3">
-            <input type="text" class="form-control" [(ngModel)]="filterObj.Email" placeholder="Search By Email">
-          </div> -->
+              
                 <div class="col-3">
-                    <!-- <app-my-button [text]="'Search'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="filetrorder($event)"> </app-my-button> -->
-    
-                    <!-- <button class="btn btn-sm btn-success" (click)="filetrorder()">Search</button> -->
+                
                 </div>
             </div>
             <div class="row pt-3">
@@ -40,7 +33,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             <tr
                                 *ngFor="let item of items['product']|paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search">
                                 <td>{{item._id}}</td>

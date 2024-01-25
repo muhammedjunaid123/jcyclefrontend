@@ -46,9 +46,6 @@ export class RentreviewComponent implements OnInit, OnDestroy {
             this.user = res['user']
             this.review = res['ratings_review']
             this.product = res['product']
-          }, error: (error) => {
-            console.log(error, 'this is the error');
-
           }
         })
       })
@@ -67,9 +64,6 @@ export class RentreviewComponent implements OnInit, OnDestroy {
             console.log(this.product, 'product from rentreview');
 
 
-
-          }, error: (error) => {
-            console.log(error, 'this is the error');
 
           }
         })

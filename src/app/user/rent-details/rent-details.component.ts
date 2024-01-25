@@ -75,10 +75,7 @@ export class RentDetailsComponent implements OnInit, OnDestroy {
             return
           }
         },
-        error: (Error) => {
-          console.log(Error);
-  
-        }
+       
       })
     )
 

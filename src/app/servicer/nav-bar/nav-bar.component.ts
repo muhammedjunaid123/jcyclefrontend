@@ -13,7 +13,7 @@ export class NavBarComponent  implements OnInit{
   url!:string
   home:boolean=false
   service:boolean=false
- 
+ chat:boolean=false
 
   ngOnInit(): void {
     try {
@@ -35,6 +35,11 @@ export class NavBarComponent  implements OnInit{
       this.home=true
     }else{
       this.home=false
+    }
+    if(this.url==='chat'){
+      this.chat=true
+    }else{
+      this.chat=false
     }
   }
   mobMenuChange() { 

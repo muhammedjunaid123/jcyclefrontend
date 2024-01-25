@@ -51,4 +51,14 @@ export class ServicerService {
   serviceOrderCancel(itemId:string,userId:string,price:number){
  return this._http.patch(`/servicer/serviceOrderCancel`,{itemId,userId,price})
   }
+  getRecentUsers(): Observable<any> {
+    return this._http.get('/servicer/getRecentUsers')
+  }
+  getRecentChats(id: string): Observable<any> {
+    return this._http.get(`/servicer/getRecentChats?id=${id}`)
+  }
+  getMyDetails(): Observable<any> {
+    return this._http.get('/servicer/getMyDetails')
+  }
+  
 }

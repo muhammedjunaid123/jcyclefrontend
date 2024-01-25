@@ -59,10 +59,7 @@ export class ProductComponent implements OnInit,OnDestroy {
         next: () => {
           this.refersh()
         },
-        error: (err: Error) => {
-          console.log(err);
-
-        }
+       
       })
       )
     } else {
@@ -71,10 +68,7 @@ export class ProductComponent implements OnInit,OnDestroy {
         next: () => {
           this.refersh()
         },
-        error: (err: Error) => {
-          console.log(err);
-
-        }
+      
       })
       )
     }

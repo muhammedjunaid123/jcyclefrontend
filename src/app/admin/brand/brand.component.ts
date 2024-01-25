@@ -25,11 +25,7 @@ export class BrandComponent implements OnInit,OnDestroy {
       next: (res:adminBrand[]) => {
         this.brand = res
       },
-      error: (error) => {
-        console.log(error.error.message);
-
-      }
-
+     
     })
     )
 
@@ -43,11 +39,7 @@ export class BrandComponent implements OnInit,OnDestroy {
       next: (res:adminBrand[]) => {
         this.brand = res
       },
-      error: (error) => {
-        console.log(error.error.message);
-
-      }
-
+     
     })
     )
   }
@@ -58,9 +50,7 @@ export class BrandComponent implements OnInit,OnDestroy {
         next:(res)=>{
          this.refersh()
         },
-        error:(err)=>{
-          this._toastr.error(err.error.message)
-        }
+       
       })
     )
   }
@@ -77,10 +67,7 @@ export class BrandComponent implements OnInit,OnDestroy {
         next:()=>{
           this.refersh()
         },
-        error:(err:Error)=>{
-          console.log(err);
-          
-        }
+        
       })
       )
     }else{
@@ -89,10 +76,7 @@ export class BrandComponent implements OnInit,OnDestroy {
         next:()=>{
           this.refersh()
         },
-        error:(err:Error)=>{
-          console.log(err);
-          
-        }
+       
       })
       )
     }

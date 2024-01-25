@@ -82,8 +82,6 @@ export class OtpVerificationComponent implements OnInit,OnDestroy {
       next:()=>{
         localStorage.setItem(environment.UserSecret,this.token)
       this._router.navigate([''])
-      },error:(error)=>{
-        this._toastr.error(error.error.message)
       }
      })
       )

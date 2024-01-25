@@ -48,9 +48,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err) => {
-            this._toastr.error(err.error.message)
-          }
+         
         })
     )
 
@@ -65,10 +63,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-
-          }
+        
         })
       )
     } else {
@@ -78,10 +73,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-
-          }
+          
         })
       )
     }

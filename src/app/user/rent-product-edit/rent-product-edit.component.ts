@@ -128,10 +128,7 @@ export class RentProductEditComponent implements OnInit,OnDestroy{
 
             this._router.navigate(['/profile'])
           },
-          error: (err) => {
-            console.log(err);
-
-          }
+         
         })
       )
     } else {

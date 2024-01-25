@@ -8,16 +8,19 @@ import { ServiceInputComponent } from './service-input/service-input.component';
 import { ServicerLoginComponent } from './servicer-login/servicer-login.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { ServiceOrderListComponent } from './service-order-list/service-order-list.component';
+import { ChatComponent } from './chat/chat.component';
+import { servicerGuard, servicerGuardloged } from '../guard/servicerGuard/servicer-guard.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  {path:'signup',component:ServicersignupComponent},
-  {path:'login',component:ServicerLoginComponent},
-  {path:'otp',component:OtpComponent},
-  {path:'home',component:HomeComponent},
-  {path:'addservice',component:ServiceInputComponent},
-  {path:'serviceEdit',component:ServiceEditComponent},
-  {path:'serviceOrders',component:ServiceOrderListComponent}
+  { path: '', component: HomeComponent,canActivate:[servicerGuard] },
+  {path:'signup',component:ServicersignupComponent,canActivate:[servicerGuardloged]},
+  {path:'login',component:ServicerLoginComponent,canActivate:[servicerGuardloged]},
+  {path:'otp',component:OtpComponent,canActivate:[servicerGuardloged]},
+  {path:'home',component:HomeComponent,canActivate:[servicerGuard]},
+  {path:'addservice',component:ServiceInputComponent,canActivate:[servicerGuard]},
+  {path:'serviceEdit',component:ServiceEditComponent,canActivate:[servicerGuard]},
+  {path:'serviceOrders',component:ServiceOrderListComponent,canActivate:[servicerGuard]},
+  { path: 'chat', title: 'Chat', component: ChatComponent,canActivate:[servicerGuard] }
 ];
 
 @NgModule({

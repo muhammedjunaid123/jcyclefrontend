@@ -158,10 +158,7 @@ export class ProductEditComponent implements OnInit,OnDestroy {
 
             this._router.navigate(['/admin/product'])
           },
-          error: (err) => {
-            console.log(err);
-
-          }
+         
         })
       )
     } else {

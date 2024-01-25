@@ -40,10 +40,7 @@ Date = this.today.toISOString().split('T')[0];
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-  
-        }
+        
       })
     )
   }

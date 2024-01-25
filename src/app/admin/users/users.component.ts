@@ -25,10 +25,7 @@ export class UsersComponent implements OnInit,OnDestroy {
           next: (res: user[]) => {
             this.users = res
           },
-          error: (error: Error) => {
-            console.log(error);
-  
-          }
+         
         })
     )
   }
@@ -39,10 +36,7 @@ export class UsersComponent implements OnInit,OnDestroy {
         next: (res: user[]) => {
           this.users = res
         },
-        error: (error: Error) => {
-          console.log(error);
-
-        }
+      
       })
     )
     
@@ -56,10 +50,7 @@ export class UsersComponent implements OnInit,OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-  
-          }
+        
         })
       )
     } else {
@@ -68,10 +59,7 @@ export class UsersComponent implements OnInit,OnDestroy {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-  
-          }
+         
         })
       )
     }

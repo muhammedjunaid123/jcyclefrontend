@@ -22,9 +22,7 @@ export class CategoryEditComponent implements OnInit,OnDestroy{
       this._adminService.categoryDetail(params['id']).subscribe({
         next: (res) => {
           this.categoryData = res
-        }, error:(err)=>{
-          this._toastr.error(err.error.message)
-         }
+        }
       })
     })
     )
@@ -35,9 +33,7 @@ categoryupdate(id:string,categoryval:string){
   this._adminService.updatecategory(id,categoryval).subscribe({
     next:()=>{
       this._Router.navigate(['/admin/categoryAdd'])
-    }, error:(err)=>{
-      this._toastr.error(err.error.message)
-     }
+    }
   })
   )
 }

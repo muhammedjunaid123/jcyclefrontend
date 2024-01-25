@@ -39,11 +39,7 @@ export class AdminRentComponent implements OnInit, OnDestroy {
           console.log(this.product, 'admin rent ');
   
         },
-        error: (Error) => {
-          console.log(Error);
-          console.log(Error.message);
-  
-        }
+        
       })
     )
 
@@ -61,11 +57,7 @@ export class AdminRentComponent implements OnInit, OnDestroy {
           console.log(this.product, 'admin rent ');
   
         },
-        error: (Error) => {
-          console.log(Error);
-          console.log(Error.message);
-  
-        }
+       
       })
     )
   }

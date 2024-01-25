@@ -52,10 +52,7 @@ Addcart(id: string,price:number) {
     next: (res) => {
       this._toastr.success("added")
     },
-    error: (error) => {
-      this._toastr.info(error.error.message)
-
-    }
+    
   })
   )
 }
@@ -71,11 +68,7 @@ wishlist(id: string) {
      this.refersh()
 
     },
-    error: (error) => {
-     
-      this._toastr.info(error.error.message)
-
-    }
+    
   })
   )
 }

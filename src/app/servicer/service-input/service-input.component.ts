@@ -131,9 +131,7 @@ export class ServiceInputComponent implements OnInit, OnDestroy {
         
           this._router.navigate(['/servicer/home'])
         },
-        error: (err) => {
-          this._toastr.error(err.error.message)
-        }
+       
       })
     )
   }

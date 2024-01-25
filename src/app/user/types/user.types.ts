@@ -15,14 +15,14 @@ export interface filter {
 }
 
 export interface rent {
-  _id:string,
+  _id: string,
   name: string,
   price: number,
   cycle_Details: string,
   location: string,
   owner: any,
   image: any,
-  bookedDate:any
+  bookedDate: any
 }
 
 export interface bicycle {
@@ -119,29 +119,58 @@ export interface wishProduct {
   id: any,
   _id: string
 }
-export interface address{
-city:string,
-country:string,
-district:string, 
-fname:string,
-housename:string,
-lname:string,
-mobile:number,
-pin:number 
-state:string,
-email:string
+export interface address {
+  _id?: string,
+  city: string,
+  country: string,
+  district: string,
+  fname: string,
+  housename: string,
+  lname: string,
+  mobile: number,
+  pin: number
+  state: string,
+  email: string,
+  __v?:any
 }
 
-export interface rentorderDetails{
-  user:any,
-  Date:any,
-  owner:any,
+export interface rentorderDetails {
+  user: any,
+  Date: any,
+  owner: any,
   razorId: any,
-  paymentMethod:string,
-  totalAmount:number
+  paymentMethod: string,
+  totalAmount: number
 }
-export interface datePickerT{
-  start:Date,
-  end:Date,
-  location:string
+export interface datePickerT {
+  start: Date,
+  end: Date,
+  location: string
+}
+export interface ChatData {
+  receiverType: string
+  senderType: string
+  text: string
+  receiver: string
+  serviceName: string
+  companyName: string
+}
+export interface Data {
+  _id: string;
+  users: string[];
+  userRead: boolean;
+  professionalRead: boolean;
+  messages: [];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+export interface IServicerDetailsResponse {
+  servicesFind: {
+    _id: string;
+    companyName: string;
+    email: string;
+    phone: number;
+  };
+  wallet: number | undefined;
 }

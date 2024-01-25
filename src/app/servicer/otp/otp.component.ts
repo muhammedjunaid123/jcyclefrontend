@@ -84,8 +84,6 @@ export class OtpComponent implements OnInit,OnDestroy {
       next:()=>{
         localStorage.setItem(environment.servicerSecret,this.token)
       this._router.navigate(['/servicer/home'])
-      },error:(error)=>{
-        this._toastr.error(error.error.message)
       }
      })
       )

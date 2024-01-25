@@ -26,10 +26,7 @@ export class AdminServicersComponent implements OnDestroy,OnInit {
           next: (res: any) => {
             this.sevicer = res
           },
-          error: (error: Error) => {
-            console.log(error);
-  
-          }
+         
         })
     )
   }
@@ -42,10 +39,7 @@ export class AdminServicersComponent implements OnDestroy,OnInit {
             console.log(this.sevicer);
             
           },
-          error: (error: Error) => {
-            console.log(error,'error');
-  
-          }
+          
         })
     )
 
@@ -60,10 +54,7 @@ export class AdminServicersComponent implements OnDestroy,OnInit {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-  
-          }
+          
         })
       )
     } else {
@@ -72,10 +63,7 @@ export class AdminServicersComponent implements OnDestroy,OnInit {
           next: () => {
             this.refersh()
           },
-          error: (err: Error) => {
-            console.log(err);
-  
-          }
+       
         })
       )
     }

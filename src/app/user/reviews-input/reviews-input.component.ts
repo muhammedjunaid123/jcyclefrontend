@@ -62,9 +62,7 @@ marker=''
                 this._router.navigate(['/bicycleDetail', { id: this.productID }])
               }
             },
-            error: (err) => {
-              this._toastr.warning(err.error.message)
-            }
+          
           })
           )
         }else{
@@ -82,9 +80,7 @@ marker=''
                 this._router.navigate(['/bicycleDetail', { id: this.productID }])
               }
             },
-            error: (err) => {
-              this._toastr.warning(err.error.message)
-            }
+            
           })
           )
         }

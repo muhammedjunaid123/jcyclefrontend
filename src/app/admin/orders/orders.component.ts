@@ -32,10 +32,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
           this.order = res
 
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
   }
@@ -47,10 +44,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
           this.order = res
 
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
   }
@@ -67,10 +61,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+        
       })
     )
 

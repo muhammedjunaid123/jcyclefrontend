@@ -44,6 +44,10 @@ import { ServiceComponent } from './service/service.component';
 import { TimeConvertPipe } from '../pipe/time-convert.pipe';
 import { SreviceListComponent } from './srevice-list/srevice-list.component';
 import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.component';
+import { ChatComponent } from './chat/chat.component';
+import { DateToTimePipe } from '../pipe/date-to-time.pipe';
+import { AddressEditComponent } from './address-edit/address-edit.component';
+import { OrderServicePageComponent } from './order-service-page/order-service-page.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,10 @@ import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.
     HostRentHistoryComponent,
     ServiceComponent,
     SreviceListComponent,
-    RentProductEditComponent
+    RentProductEditComponent,
+    ChatComponent,
+    AddressEditComponent,
+    OrderServicePageComponent
 
   ],
   imports: [
@@ -96,6 +103,7 @@ import { RentProductEditComponent } from './rent-product-edit/rent-product-edit.
     MatStepperModule,
     MatInputModule,
     TimeConvertPipe,
+    DateToTimePipe
    
 
   ],

@@ -25,10 +25,7 @@ private subscribe:Subscription=new Subscription()
           console.log(this.service, 'service');
   
         },
-        error: (error) => {
-          console.log(error);
-  
-        }
+       
       })
     )
   }
@@ -40,10 +37,7 @@ private subscribe:Subscription=new Subscription()
           console.log(this.service, 'service');
   
         },
-        error: (error) => {
-          console.log(error);
-  
-        }
+       
       })
     )
 

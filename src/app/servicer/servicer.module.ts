@@ -18,6 +18,8 @@ import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { ServiceOrderListComponent } from './service-order-list/service-order-list.component';
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChatComponent } from './chat/chat.component';
+import { DateToTimePipe } from '../pipe/date-to-time.pipe';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ServicerLoginComponent,
     NavBarComponent,
     ServiceEditComponent,
-    ServiceOrderListComponent
+    ServiceOrderListComponent,
+    ChatComponent,
+  
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     TimeConvertPipe,
     SearchFilterPipe,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DateToTimePipe
   ]
 })
 export class ServicerModule { }

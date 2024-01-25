@@ -34,11 +34,7 @@ export class ServicersignupComponent implements OnDestroy {
         next: (res:user) => {    
           this._router.navigate(['/servicer/otp'], { queryParams: { id: res._id } })
         },
-        error: (error:any) => {
-          console.log(error);
-          
-          this._toastr.error( error.error.message);
-        }
+       
       })
       )
     }

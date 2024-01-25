@@ -32,10 +32,7 @@ export class LoginComponent implements OnDestroy {
               this._toastr.success('LOGIN SUCCESSFUL');
               this._router.navigate([''])
             },
-            error: (error: any) => {
-              this._toastr.error(error.error.message);
-
-            }
+          
 
           })
       )

@@ -32,10 +32,7 @@ export class ServicerLoginComponent  implements OnDestroy{
               this._toastr.success('LOGIN SUCCESSFUL');
               this._router.navigate(['/servicer/home'])
             },
-            error: (error: any) => {
-              this._toastr.error(error.error.message);
-
-            }
+           
 
           })
       )

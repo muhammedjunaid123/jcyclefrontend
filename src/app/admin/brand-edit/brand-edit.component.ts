@@ -23,9 +23,7 @@ ngOnInit(): void {
       next: (res) => {
         this.brandData = res
       },
-      error:(err)=>{
-       this._toastr.error(err.error.message)
-      }
+    
     })
   })
   )
@@ -38,9 +36,7 @@ Brandupdate(id:string,brandval:string){
     next:()=>{
       this._Router.navigate(['/admin/brandAdd'])
     },
-    error:(err)=>{
-      this._toastr.error(err.error.message)
-     }
+   
   })
   )
 }

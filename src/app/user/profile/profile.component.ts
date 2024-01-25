@@ -42,9 +42,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.nameForm.setValue({ name: name });
         }
       },
-      error: (err) => {
-        this._toastr.error(err.error.message)
-      }
+      
     })
   }
   private subscribe: Subscription = new Subscription()
@@ -64,9 +62,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this._userService.loadWallet().subscribe({
         next: (res: user) => {
           this.wallet = res['walletHistory']
-
-        }, error: (err) => {
-          console.log(err);
 
         }
       })
@@ -88,10 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         next: (res: any) => {
           this.order = res
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
   }
@@ -104,9 +96,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.nameForm.setValue({ name: name });
         }
       },
-      error: (err) => {
-        this._toastr.error(err.error.message)
-      }
+     
     })
   }
   saveName() {
@@ -119,11 +109,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
               this.refersh()
               this.edit = false
             },
-            error: (error: any) => {
-              console.log(error);
-
-              this._toastr.error(error.error.message);
-            }
+           
           })
       )
     } else {
@@ -155,9 +141,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       next: (res: any) => {
         this.address = res['address']
 
-
-      }, error: (err: any) => {
-        console.log(err);
 
       }
     }))

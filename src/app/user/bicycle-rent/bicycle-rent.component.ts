@@ -69,10 +69,7 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
 
 
       },
-      error: (Error) => {
-        console.log(Error);
-
-      }
+     
     })
     )
     this.subscribe.add(   
@@ -83,10 +80,7 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
             console.log(this.product, 'rent');
     
           },
-          error: (Error) => {
-            console.log(Error);
-    
-          }
+  
         })
     )
 
@@ -152,10 +146,7 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
 
 
       },
-      error: (Error) => {
-        console.log(Error);
-
-      }
+      
     })
       )
       this.subscribe.add(
@@ -166,10 +157,7 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
               console.log(this.product, 'rent');
     
             },
-            error: (Error) => {
-              console.log(Error);
-    
-            }
+           
           })
       )
 

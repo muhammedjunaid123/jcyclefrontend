@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/user/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-srevice-list',
@@ -21,7 +22,7 @@ ngOnInit(): void {
   
 }
   pageTitle: string = 'Server Side Filter';
-  constructor(private _userService: UsersService) { }
+  constructor(private _userService: UsersService,private _router:Router) { }
   refresh() {
     this.subscribe.add(
       this._userService.getUserserviceHistory().subscribe({
@@ -31,10 +32,7 @@ ngOnInit(): void {
 
           
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
   }
@@ -47,12 +45,13 @@ ngOnInit(): void {
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+        
       })
     )
+  }
+  chat(id:string){
+    this._router.navigate(['chat',{id:id}])
+  
   }
  
   ngOnDestroy(): void {

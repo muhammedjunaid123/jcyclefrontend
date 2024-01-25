@@ -4,6 +4,6 @@ export const environment = {
     UserSecret:'JwtUserJcycle',
     AdminSecrect:'JwtadminJcycle',
     servicerSecret:'JwtServicerJcycle',
-    RAZOR_KEY:'rzp_test_D85C37TIl3xCuv'
-
+    RAZOR_KEY:'rzp_test_D85C37TIl3xCuv',
+    socketEndPoint:'http://localhost:3000'
 };

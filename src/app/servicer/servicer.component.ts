@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-servicer',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './servicer.component.html',
   styleUrl: './servicer.component.css'
 })

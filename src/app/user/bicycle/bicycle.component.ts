@@ -46,17 +46,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
     })
 
 
-    // this._userService.loadBicycle()
-    //   .subscribe({
-    //     next: (res: any) => {
-    //       this.product = res
-
-    //     },
-    //     error: (Error) => {
-    //       console.log(Error);
-
-    //     }
-    //   })
+   
 
     this.subscribe.add(
       this._userService.getBrand().subscribe({
@@ -81,10 +71,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.product = res
          this.Product =this.product
         },
-        error: (Error) => {
-          console.log(Error);
-
-        }
+        
       })
     )
 
@@ -99,10 +86,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.product = res
           this.Product =this.product
         },
-        error: (Error) => {
-          console.log(Error);
-
-        }
+        
       })
     )
   }
@@ -118,10 +102,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
           this._toastr.success("added")
 
         },
-        error: (error) => {
-          this._toastr.info(error.error.message)
-
-        }
+        
       })
     )
   }
@@ -138,12 +119,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.refersh()
 
         },
-        error: (error) => {
-
-          this._toastr.info(error.error.message)
-
-        }
-
+       
       })
     )
   }
@@ -156,9 +132,7 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (res:bicycle[]) => {
         this.product = res
       },
-      error: (err) => {
-        this._toastr.error(err.error.message)
-      }
+    
     })
 
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/user/users.service';
 import { ServicerService } from 'src/app/services/servicer/servicer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-service-order-list',
@@ -17,7 +18,7 @@ export class ServiceOrderListComponent implements OnDestroy {
   today = new Date()
   Date = this.today.toISOString().split('T')[0];
   private subscribe: Subscription = new Subscription()
-  constructor(private _servicerService: ServicerService) { }
+  constructor(private _servicerService: ServicerService,private _router:Router) { }
   ngOnInit(): void {
     this.subscribe.add(
       this._servicerService.getUserserviceHistory().subscribe({
@@ -25,10 +26,7 @@ export class ServiceOrderListComponent implements OnDestroy {
           this.service = res
           console.log(this.service);
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
 
@@ -43,10 +41,7 @@ export class ServiceOrderListComponent implements OnDestroy {
 
 
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+        
       })
     )
   }
@@ -59,13 +54,11 @@ export class ServiceOrderListComponent implements OnDestroy {
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+      
       })
     )
   }
+  
   ngOnDestroy(): void {
     this.subscribe.unsubscribe()
   }

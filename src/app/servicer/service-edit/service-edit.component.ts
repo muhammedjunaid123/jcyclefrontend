@@ -158,9 +158,7 @@ export class ServiceEditComponent implements OnInit, OnDestroy {
   
           this._router.navigate(['/servicer/home'])
         },
-        error: (err: any) => {
-          this._toastr.error(err.error.message)
-        }
+       
       })
     )
   }

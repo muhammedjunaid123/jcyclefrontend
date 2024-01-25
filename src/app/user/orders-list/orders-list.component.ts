@@ -29,10 +29,7 @@ export class OrdersListComponent implements OnDestroy {
 
           console.log(this.order[0]);
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+       
       })
     )
   }
@@ -45,10 +42,7 @@ export class OrdersListComponent implements OnDestroy {
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+     
       })
     )
   }
@@ -59,10 +53,7 @@ export class OrdersListComponent implements OnDestroy {
         next: () => {
           this.refresh()
         },
-        error: (err) => {
-          console.log(err);
-
-        }
+      
       })
     )
   }

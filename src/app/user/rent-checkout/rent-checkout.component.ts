@@ -39,10 +39,7 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
             return
           }
         },
-        error: (Error) => {
-          console.log(Error);
-  
-        }
+       
       })
     )
 

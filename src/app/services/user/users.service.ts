@@ -77,8 +77,8 @@ export class UsersService {
     return this._http.patch('/users/cartUpdate', { user, count, id, price })
   }
   orderProduct(orderDetails: any) {
-    console.log(orderDetails);
-
+   
+    const user = localStorage.getItem(environment.UserSecret)
     return this._http.post('/users/cheakout', orderDetails)
   }
   orderLoad(): Observable<order[]> {

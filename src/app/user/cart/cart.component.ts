@@ -12,7 +12,7 @@ import { bicycle, cart, cartProduct } from '../types/user.types';
 })
 export class CartComponent implements OnInit, OnDestroy {
   DeliveryDate!: Date
-  cartProduct!: cartProduct[]
+  cartProduct: cartProduct[] = []
   TotalAmount!: number
   private subscribe: Subscription = new Subscription()
   constructor(private _userService: UsersService, private _toastr: ToastrService) { }
@@ -21,10 +21,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscribe.add(
       this._userService.loadCart().subscribe({
         next: (res: cart) => {
-          this.TotalAmount = res['TotalAmount']
-          this.cartProduct = res['product']
+          if (res !== null) {
+            this.TotalAmount = res['TotalAmount']
+            this.cartProduct = res['product']
+          }
         },
-       
+
       })
     )
     this.DeliveryDate = new Date()
@@ -40,7 +42,7 @@ export class CartComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-         
+
         })
       )
     } else {
@@ -57,7 +59,7 @@ export class CartComponent implements OnInit, OnDestroy {
           next: () => {
             this.refersh()
           },
-        
+
         })
       )
     } else {
@@ -72,7 +74,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.TotalAmount = res['TotalAmount']
           this.cartProduct = res['product']
         },
-       
+
       })
     )
   }
@@ -83,7 +85,7 @@ export class CartComponent implements OnInit, OnDestroy {
         next: () => {
           this.refersh()
         },
-       
+
       })
     )
   }

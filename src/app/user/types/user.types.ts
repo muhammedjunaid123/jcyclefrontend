@@ -74,6 +74,7 @@ export interface user {
   name: string,
   email: string,
   phone: number,
+  wallet:number,
   walletHistory: wallet[],
   isBlocked: Boolean,
   isVerified: Boolean
@@ -82,6 +83,7 @@ export interface user {
 export interface order {
   _id: string,
   user: any,
+  Location:string,
   product: orderProduct[]
 }
 

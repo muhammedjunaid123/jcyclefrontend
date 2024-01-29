@@ -18,6 +18,13 @@
                 </div>
                 <p>price :₹{{s.price}}</p>
                 <p>details :{{s.service_Details}}</p>
+                <div *ngIf="UserWallet>s.price">
+                    <input type="checkbox" [(ngModel)]="isChecked" *ngIf="UserWallet !== 0">
+                    wallet
+                    <div *ngIf="isChecked">
+                      paying from wallet
+                    </div>
+                  </div>
                 <div></div>
                 <div class="flex justify-center">
                     <button

@@ -26,6 +26,8 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
   countFordate: number = 0
   dateData!: datePickerT
   filterDateData!: any
+  UserWallet: number = 0
+  isChecked: boolean = false;
   today = new Date()
   private subscribe: Subscription = new Subscription()
   ngOnInit(): void {
@@ -33,13 +35,13 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
       this._Store.pipe(select(datepikerData)).subscribe({
         next: (res: datePickerT) => {
           this.dateData = res
-  
+
           if (!this.dateData.start && !this.dateData.end && !this.dateData.location) {
             this._router.navigate(['datePicker'])
             return
           }
         },
-       
+
       })
     )
 
@@ -49,7 +51,7 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
         this._userService.rentDetail(params['id']).subscribe({
           next: (res: any) => {
 
-            this.product = res
+            this.product = res['product']
             this.totalAmount = this.product.price
 
             this.filterDateData = res['bookedDate']
@@ -80,7 +82,7 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
           this.userName = res.name
           this.userEmail = res.email
           this.userPhone = res.phone
-
+          this.UserWallet = res['wallet']
         }
       })
     )
@@ -126,24 +128,38 @@ export class RentCheckoutComponent implements OnInit, OnDestroy {
 
   }
   verifyPayment(res: any) {
-    const orderDetails = {
-      user: localStorage.getItem(environment.UserSecret),
-      Date: { start: this.dateData.start, end: this.dateData.end },
-      owner: this.product.owner._id,
-      razorId: res,
-      paymentMethod: 'razor',
-      productID: this.product._id,
-      totalAmount: this.totalAmount
+    let orderDetails!: any
+    if (this.isChecked) {
+      orderDetails = {
+        user: localStorage.getItem(environment.UserSecret),
+        date: { start: this.dateData.start, end: this.dateData.end },
+        owner: this.product.owner._id,
+        razorId: res,
+        paymentMethod: 'wallet',
+        productID: this.product._id,
+        totalAmount: this.totalAmount
+      }
+    } else {
+
+      orderDetails = {
+        user: localStorage.getItem(environment.UserSecret),
+        date: { start: this.dateData.start, end: this.dateData.end },
+        owner: this.product.owner._id,
+        razorId: res,
+        paymentMethod: 'razor',
+        productID: this.product._id,
+        totalAmount: this.totalAmount
+      }
     }
-     this.subscribe.add(
-       this._userService.addRentOrder(orderDetails).subscribe({
-         next: () => {
-           this._toastr.success('order success')
-           this._router.navigate(['rent'])
-   
-         }
-       })
-     )
+    this.subscribe.add(
+      this._userService.addRentOrder(orderDetails).subscribe({
+        next: () => {
+          this._toastr.success('order success')
+          this._router.navigate(['rent'])
+
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {

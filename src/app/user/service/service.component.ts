@@ -20,9 +20,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
   constructor(private _userService: UsersService, private _router: Router, private _toastr: ToastrService) { }
 
   service!: service[]
-  userName!: string
-  userEmail!: string
-  userPhone!: number
+
   pagesize = 6
   currentPage = 1
   private subscribe: Subscription = new Subscription()
@@ -38,15 +36,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
        
       })
     )
- this.subscribe.add(
-   this._userService.userData().subscribe({
-     next: (res: user) => {
-       this.userEmail = res?.email
-       this.userName = res?.name
-       this.userPhone = res?.phone
-     }
-   })
- )
+ 
   }
   Refresh() {
     this.subscribe.add(

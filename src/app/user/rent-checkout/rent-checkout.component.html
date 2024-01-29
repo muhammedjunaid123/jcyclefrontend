@@ -12,9 +12,17 @@
                 <h1 class="underline mt-2">RENT TIME</h1>
                 <p>START :{{dateData.start |date }}</p>
                 <p>END :{{dateData.end |date }}</p>
-
+                <div *ngIf="UserWallet>totalAmount">
+                    <input type="checkbox" [(ngModel)]="isChecked" *ngIf="UserWallet !== 0">
+                    wallet
+                    <div *ngIf="isChecked">
+                      paying from wallet
+                    </div>
+                  </div>
             </div>
-            <div></div>
+            <div>
+               
+            </div>
             <div>
                 <button
              (click)="razor()"    class=" relative px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-red-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-red-700 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 hover:text-white"

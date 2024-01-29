@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { address, cart, cartProduct } from '../types/user.types';
+import { address, cart, cartProduct, user, wallet } from '../types/user.types';
 
 declare var Razorpay: any;
 
@@ -14,7 +14,7 @@ declare var Razorpay: any;
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.css'
 })
-export class PlaceOrderComponent implements OnInit,OnDestroy {
+export class PlaceOrderComponent implements OnInit, OnDestroy {
   selectedAddress: any = null;
   DeliveryDate!: Date
   cartProduct: cartProduct[] = []
@@ -23,41 +23,47 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   userName!: string
   userEmail!: string
   userPhone!: string
-   flag!:boolean
-   addressArr!:address[]
-  private subscribe: Subscription= new Subscription()
+  isChecked: boolean = false;
+  flag!: boolean
+  UserWallet:number=0
+  addressArr!: address[]
+  private subscribe: Subscription = new Subscription()
   constructor(private _userService: UsersService, private _toastr: ToastrService,
-    private _router:Router) { }
-  //
+    private _router: Router) { }
+
   ngOnInit(): void {
     this.subscribe.add(
-    this._userService.loadCart().subscribe({
-      next: (res:cart) => {
-        
-        this.TotalAmount = res['TotalAmount']
-        this.userName = res['user']['name']
-        this.userEmail = res['user']['email']
-        this.userPhone = res['user']['phone']
-        this.cartProduct=res['product']
+      this._userService.loadCart().subscribe({
+        next: (res: cart) => {
 
-        console.log(this.cartProduct);
-        this.length = this.cartProduct.length
+          this.TotalAmount = res['TotalAmount']
+          this.userName = res['user']['name']
+          this.userEmail = res['user']['email']
+          this.userPhone = res['user']['phone']
+          this.cartProduct = res['product']
 
-       this._userService.loadAddress().subscribe({
-        next:(res:any)=>{      
-         this.addressArr=res['address']
-         console.log(this.addressArr);
-         
-        }
-       })
-        
+          console.log(this.cartProduct);
+          this.length = this.cartProduct.length
 
-      },
-     
-    })
+          this._userService.loadAddress().subscribe({
+            next: (res: any) => {
+              this.addressArr = res['address']
+              console.log(this.addressArr);
+            }
+          })
+        },
+      })
+
     )
-
-
+    this.subscribe.add(
+  this._userService.userData().subscribe({
+    next:(user:user)=>{
+     this.UserWallet=user['wallet']
+     console.log(this.UserWallet,'wallet');
+     
+    }
+  })
+    )
     this.DeliveryDate = new Date()
 
     this.DeliveryDate.setDate(this.DeliveryDate.getDate() + 10)
@@ -65,58 +71,79 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
   //refersh the page value
   refersh() {
     this.subscribe.add(
-    this._userService.loadCart().subscribe({
-      next: (res:cart) => { 
-        this.TotalAmount = res['TotalAmount']
-        this.userName = res['user']['name']
-        this.userEmail = res['user']['email']
-        this.userPhone = res['user']['phone']
-        this.cartProduct=res['product']
-        console.log(this.cartProduct);
-        this.length = this.cartProduct.length
-      },
-    
-    })
+      this._userService.loadCart().subscribe({
+        next: (res: cart) => {
+          this.TotalAmount = res['TotalAmount']
+          this.userName = res['user']['name']
+          this.userEmail = res['user']['email']
+          this.userPhone = res['user']['phone']
+          this.cartProduct = res['product']
+          console.log(this.cartProduct);
+          this.length = this.cartProduct.length
+        },
+
+      })
     )
   }
   // remove cart value
   removeCart(id: string, price: number, count: number) {
     this.subscribe.add(
-    this._userService.removeCart(id, price, count).subscribe({
-      next: () => {
-        this.refersh()
-      },
-      
-    })
+      this._userService.removeCart(id, price, count).subscribe({
+        next: () => {
+          this.refersh()
+        },
+
+      })
     )
   }
 
 
   verifyPayment(res: any) {
+    let location = ''
+    delete this.selectedAddress['_id']
+    let locationValueArr = Object.values(this.selectedAddress)
+    location = locationValueArr.join(',')
+    console.log(location);
+let orderDetails!:any
 
-    const orderDetails = {
-      user:localStorage.getItem(environment.UserSecret),
-      razorId: res,
-      paymentMethod: 'razor'
+    if(this.isChecked){
+       orderDetails = {
+        user: localStorage.getItem(environment.UserSecret),
+        razorId: res,
+        paymentMethod: 'wallet',
+        location: location
+      }
+    }else{
+       orderDetails = {
+        user: localStorage.getItem(environment.UserSecret),
+        razorId: res,
+        paymentMethod: 'razor',
+        location: location
+      }
     }
-
+      console.log(orderDetails,'order Details');
+      
     this.subscribe.add(
       this._userService.orderProduct(orderDetails).subscribe({
-        next: (res:any) => {
+        next: (res: any) => {
           this._router.navigate(['order-success', res])
           this._toastr.success('Booked Successsfully !')
         },
-       
+
       })
     )
 
   }
-  selectAddress(address: any) {
-    this.selectedAddress = address;
-  }
-  
 
-  razor(){
+
+
+  razor() {
+    if (this.selectedAddress === null) {
+      this._toastr.warning('selecte the address')
+      return
+    }
+
+
     const RazorpayOptions = {
       description: 'Sample Payment',
       currency: 'INR',
@@ -124,13 +151,14 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
       name: 'JCYCLE',
       key: environment.RAZOR_KEY,
       handler: (res: any) => {
-        this.verifyPayment(res) 
+        this.verifyPayment(res)
       },
-     
+
       prefill: {
         name: this.userName,
         email: this.userEmail,
         phone: this.userPhone,
+
       },
       theme: {
         color: '#800000',
@@ -149,22 +177,19 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
       console.log('payment fail');
 
     }
-    if(this.flag===false){  
-       return
-      }
-      Razorpay.open(RazorpayOptions, pass, fail)
+    if (this.flag === false) {
+      return
+    }
+    Razorpay.open(RazorpayOptions, pass, fail)
 
   }
- async payNow() {
-    
-   
- 
+  async payNow() {
     this.subscribe.add(
       this._userService.loadCart().subscribe({
         next: (res: cart) => {
           if (this.cartProduct.length !== res['product'].length) {
             this._toastr.error("There is some error, please refresh the page.")
-           return
+            return
           } else {
             this.razor()
           }
@@ -172,16 +197,16 @@ export class PlaceOrderComponent implements OnInit,OnDestroy {
 
       })
     )
-   
 
-   if(this.flag===false){
 
-   
-   }
-   
+    if (this.flag === false) {
+
+
+    }
+
   }
-ngOnDestroy(): void {
-  this.subscribe.unsubscribe()
-}
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
+  }
 }
 

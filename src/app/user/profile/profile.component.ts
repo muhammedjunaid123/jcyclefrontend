@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   rentHistoryHost:any=[]
   servicenav=false
   service:any=[]
+  TotalWallet:number=0
   ngOnInit(): void {
 
     this._userService.userData().subscribe({
@@ -61,6 +62,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscribe.add(
       this._userService.loadWallet().subscribe({
         next: (res: user) => {
+          this.TotalWallet=res['wallet']
           this.wallet = res['walletHistory']
 
         }

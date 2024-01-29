@@ -23,6 +23,8 @@ export class OrderServicePageComponent  implements OnInit,OnDestroy{
   userPhone!: number
   pagesize = 6
   currentPage = 1
+  UserWallet:number=0
+  isChecked: boolean = false;
   private subscribe: Subscription = new Subscription()
   ngOnInit(): void {
     this.subscribe.add(  
@@ -44,6 +46,7 @@ export class OrderServicePageComponent  implements OnInit,OnDestroy{
        this.userEmail = res?.email
        this.userName = res?.name
        this.userPhone = res?.phone
+       this.UserWallet=res['wallet']
      }
    })
  )
@@ -87,17 +90,30 @@ export class OrderServicePageComponent  implements OnInit,OnDestroy{
 
 }
 verifyPayment(res: any, data: service) {
-
-  const orderDetails = {
+  let orderDetails!:any
+ if(this.isChecked){
+   orderDetails = {
     user: localStorage.getItem(environment.UserSecret),
     date: data.date,
     time: data.time,
     owner: data.owner,
     razorId: res,
-    paymentMethod: 'razor',
+    paymentMethod: 'wallet',
     productID: data._id,
     totalAmount: data.price
   }
+ }else{
+    orderDetails = {
+     user: localStorage.getItem(environment.UserSecret),
+     date: data.date,
+     time: data.time,
+     owner: data.owner,
+     razorId: res,
+     paymentMethod: 'razor',
+     productID: data._id,
+     totalAmount: data.price
+   }
+ }
  this.subscribe.add(
    this._userService.addServiceOrder(orderDetails).subscribe({
      next: () => {

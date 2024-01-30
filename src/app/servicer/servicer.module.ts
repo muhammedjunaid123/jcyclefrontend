@@ -20,6 +20,7 @@ import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChatComponent } from './chat/chat.component';
 import { DateToTimePipe } from '../pipe/date-to-time.pipe';
+import { ServicerProfileComponent } from './servicer-profile/servicer-profile.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { DateToTimePipe } from '../pipe/date-to-time.pipe';
     ServiceEditComponent,
     ServiceOrderListComponent,
     ChatComponent,
+    ServicerProfileComponent
   
   ],
   imports: [

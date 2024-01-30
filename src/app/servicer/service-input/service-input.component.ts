@@ -86,38 +86,45 @@ export class ServiceInputComponent implements OnInit, OnDestroy {
     console.log(today, selectedDateFromForm);
 
     if (today === selectedDateFromForm) {
-      console.log('enterd ');
-  console.log(time);
-  
       //for get the time  from the date
+      
+      
       let Stime = time.split(" ")
-      console.log(Stime);
+    
       
       let stringDate:string = data['time']
        let Sdate=stringDate.split(" ")
 
-      console.log(Stime,'1');
+      
       //cheaking the time with am pm 
       if (Stime[1] === 'PM' && Sdate[1] === 'AM') {
+        console.log('ampm');
+        
         this._toastr.warning('The time is already finished')
         return
       }
+      let sTMN=Stime[1]
+      let sDMN= Sdate[1]
       //split the time like hour and mints
       Stime = Stime[0].split(':')
       Sdate = Sdate[0].split(':')
       console.log(Stime, Sdate,'2');
+      console.log(sDMN,sTMN);
       
       //cheaking the hour 
-      if (Sdate[0] < Stime[0]) {
-        console.log(Sdate[1], Stime[1]);
-
+        
+    
+        
+        
+      if (Number(Sdate[0]) < Number(Stime[0])&&sDMN==sTMN) {
+    
         console.log('1');
 
         this._toastr.warning('The time is already finished')
         return
       }
       //cheaking the minits if the hour the same 
-      if (Sdate[1] < Stime[1] && Sdate[0] === Stime[0]) {
+      if (Number( Sdate[1]) < Number(Stime[1]) && Sdate[0] === Stime[0]&&sTMN==sDMN) {
         console.log('2');
 
         this._toastr.warning('The time is already finished')

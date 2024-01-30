@@ -58,7 +58,15 @@ export class ServicerService {
     return this._http.get(`/servicer/getRecentChats?id=${id}`)
   }
   getMyDetails(): Observable<any> {
+   
     return this._http.get('/servicer/getMyDetails')
   }
-  
+  saveName(name: string) {
+    const servicer = localStorage.getItem(environment.servicerSecret)
+    return this._http.post(`/servicer/updateName?id=${servicer}`, name)
+  }
+  ServicerData(){
+    const servicer =localStorage.getItem(environment.servicerSecret)
+    return this._http.get(`/servicer/ServicerData?id=${servicer}`)
+  }
 }

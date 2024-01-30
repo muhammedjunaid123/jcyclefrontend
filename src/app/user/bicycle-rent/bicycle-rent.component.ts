@@ -44,50 +44,45 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
       private _router: Router,
       private _Store: Store) { }
   ngOnInit(): void {
-  this.subscribe.add(
-    this._Store.pipe(select(datepikerData)).subscribe({
-      next: (res: datePickerT) => {
-        this.date = res
-        this.location = this.date.location
+    this.subscribe.add(
+      this._Store.pipe(select(datepikerData)).subscribe({
+        next: (res: datePickerT) => {
+          this.date = res
+          this.location = this.date.location
 
-        if (!this.date.start && !this.date.end && !this.date.location) {
-          this._router.navigate(['datePicker'])
-          return
-        }
-        this.range.setValue({
-          start: this.date.start,
-          end: this.date.end,
-          location: this.date.location
-        });
-        this._userService.getLocation().subscribe({
-          next: (res: any) => {
-            this.locationforapi = res[0]['city']
-            console.log(this.locationforapi);
-
+          if (!this.date.start && !this.date.end && !this.date.location) {
+            this._router.navigate(['datePicker'])
+            return
           }
-        })
+          this.range.setValue({
+            start: this.date.start,
+            end: this.date.end,
+            location: this.date.location
+          });
+          this._userService.getLocation().subscribe({
+            next: (res: any) => {
+              this.locationforapi = res[0]['city']
+              console.log(this.locationforapi);
+
+            }
+          })
 
 
-      },
-     
-    })
+        },
+
+      })
     )
-    this.subscribe.add(   
+    this.subscribe.add(
       this._userService.loadRentBicycle(this.date)
         .subscribe({
           next: (res: rent[]) => {
             this.product = res
             console.log(this.product, 'rent');
-    
+
           },
-  
+
         })
     )
-
-
-
-
-
   }
   valid() {
     if (this.range.controls.start.value !== null && this.range.controls.end.value !== null) {
@@ -117,16 +112,16 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
       location: this.location
     }
     console.log(res, 'ressssss');
-    
+
     this._Store.dispatch(datePiker({ datePickerval: res }))
-  
+
     this.subscribe.add(
-      
+
       this._Store.pipe(select(datepikerData)).subscribe({
         next: (res: datePickerT) => {
           this.date = res
-    
-    
+
+
           if (!this.date.start && !this.date.end && !this.date.location) {
             this._router.navigate(['datePicker'])
             return
@@ -140,26 +135,26 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
             next: (res: any) => {
               this.locationforapi = res[0]['city']
               console.log(this.locationforapi);
-    
+
             }
           })
 
 
-      },
-      
-    })
-      )
-      this.subscribe.add(
-        this._userService.loadRentBicycle(this.date)
-          .subscribe({
-            next: (res: rent[]) => {
-              this.product = res
-              console.log(this.product, 'rent');
-    
-            },
-           
-          })
-      )
+        },
+
+      })
+    )
+    this.subscribe.add(
+      this._userService.loadRentBicycle(this.date)
+        .subscribe({
+          next: (res: rent[]) => {
+            this.product = res
+            console.log(this.product, 'rent');
+
+          },
+
+        })
+    )
 
 
   }

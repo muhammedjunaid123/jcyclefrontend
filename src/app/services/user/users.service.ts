@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { IServicerDetailsResponse, address, bicycle, brand, cart, category, datePickerT, filter, order, productDetails, rent, rentorderDetails, review, user, wishlist } from 'src/app/user/types/user.types';
 import { service } from 'src/app/servicer/types/servicer.types';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 
 @Injectable({
@@ -200,5 +201,9 @@ export class UsersService {
   }
   getService(id:string):Observable<service>{
     return this._http.get<service>(`/users/getService?id=${id}`)
+  }
+  serviceFilter(data:any){
+    const {time,date,location}=data
+  return this._http.get(`/servicer/serviceFilter?time=${time}&date=${date}&location=${location}`)
   }
 }

@@ -48,6 +48,7 @@ import { ChatComponent } from './chat/chat.component';
 import { DateToTimePipe } from '../pipe/date-to-time.pipe';
 import { AddressEditComponent } from './address-edit/address-edit.component';
 import { OrderServicePageComponent } from './order-service-page/order-service-page.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { OrderServicePageComponent } from './order-service-page/order-service-pa
     MatStepperModule,
     MatInputModule,
     TimeConvertPipe,
-    DateToTimePipe
+    DateToTimePipe,
+    NgxMaterialTimepickerModule,
    
 
   ],

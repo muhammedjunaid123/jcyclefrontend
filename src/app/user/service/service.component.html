@@ -1,5 +1,40 @@
 <app-nav-bar></app-nav-bar>
-<section class="p-5">
+<div class="flex justify-center mt-4">
+    <form [formGroup]="serviceForm" (ngSubmit)="search()">
+        <div class="w-[80vw] h-[20vh] bg-gray-100  p-10 grid grid-cols-3 ">
+            <div class="">
+                <label for="location" class="block text-sm font-medium leading-6 text-gray-900">location</label>
+                <div class="mt-2">
+                    <select id="location" name="location" autocomplete="location" formControlName="location"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+
+                        <option *ngFor="let c of locationforapi" [value]="c">{{c}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input formControlName="date" matInput [matDatepicker]="picker" [min]="minDate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="flex gap-5 mt-4">
+                <div>
+                    <input formControlName="time" [readonly]="isReadOnly" placeholder="time" [ngxTimepicker]="piker"
+                        class="border">
+                    <ngx-material-timepicker #piker></ngx-material-timepicker>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button (click)="search()" class="bg-red-900 w-[7vw] text-white hover:scale-105 duration-300">Refersh</button>
+</div>
+<section class="pb-5 px-5">
     <div class="grid grid-cols-3 gap-4 pt-[10vh]">
         <div *ngFor="let s of service | paginate:{itemsPerPage:pagesize,currentPage:currentPage}"
             class=" w-[30vw] h-[40vh] bg-blue-50 p-10  rounded-md drop-shadow-2xl hover:scale-105 duration-200 ">
@@ -7,7 +42,7 @@
                 <h1>{{s.name}}</h1>
             </div>
             <div class="grid grid-cols-1 gap-2">
-                <p>servicer name :{{s.ownerData[0]['name']}}</p>
+                <p>servicer name :{{s.owner['name']}}</p>
                 <p>location : {{s.location}}</p>
                 <div class="grid grid-cols-2 gap-3">
                     <div class="ring-2 ring-red-800 rounded-lg px-7">
@@ -24,7 +59,6 @@
         </div>
     </div>
 </section>
- <div class="flex justify-center">
-            <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
-        </div>
-        
+<div class="flex justify-center">
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+</div>

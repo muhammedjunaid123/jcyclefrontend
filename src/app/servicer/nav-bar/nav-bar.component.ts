@@ -14,7 +14,7 @@ export class NavBarComponent  implements OnInit{
   home:boolean=false
   service:boolean=false
  chat:boolean=false
-
+ dashboard:boolean=false
   ngOnInit(): void {
     try {
       this.url=this.activeRoute.snapshot.url[0]['path']
@@ -40,6 +40,11 @@ export class NavBarComponent  implements OnInit{
       this.chat=true
     }else{
       this.chat=false
+    }
+    if(this.url==='dashboard'){
+      this.dashboard=true
+    }else{
+      this.dashboard=false
     }
   }
   mobMenuChange() { 

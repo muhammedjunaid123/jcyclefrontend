@@ -17,7 +17,8 @@ import { ListOrderComponent } from '../reusable-component/list-order/list-order.
 import { SearchFilterPipe } from '../pipe/search-filter.pipe';
 import { AdminRentComponent } from './admin-rent/admin-rent.component';
 import { AdminServicersComponent, } from './servicers/servicers.component';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -35,7 +36,8 @@ import { AdminServicersComponent, } from './servicers/servicers.component';
     OrdersComponent,
     ListOrderComponent,
     AdminRentComponent,
-    AdminServicersComponent
+    AdminServicersComponent,
+    DashboardComponent
 
   ],
   imports: [
@@ -44,7 +46,8 @@ import { AdminServicersComponent, } from './servicers/servicers.component';
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-    SearchFilterPipe
+    SearchFilterPipe,
+    ChartModule
   
    
     

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router, } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { bicycle, brand, rent, user } from 'src/app/user/types/user.types';
+import { bicycle, brand, order, rent, user } from 'src/app/user/types/user.types';
 import { adminBrand, adminCategory } from 'src/app/admin/types/admin.types';
 import { service } from 'src/app/servicer/types/servicer.types';
 
@@ -100,10 +100,14 @@ export class AdminService {
   Servicers() {
     return this._http.get(`/servicer/servciers`)
   }
-  aaa(){
-    return
-  }
+
   servicer_block(id: string, bool: boolean): Observable<service[]> {
     return this._http.patch<service[]>('/admin/serviceBlock', { id, bool })
-  }
+ }
+ getDashborad(){
+  return this._http.get(`/admin/dashboard`)
+ }
+ orderLoad():Observable<order[]>{
+  return this._http.get<order[]>(`/admin/orders`)
+ }
 }

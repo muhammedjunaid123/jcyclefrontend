@@ -17,6 +17,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { AdminRentComponent } from './admin-rent/admin-rent.component';
 import { ServicerComponent } from '../servicer/servicer.component';
 import { AdminServicersComponent } from './servicers/servicers.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: AdminLoginComponent,canActivate:[adminGuardloged] },
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path:'productedit',component:ProductEditComponent,canActivate:[adminGuard]},
   {path:'orders',component:OrdersComponent,canActivate:[adminGuard]},
   {path:'rent',component:AdminRentComponent,canActivate:[adminGuard]},
-  {path:'servicers',component:AdminServicersComponent,canActivate:[adminGuard]}
+  {path:'servicers',component:AdminServicersComponent,canActivate:[adminGuard]},
+  {path:'dashboard',component:DashboardComponent,canActivate:[adminGuard]}
 ];
 
 @NgModule({

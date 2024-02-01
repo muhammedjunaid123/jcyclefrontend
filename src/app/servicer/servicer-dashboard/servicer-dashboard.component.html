@@ -1,0 +1,76 @@
+<app-nav-bar></app-nav-bar>
+<div class="flex justify-center">
+
+    <div class="w-[60vw] h-[55vh] p-10 grid grid-cols-2 gap-4 justify-center">
+        <section>
+            <div class="ring ring-red-800 w-[20vw] h-[20vh] rounded-lg hover:scale-105 duration-200">
+                <div class="flex gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 12.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M10.5 16a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0" />
+                        <path fill="currentColor"
+                            d="M17.526 5.116L14.347.659L2.658 9.997L2.01 9.99V10H1.5v12h21V10h-.962l-1.914-5.599zM19.425 10H9.397l7.469-2.546l1.522-.487zM15.55 5.79L7.84 8.418l6.106-4.878zM3.5 18.169v-4.34A3.008 3.008 0 0 0 5.33 12h13.34a3.009 3.009 0 0 0 1.83 1.83v4.34A3.009 3.009 0 0 0 18.67 20H5.332A3.01 3.01 0 0 0 3.5 18.169" />
+                    </svg>
+                    <h1 class="p-3 text-2xl">Revenue</h1>
+                </div>
+                <div class="grid grid-cols-3">
+                    <p class=""></p>
+                    <h1 class="col-span-2 p-3 text-2xl">₹{{revenue}}</h1>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="ring ring-red-800 w-[20vw] h-[20vh] rounded-lg hover:scale-105 duration-200">
+                <div class="flex gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M9 4L7 6L5 8l2 2l2 2l.7-.7l.7-.7l-1.3-1.3L7.8 8l1.3-1.3l1.3-1.3l-.7-.7zm6 0l-.7.7l-.7.7l1.3 1.3L16.2 8l-1.3 1.3l-1.3 1.3l.7.7l.7.7l2-2l2-2l-2-2zm5.977 15.09l-.388-1.532a.747.747 0 0 0-.356-.466a.764.764 0 0 0-.587-.072l-4.552 1.284L12 17l3.915-1.003a1.88 1.88 0 0 0 .558-.893L16.166 14L8 15H3v6h5l4.455.964a3.194 3.194 0 0 0 .727-.017l7.26-1.954a.755.755 0 0 0 .454-.344a.738.738 0 0 0 .081-.56M6 20H4v-4h2zm6.922.982a.557.557 0 0 1-.138.018a.538.538 0 0 1-.115-.012L8 19.963V16.02l7.329-.908L10 17l4.721 2.232l.317.127l.328-.093l4.316-1.217l.264 1.042Z" />
+                    </svg>
+                    <h1 class="p-3 text-2xl">Servicers</h1>
+                </div>
+                <div class="grid grid-cols-3">
+                    <p class=""></p>
+                    <h1 class="col-span-2 p-3 text-2xl">{{service}}</h1>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="ring ring-red-800 w-[20vw] h-[20vh] rounded-lg hover:scale-105 duration-200">
+                <div class="flex gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24">
+                        <g fill="none" stroke="#008521" stroke-linecap="round" stroke-width="2">
+                            <path d="m9 10l3.258 2.444a1 1 0 0 0 1.353-.142L20 5" />
+                            <path d="M21 12a9 9 0 1 1-6.67-8.693" />
+                        </g>
+                    </svg>
+                    <h1 class="p-3 text-2xl">Done</h1>
+                </div>
+                <div class="grid grid-cols-3">
+                    <p class=""></p>
+                    <h1 class="col-span-2 p-3 text-2xl">{{done}}</h1>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="ring ring-red-800 w-[20vw] h-[20vh] rounded-lg hover:scale-105 duration-200">
+                <div class="flex gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17 12c-2.76 0-5 2.24-5 5s2.24 5 5 5s5-2.24 5-5s-2.24-5-5-5m1.65 7.35L16.5 17.2V14h1v2.79l1.85 1.85zM18 3h-3.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H6c-1.1 0-2 .9-2 2v15c0 1.1.9 2 2 2h6.11a6.743 6.743 0 0 1-1.42-2H6V5h2v3h8V5h2v5.08c.71.1 1.38.31 2 .6V5c0-1.1-.9-2-2-2m-6 2c-.55 0-1-.45-1-1s.45-1 1-1s1 .45 1 1s-.45 1-1 1" />
+                    </svg>
+                    <h1 class="p-3 text-2xl">Pending</h1>
+                </div>
+                <div class="grid grid-cols-3">
+                    <p class=""></p>
+                    <h1 class="col-span-2 p-3 text-2xl">{{pending}}</h1>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+<div class="flex justify-center">
+    <div class=" w-[70vw] h-[40vh] p-10">
+        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+    </div>
+</div>

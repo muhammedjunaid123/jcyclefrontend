@@ -11,6 +11,7 @@ import { ServiceOrderListComponent } from './service-order-list/service-order-li
 import { ChatComponent } from './chat/chat.component';
 import { servicerGuard, servicerGuardloged } from '../guard/servicerGuard/servicer-guard.guard';
 import { ServicerProfileComponent } from './servicer-profile/servicer-profile.component';
+import { ServicerDashboardComponent } from './servicer-dashboard/servicer-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent,canActivate:[servicerGuard] },
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'serviceEdit',component:ServiceEditComponent,canActivate:[servicerGuard]},
   {path:'serviceOrders',component:ServiceOrderListComponent,canActivate:[servicerGuard]},
   { path: 'chat', title: 'Chat', component: ChatComponent,canActivate:[servicerGuard] },
-  {path:'profile', component:ServicerProfileComponent,canActivate:[servicerGuard]}
+  {path:'profile', component:ServicerProfileComponent,canActivate:[servicerGuard]},
+  {path:'dashboard',component:ServicerDashboardComponent,canActivate:[servicerGuard]}
 ];
 
 @NgModule({

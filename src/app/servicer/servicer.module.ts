@@ -21,6 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ChatComponent } from './chat/chat.component';
 import { DateToTimePipe } from '../pipe/date-to-time.pipe';
 import { ServicerProfileComponent } from './servicer-profile/servicer-profile.component';
+import { ServicerDashboardComponent } from './servicer-dashboard/servicer-dashboard.component';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { ServicerProfileComponent } from './servicer-profile/servicer-profile.co
     ServiceEditComponent,
     ServiceOrderListComponent,
     ChatComponent,
-    ServicerProfileComponent
+    ServicerProfileComponent,
+    ServicerDashboardComponent
   
   ],
   imports: [
@@ -47,7 +50,8 @@ import { ServicerProfileComponent } from './servicer-profile/servicer-profile.co
     TimeConvertPipe,
     SearchFilterPipe,
     NgxPaginationModule,
-    DateToTimePipe
+    DateToTimePipe,
+    ChartModule
   ]
 })
 export class ServicerModule { }

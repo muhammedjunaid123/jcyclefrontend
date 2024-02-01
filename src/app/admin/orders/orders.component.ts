@@ -6,6 +6,7 @@ import { Refresh } from '@ngrx/store-devtools/src/actions';
 import { Subscription } from 'rxjs';
 import { AdminStatus } from '../types/admin.types';
 import { order, user } from 'src/app/user/types/user.types';
+import { AdminService } from 'src/app/services/admin/admin.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   search = ''
 
   pageTitle: string = 'Server Side Filter';
-  constructor(private _userService: UsersService) { }
+  constructor(private _userService: UsersService,private _adminService:AdminService) { }
 
   refresh() {
     this.subscribe.add(
@@ -39,7 +40,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscribe.add(
-      this._userService.orderLoad().subscribe({
+    this._adminService.orderLoad().subscribe({
         next: (res: order[]) => {
           this.order = res
 

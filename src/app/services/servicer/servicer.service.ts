@@ -69,4 +69,8 @@ export class ServicerService {
     const servicer =localStorage.getItem(environment.servicerSecret)
     return this._http.get(`/servicer/ServicerData?id=${servicer}`)
   }
+  dashboard(){
+    const servicer =localStorage.getItem(environment.servicerSecret)
+     return this._http.get(`/servicer/dashboard?id=${servicer}`)
+  }
 }

@@ -21,7 +21,7 @@ export const adminGuardloged: CanActivateFn = (route, state) => {
   if(!token){
     return true;
   }else{
- _router.navigate(['/admin/product'])
+ _router.navigate(['/admin/dashboard'])
  return false
   }
 };

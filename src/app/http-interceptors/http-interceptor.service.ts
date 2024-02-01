@@ -17,11 +17,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private _spinner: NgxSpinnerService,private _errorHandlerService: ErrorHandleService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-
     this._spinner.show();
-   
-    
     const userToken = localStorage.getItem(environment.UserSecret);
     const servicerToken = localStorage.getItem(environment.servicerSecret);
     const adminToken = localStorage.getItem(environment.AdminSecrect);
@@ -43,13 +39,9 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
       }),
      
-      catchError((error: HttpErrorResponse) => {
-        console.log(error,'error');
-        
+      catchError((error: HttpErrorResponse) => {        
         this._spinner.hide();       
-        console.log('error',error);
         this._errorHandlerService.handleError(error);
-      
         return throwError(() => error);
       })
     );

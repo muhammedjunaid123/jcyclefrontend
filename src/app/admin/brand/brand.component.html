@@ -1,0 +1,49 @@
+
+<div class="flex">
+    <app-navbar></app-navbar>
+    <div  class="w-full p-4">
+        <ul *ngIf="brand" role="list" class=" pl-24 pr-24 divide-gray-100">
+    
+            <div  *ngFor="let b of brand |paginate:{itemsPerPage:pagesize,currentPage:currentPage}">
+    
+            <li class="flex justify-between py-3">
+                <div class="flex min-w-0 gap-x-4">
+                    <div class="min-w-0 flex-auto">
+                        <p class="text-lg font-semibold leading-6 text-gray-900">{{b.Brand_name}}</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                <div >
+                    <button (click)="block_or_unblock(b._id,b.isBlocked)" class="bg-red-700 text-white rounded-lg w-20 h-10 hover:scale-105">
+                        {{b.isBlocked?'unlist':'list'}}
+                    </button>
+                </div>
+               
+                <button (click)="editBrand(b._id)" class="bg-red-800 rounded-lg w-20 text-white hover:scale-105">EDIT</button>
+                </div>
+            </li>
+            <hr>
+        </div>
+        </ul>
+    
+    
+        <div class="sm:col-span-4 ">
+            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">ADD THE BRANDS HERE </label>
+            <div class="mt-2">
+                <input id="name" name="name" type="name" autocomplete="name" #brandVal
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+            <div class="flex justify-end pr-7 pt-5">
+                <button  (click)="addBrand(brandVal.value)" class="bg-green-600 w-16 h-auto rounded-md flex justify-center">
+                    Add
+                </button>
+    
+            </div>
+        </div>
+    
+    
+    </div>
+</div>
+<div class="flex justify-center">
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+ </div>

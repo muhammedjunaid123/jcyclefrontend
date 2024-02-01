@@ -1,0 +1,163 @@
+<app-nav-bar></app-nav-bar>
+<section>
+    <hr class="mt-5 mb-2">
+    <section class="grid grid-cols-7  divide-x">
+        <div class="col-span-2  p-5 ">
+            <div class="grid justify-center">
+                <h1 class="font-bold text-xl  text-gray-700">Profile</h1>
+            </div>
+            <div class="grid justify-center ">
+                <p class="font-semibold text-gray-700"> {{userData.name}}</p>
+            </div>
+            <div class="grid justify-center ">
+                <p class="font-semibold text-gray-700"> {{userData.email}}</p>
+            </div>
+            <div class="grid justify-center ">
+                <p class="font-semibold text-gray-700"> {{userData.phone}}</p>
+            </div>
+            <div class="grid justify-center gap-2 mt-10">
+                <div class="flex gap-2 ">
+                    <div>
+                        <button
+                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
+                            (click)="getwallet()">wallet</button>
+                    </div>
+                    <div>
+                        <button
+                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
+                            (click)="getOrders()">orders</button>
+                    </div>
+                    <div>
+                        <button
+                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
+                            (click)="getAddrress()">address</button>
+                    </div>
+
+                </div>
+                <div class="flex gap-2 ">
+                    <div>
+                        <button
+                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
+                            (click)="getRent()">rent</button>
+                    </div>
+                    <div>
+                        <button
+                            class="p-1  text-blue-950 ring-2 ring-red-800 rounded-md w-auto hover:bg-red-800 hover:text-white"
+                            (click)="getService()">service</button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="grid justify-center mt-10">
+                <button (click)="logout()" class="bg-red-800 flex justify-center text-white w-[10vw] h-[5vh]"><svg
+                        class="mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024">
+                        <path fill="currentColor"
+                            d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8c-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9a353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8c47.9 0 94.3 9.3 137.9 27.8c42.2 17.8 80.1 43.4 112.7 75.9c7.9 7.9 15.3 16.1 22.4 24.5c3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82C271.7 82.6 79.6 277.1 82 516.4C84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7c3.4-5.3-.4-12.3-6.7-12.3m88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6" />
+                    </svg>Logout</button>
+            </div>
+        </div>
+
+        <div class="col-span-5">
+            @if (wallet.length>0||walletnav!==false) {
+            <app-wallet [wallet]="wallet" [TotalWallet]="TotalWallet"></app-wallet>
+            }@else if (order.length>0||ordernav!==false) {
+            <app-orders-list [order]="order"></app-orders-list>
+            }@else if (address.length>0||addressnav!==false) {
+            <app-address [addressArr]="address"></app-address>
+            }@else if(rentnav!==false){
+            <div>
+                <div class="grid grid-cols-2 gap-4 px-6">
+                    <button (click)="rentHistoryDetails()"
+                    [ngClass]="{'ring-2 ring-red-800 h-[5vh] text-black scale-105 duration-150':rentBbtn,'bg-red-800 h-[5vh] text-white':!rentBbtn}">rent
+                        History</button>
+                    <button (click)="rentProductDetails()"
+                    [ngClass]="{'ring-2 ring-red-800 h-[5vh] text-black  scale-105 duration-150':!rentBbtn,'bg-red-800 h-[5vh] text-white':rentBbtn}">Rent
+                        product details</button>
+                </div>
+            </div>
+            @if(rentBbtn){
+                <div class="mt-10">
+                    <div class="grid grid-cols-2 gap-4 px-6">
+                        <button (click)="rentProductDetails()"
+                        [ngClass]="{'ring-2 ring-red-800 h-[5vh] text-black  scale-105 duration-150':!rentHostBbtn,'bg-red-800 h-[5vh] text-white':rentHostBbtn}">
+                        Host Rent Product Details</button>
+                        <button (click)="getRentHost()"
+                        [ngClass]="{'ring-2 ring-red-800 h-[5vh] text-black scale-105 duration-150':rentHostBbtn,'bg-red-800 h-[5vh] text-white':!rentHostBbtn}">Host Rent
+                            History</button>
+                    </div>
+                </div>
+                @if (rentHostBbtn) {
+                        <app-rent-userproduct-history [RentProduct]="RentProduct"></app-rent-userproduct-history>
+
+                    }@else {
+                        <app-host-rent-history [rentHistory]="rentHistoryHost" ></app-host-rent-history>
+                    }
+
+                }@else {
+                    
+                    <app-rent-history [rentHistory]="rentHistory"></app-rent-history>
+                }
+            }@else if(servicenav!==false&&service.length>0){
+               <app-srevice-list [service]="service"></app-srevice-list>
+            }
+            @else {
+
+            <div>
+                <div>
+                    <h1 class="text-2xl my-5 ml-5">basic info</h1>
+                    <hr>
+                </div>
+
+                <div class="gap-4 grid justify-center mt-5">
+                    @if (edit) {
+
+                    <form class="space-y-3" [formGroup]="nameForm" #form="ngForm">
+
+                        <div class="relative">
+                            <div (click)="saveName()" class="absolute top-0 right-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M21 7v12q0 .825-.587 1.413T19 21H5q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h12zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18m-6-8h9V6H6z" />
+                                </svg>
+                            </div>
+                            <label for="name" class="block text-sm font-medium leading-6 text-gray-900"> Name</label>
+                            <div class="mt-1">
+                                <input id="name" name="name" type="name" autocomplete="name" required
+                                    formControlName="name"
+                                    class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow-lg focus:shadow-red-800  focus:scale-105 duration-500  focus:-translate-y-1 sm:text-sm sm:leading-6">
+                                <div *ngIf="form.submitted && user?.name?.errors">
+                                    <p class="text-danger">name is required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    }@else {
+                    <div class="px-3 w-[40vw] shadow-2xl border  relative">
+                        <div class="absolute top-0 right-0" (click)="editchage()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006z" />
+                                <path fill="currentColor"
+                                    d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2" />
+                            </svg>
+                        </div>
+
+                        {{userData.name}}
+                    </div>
+                    }
+                    <div class="px-3 w-[40vw] shadow-2xl border ">
+                        {{userData.email}}
+                    </div>
+                    <div class="px-3 w-[40vw] shadow-2xl border ">
+                        {{userData.phone}}
+                    </div>
+                </div>
+            </div>
+            }
+
+
+        </div>
+    </section>
+</section>

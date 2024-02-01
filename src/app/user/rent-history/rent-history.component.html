@@ -1,0 +1,75 @@
+@if(rentHistory.length===0){
+    <img src="../../../assets/not found list.svg"  class="w-[100vw] h-[100vh] flex justify-center" alt="">
+}
+@else{
+    <div class="card w-auto p-1">
+        <div class="card-header text-black">
+           Rent order List
+        </div>
+        <div class="card-body">
+            <div class="row ">
+                <div class="col-3">
+                    <input [(ngModel)]="search" type="text" class="form-control w-[80vw]"  placeholder="Search by product Name ">
+                </div>
+               
+                <div class="col-3">
+                  
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-10" style="float:right;text-align: right">
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th> product Name</th>
+                                <th> Owner Name</th>
+                                <th>City</th>
+                                <th>startDate</th>
+                                <th>EndDate</th>
+                                <th>status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                            *ngFor="let item of rentHistory |paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search">
+                                <td>{{item._id}}</td>
+                                <td>{{item.rentProduct.name || '--'}}</td>
+                                <td>{{item.owner.name || '--'}}</td>
+                                <td>{{item.rentProduct.location|| '--'}}</td>
+                                <td>{{item.start | date:'dd-MMM-yyyy'}}</td>
+                                <td>{{item.end | date:'dd-MMM-yyyy'}}</td>
+                                @if (item.end<=Date&&item.status!=='cancelled') {
+                                    <td>completed</td>    
+                                }@else {
+                                    <td>{{item.status }}</td>
+                                }
+                        
+                                @if (item.status==='cancelled') {
+                                    <td>{{item.status }}</td>
+                                }@else if (item.start<=Date&&item.status!=='cancelled') {
+                                     <td>No action are available</td>
+                                }
+                                @else {
+
+                                    <td><button (click)="cancelled(item._id,item.totalAmount,item.user)" class="hover:scale-110 duration-150 bg-red-800 text-white">cancelled</button></td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>
+        <div class="flex justify-center">
+            <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+        </div>
+        
+        </div>
+}
+  
+

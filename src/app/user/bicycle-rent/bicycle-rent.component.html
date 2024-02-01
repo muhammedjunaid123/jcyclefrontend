@@ -1,0 +1,106 @@
+<app-nav-bar></app-nav-bar>
+<div class=" bg-gray-100 w-[95%] rounded-lg h-[7vh] mx-5 my-3 shadow-md  flex  justify-between ">
+    <div class="fixed bottom-5 right-5 z-1 ">
+
+        <button routerLink="/rent-add" title="Add New"
+          class="group cursor-pointer outline-none hover:rotate-90 duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
+            class="bg-white rounded-full stroke-red-700 fill-none group-hover:fill-red-800 group-active:stroke-green-200 group-active:fill-green-600 group-active:duration-0 duration-300">
+            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+              stroke-width="1.5"></path>
+            <path d="M8 12H16" stroke-width="1.5"></path>
+            <path d="M12 16V8" stroke-width="1.5"></path>
+          </svg>
+        </button>
+      </div>
+    <div class="p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="red"
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14" />
+        </svg>
+    </div>
+    <div class="p-2">
+        <input [(ngModel)]="search" type="text" class="w-[90vw] bg-gray-100 outline-none  ">
+    </div>
+</div>
+<div class="grid justify-center">
+    <div class="w-[80vw] h-[20vh] bg-gray-100   p-10 mr-5 grid grid-cols-2 ">
+        <div>
+            <mat-form-field>
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [min]="minDate">
+                    <input matStartDate formControlName="start" placeholder="Start date">
+                    <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </div>
+        <div class="">
+            <label for="location" class="block text-sm font-medium leading-6 text-gray-900">location</label>
+        
+            <div class="mt-2" [formGroup]="range">
+                <select id="location" name="location" autocomplete="location" formControlName="location"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                    <option *ngFor="let c of locationforapi" [value]="c">{{c}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button (click)="refersh()" class="bg-red-800 text-white">refersh</button>
+</div>
+<div class="grid grid-flow-col ">
+    <div>
+
+    </div>
+
+
+    <div
+        class="py-5  grid lg:grid-cols-3 xl2:grid-cols-4 xl:grid-cols-3 gap-5 md:grid-cols-2 lg:bg-white sm:grid-cols-1 ">
+
+        <div *ngFor="let p of product| paginate:{itemsPerPage:pSize,currentPage:currentPage} |searchFilter:search"
+            class="overflow-hidden p-2 grid select-none shadow-inner drop-shadow-2xl lg:w-[30vw] xl:w-[20vw] md:w-[45vw] h-[50vh]  sm:w-[40vw]   bg-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-40 rounded-lg   ">
+            <div (click)="productDetails(p._id)">
+                <img [src]="p.image[0]" alt="..." class="">
+            </div>
+            <hr>
+            <div class="grid grid-cols-5 ">
+                <div class="col-span-4">
+                    <p>NAME:{{p.name}}</p>
+                    <p>OWNER:{{p.owner['name']}}</p>
+                    <p>LOCATION:{{p.location}}</p>
+
+                </div>
+                <div>
+
+                    <div class="rounded-md w-[7vh] h-[4vh] m-4 bg-green-600">
+                        <div class="flex">
+                            <p class="ml-2 text-white">5</p>
+                            <div class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="white"
+                                        d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" grid grid-cols-2 ">
+                <div class="grid justify-start">
+                    ₹{{p.price}} /day
+                </div>
+                <div
+                    class=" p-1 flex text-white justify-center absolute w-[10vw] bottom-0 right-0 bg-blue-900 rounded-br-lg">
+                    DETAILS
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="flex justify-center">
+
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+</div>
+<app-footer></app-footer>

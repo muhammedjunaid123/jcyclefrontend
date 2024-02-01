@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+<section class="p-5">
+    <div class="grid grid-cols-3 gap-4 pt-[1vh]">
+        <div class="fixed bottom-5 right-5 z-1 ">
+
+            <button routerLink="/servicer/addservice" title="Add New"
+              class="group cursor-pointer outline-none hover:rotate-90 duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
+                class="bg-white rounded-full stroke-red-700 fill-none group-hover:fill-red-800 group-active:stroke-green-200 group-active:fill-green-600 group-active:duration-0 duration-300">
+                <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                  stroke-width="1.5"></path>
+                <path d="M8 12H16" stroke-width="1.5"></path>
+                <path d="M12 16V8" stroke-width="1.5"></path>
+              </svg>
+            </button>
+          </div>
+        <div *ngFor="let s of service |paginate:{itemsPerPage:pagesize,currentPage:currentPage}"
+            class=" w-[30vw] h-[45vh] bg-blue-50 p-10  rounded-md drop-shadow-2xl hover:scale-105 duration-200 ">
+            <div class="flex justify-center p-3.5">
+                <h1>{{s.name}}</h1>
+            </div>
+            <div class="grid grid-cols-1 gap-2">
+                <p>servicer name :{{s.owner['name']}}</p>
+                <p>location : {{s.location}}</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="ring-2 ring-red-800 rounded-lg px-7">
+                        {{s.date |date}}
+                    </div>
+                    <div class="ring-2 ring-red-800 rounded-lg px-7">
+                        {{ s.time|timeConvert}}
+                    </div>
+                </div>
+                <p>price :₹{{s.price}}</p>
+                <p>details :{{s.service_Details}}</p>
+                <p>booked :{{s.isBooked?'yes':'no'}}</p>
+                <div class="grid grid-cols-2 gap-3">
+                    @if (s.isBooked) {
+                        <button class="bg-red-800 text-white hover:rounded-lg duration-300 ">already booked</button>    
+                    }@else {
+                        <button (click)="edit(s._id)" class="bg-red-800 text-white hover:rounded-lg duration-300 ">edit</button>
+                    }
+                    <button  (click)="serviceListUnlist(s._id,s.isBlocked)" class="bg-red-800 text-white hover:rounded-lg duration-300 ">{{s.isBlocked?'list':'unlist'}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="flex justify-center">
+    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+</div>

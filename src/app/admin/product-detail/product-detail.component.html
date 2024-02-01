@@ -1,0 +1,33 @@
+<div class="flex">
+
+<app-navbar></app-navbar>
+<section class="grid grid-cols-1 ">
+    <div class="grid grid-cols-2">
+        <div class="">
+            <img [src]="product.image[0]" alt="...">
+        </div>
+        <div class="ml-[10vw]   align-text-top justify-items-end  mt-[20vh]">
+            <h1 class=" text-4xl mb-3"><strong>{{product.name}}</strong></h1>
+            <div>
+                <div class=" grid grid-cols-1 justify-center mt-[10vh] w-[25vw] gap-3 ">
+                    <P><strong>PRICE :</strong>₹{{product.price}}</P>
+                    <P><strong>BRAND :</strong>{{product.brand.Brand_name}}</P>
+                    <P><strong>CATEGORY :</strong>{{product.category.category_name}}</P>
+                    <p>GEAR: {{product.gears ? 'Yes' : 'No'}}</p>
+                    <p>BREAK: {{product.brake_type ? 'disc brake' : 'normal'}}</p>
+                    <p>SUSPENSION: {{product.suspension ? 'Yes' : 'No'}}</p>
+                    <h1 class="text-2xl text-gray-700">Cycle Details</h1>
+            <div class="">
+                <p class="break-words">{{product.cycle_Details }}</p>
+            </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+   
+</section>
+</div>

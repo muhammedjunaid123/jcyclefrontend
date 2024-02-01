@@ -1,0 +1,135 @@
+<form [formGroup]="productForm" (ngSubmit)="productupdate(product._id)">
+    <div class=" flex ">
+
+        <div class="border-b border-gray-900/10 p-12 pt-28 pl-20">
+
+            <!-- File input -->
+            <input type="file" #fileInput accept="image/*" multiple (change)="previewImage($event)" formControlpl-3
+                Name="image" class=" mb-8 py-2 px-4 bg-gray-200 text-gray-700 rounded-md">
+
+            <!-- Image preview container -->
+            <div class="grid grid-cols-3">
+               
+                <div *ngFor="let imageUrl of imageUrls;let index=index" class="mb-4 flex items-center">
+                    <div *ngIf="index+1<=apiFileLength" (click)="imgDelete(index,product._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024">
+                            <path fill="currentColor"
+                                d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32m-200 0H360v-72h304z" />
+                        </svg>
+                    </div>
+                    <img [src]="imageUrl" alt="Image Preview" class="w-16 h-16 object-cover rounded-md mr-4">
+                    <!-- You can customize the image size and styling based on your preferences -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="border-b border-gray-900/10 pb-12">
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 w-[50vw]">
+                <div class="sm:col-span-3">
+                    <label for="name" class="block text-sm font-medium leading-6 text-gray-900">name</label>
+                    <div class="mt-2">
+                        <input type="text" name="name" id="name" autocomplete="given-name" formControlName="name"
+                            value="{{product.name}}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="price" class="block text-sm font-medium leading-6 text-gray-900">price</label>
+                    <div class="mt-2">
+                        <input type="number" name="price" id="price" autocomplete="family-name" formControlName="price"
+                            value="{{product.price}}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="stock" class="block text-sm font-medium leading-6 text-gray-900">stock</label>
+                    <div class="mt-2">
+                        <input id="stock" name="stock" type="number" autocomplete="stock" formControlName="stock"
+                            value="{{product.stock}}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
+                    <div class="mt-2">
+                        <select id="brand" name="brand" autocomplete="brand" formControlName="brand"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option value=""> {{product.brand['Brand_name']}}</option>
+                            <option [ngValue]="b._id" *ngFor="let b of brand">
+                                {{ b.Brand_name}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="sm:col-span-3">
+                    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">category</label>
+                    <div class="mt-2">
+                        <select id="category" name="category" autocomplete="category" formControlName="category"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option ngValue="hello">{{product.category['category_name']}}</option>
+                            <option [ngValue]="c._id" *ngFor="let c of category">
+                                {{c.category_name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="sm:col-span-3">
+                    <label for="gears" class="block text-sm font-medium leading-6 text-gray-900">gears</label>
+                    <div class="mt-2">
+                        <select id="gears" name="gears" autocomplete="gears" formControlName="gears"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option [value]="false">NO</option>
+                            <option [value]="true">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="brake" class="block text-sm font-medium leading-6 text-gray-900">brake_type</label>
+                    <div class="mt-2">
+                        <select id="brake" name="brake" autocomplete="brake" formControlName="brake_type"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option [value]="false">normal</option>
+                            <option [value]="true">disc brake</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="suspension" class="block text-sm font-medium leading-6 text-gray-900">suspension</label>
+                    <div class="mt-2">
+                        <select id="suspension" name="suspension" autocomplete="suspension" formControlName="suspension"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option [value]="false">NO</option>
+                            <option [value]="true">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-full">
+                    <label for="about" class="block text-sm font-medium leading-6 text-gray-900">cycle_Details</label>
+                    <div class="mt-2">
+                        <textarea id="about" name="about" rows="3" formControlName="cycle_Details"
+                            [value]="product.cycle_Details"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+        <button routerLink="/admin/product" type="button"
+            class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+        <button type="submit"
+            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">update</button>
+    </div>
+
+</form>

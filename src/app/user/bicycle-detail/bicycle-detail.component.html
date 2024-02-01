@@ -1,0 +1,135 @@
+<app-nav-bar></app-nav-bar>
+<section class="grid grid-cols-1 relative">
+    <div class=" right-20 top-24 absolute ">
+        <div class="  rounded-full p-0 hover:scale-110 flex text-white justify-center absolute w-[5vw] h-[5vh] bottom-0 left-0 rounded-bl-lg"
+            (click)="wishlist(product._id)">
+            @if (!product.wished) {
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                <path fill="#ffffff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                    d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+            </svg>
+            }
+            @else {
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                <path fill="#cc0000" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                    d="M15 8C8.92487 8 4 12.9249 4 19C4 30 17 40 24 42.3262C31 40 44 30 44 19C44 12.9249 39.0751 8 33 8C29.2797 8 25.9907 9.8469 24 12.6738C22.0093 9.8469 18.7203 8 15 8Z" />
+            </svg>
+            }
+
+        </div>
+    </div>
+    <div class="grid grid-cols-2">
+        <div class="box-content px-10 pt-10 ">
+            <p-galleria [value]="product.image" [numVisible]="5" [transitionInterval]="3000" [circular]="true"
+                [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions"
+                [autoPlay]="true" [transitionInterval]="3000">
+                <ng-template pTemplate="item" let-item class="box-content">
+                    <img class="hover:cursor-zoom-in w-[100vw] h-[70vh] " [src]="item"
+                        style="width: 100%; display: block;" />
+                </ng-template>
+            </p-galleria>
+        </div>
+        <div class="ml-[10vw]   align-text-top justify-items-end  mt-[20vh]">
+            <h1 class=" text-4xl mb-3"><strong>{{product.name}}</strong></h1>
+            <div>
+                <div class=" grid grid-cols-1 justify-center mt-[10vh] w-[25vw] gap-3 ">
+                    <P><strong>PRICE :</strong>₹{{product.price}}</P>
+                    <P><strong>BRAND :</strong>{{product.brand['Brand_name']}}</P>
+                    <P><strong>CATEGORY :</strong>{{product.category['category_name']}}</P>
+
+                </div>
+            </div>
+            <div class=" pt-5 flex gap-4 mt-8 ">
+                <div (click)="Addcart(product._id,product.price)">
+                    <button class="bg-red-800 text-white rounded-md w-28 h-10 hover:scale-110 duration-150  ">ADD TO
+                        CART </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 p-8">
+        <div class="grid   rounded-lg p-10 hover:scale-105 duration-150">
+            <h1 class="text-2xl text-gray-700">Highlight</h1>
+            <div class="">
+                <ul>
+                    <li>GEAR :{{product.gears?'Yes':'No'}}</li>
+                    <li>BREAK :{{product.brake_type?'disc brake':'normal'}}</li>
+                    <li>SUSPENTION {{product.suspension?'yes':'No'}}</li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid col-span-2  rounded-lg p-10 hover:scale-105 duration-150">
+            <h1 class="text-2xl text-gray-700">Cycle Details</h1>
+            <div class="">
+                <p class="break-words">{{product.cycle_Details }}</p>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</section>
+<section class="grid justify-center  p-5">
+    <div class="w-[90vw] h-[40vh] grid grid-cols-4  shadow-lg">
+        <div>
+            <p class="font-semibold text-2xl  text-black ml-3 mt-2">Ratings & Reviews</p>
+            <div class="">
+                <div class="font-medium text-1xl  text-black ml-10 mt-4">
+                    {{total}}★ <br>
+                </div>
+                <div class="font-thin text-sm  text-black ml-10">
+                    Ratings &<br>
+                    Reviews
+                </div>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <div class="flex ">
+                <div class="mb-1 text-base font-medium text-black">5★</div>
+                <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[5]/Total*100||0"
+                    ></div>
+                </div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[5]||0}}</div>
+            </div>
+            <div class="flex ">
+                <div class="mb-1 text-base font-medium text-black"> 4★</div>
+                <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[4]/Total*100||0"></div>
+                </div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[4]||0}}</div>
+            </div>
+            <div class="flex ">
+                <div class="mb-1 text-base font-medium text-black"> 3★</div>
+                <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[3]/Total*100||0"></div>
+                </div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[3]||0}}</div>
+            </div>
+            <div class="flex ">
+                <div class="mb-1 text-base font-medium text-black"> 2★</div>
+                <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"[style.width.%]="obj[2]/Total*100||0"></div>
+                </div>
+                <div class="mb-1 text-base font-medium text-black"> {{obj[2]||0}}</div>
+            </div>
+            <div class="flex ">
+                <div class="mb-1 text-base font-medium text-black">1★</div>
+                <div class="w-[40vw] mt-2.5 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" [style.width.%]="obj[1]/Total*100||0"></div>
+                </div>
+                <div class="mb-1 text-base font-medium text-black">{{obj[1]||0}}</div>
+            </div>
+        </div>
+        <div>
+            <div class="grid grid-cols-1 justify-center gap-6  p-4 ml-5">
+                <button (click)=" showReview(product._id)" class="h-[5vh] hover:scale-105 duration-150 border shadow-md">show Reviews</button>
+                <button  (click)=" addReview(product._id)"  class="h-[5vh] hover:scale-105 duration-150 border shadow-md">add Reviews</button>
+            </div>
+        </div>
+    </div>
+</section>

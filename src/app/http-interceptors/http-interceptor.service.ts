@@ -4,10 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ErrorHandleService } from '../services/error/error-handle.service';
-import { log } from 'console';
-import * as e from 'cors';
-import { Router } from 'express';
-import { Route, RouterLink } from '@angular/router';
+
 
 
 @Injectable({
@@ -17,6 +14,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private _spinner: NgxSpinnerService,private _errorHandlerService: ErrorHandleService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('hit');
+    
     this._spinner.show();
     const userToken = localStorage.getItem(environment.UserSecret);
     const servicerToken = localStorage.getItem(environment.servicerSecret);

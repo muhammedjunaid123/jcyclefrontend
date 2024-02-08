@@ -34,13 +34,16 @@ export class BicycleComponent implements OnInit, OnDestroy {
       private _router: Router,
       private _Store: Store) { }
   ngOnInit(): void {
-
-    this._userService.loadBicycle().subscribe({
-      next: (res: bicycle[]) => {
-        this.product = res
-      },
+this.subscribe.add(
+  this._userService.loadBicycle().subscribe({
+    next: (res: bicycle[]) => {
+      this.product = res
+      console.log(this.product,'1');
       
-    })
+    },
+    
+  })
+)
 
     this.productForm = this._fb.group({
       brand: ['', Validators.required],

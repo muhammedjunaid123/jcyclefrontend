@@ -38,9 +38,7 @@ export class UsersService {
     return this._http.get<bicycle[]>(`/product/BestSeller`)
   }
   addCart(id: string, price: number) {
-    const user = localStorage.getItem(environment.UserSecret)
-    console.log(user,'user id for product wishlist info');
-    
+    const user = localStorage.getItem(environment.UserSecret) 
     return this._http.post(`/users/cart`, { id, user, price })
   }
   addWishlist(id: string) {

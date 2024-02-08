@@ -32,7 +32,10 @@ export class UsersService {
   }
   loadBicycle():Observable<bicycle[]> {
     const user = localStorage.getItem(environment.UserSecret)
-    return this._http.get<bicycle[]>(`/product?id=${user}`)
+    let  data=this._http.get<bicycle[]>(`/product?id=${user}`)
+    console.log(data);
+    
+    return data
   }
   loadBestSeller(): Observable<bicycle[]> {
     return this._http.get<bicycle[]>(`/product/BestSeller`)

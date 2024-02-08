@@ -37,6 +37,8 @@ export class BicycleComponent implements OnInit, OnDestroy {
 this.subscribe.add(
   this._userService.loadBicycle().subscribe({
     next: (res: bicycle[]) => {
+      console.log(res);
+      
       this.product = res
       console.log(this.product,'1');
       

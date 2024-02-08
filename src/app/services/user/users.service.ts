@@ -31,7 +31,8 @@ export class UsersService {
     return this._http.patch(`/users/verified?id=${id}`, {})
   }
   loadBicycle() {
-    return this._http.get(`/product`)
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get(`/product?id=${user}`)
   }
   loadBestSeller(): Observable<bicycle[]> {
     return this._http.get<bicycle[]>(`/product/BestSeller`)

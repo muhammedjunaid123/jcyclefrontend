@@ -11,7 +11,7 @@ import { wishProduct, wishlist } from '../types/user.types';
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent  implements OnInit,OnDestroy{
-  wishProduct!:wishProduct[]
+   wishProduct!:wishProduct[]
    i=0
    private subscribe: Subscription = new Subscription()
   constructor(private _userService:UsersService,

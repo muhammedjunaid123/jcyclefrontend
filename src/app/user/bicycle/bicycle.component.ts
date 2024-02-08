@@ -17,7 +17,7 @@ import { Subscription, map } from 'rxjs';
   templateUrl: './bicycle.component.html',
   styleUrl: './bicycle.component.css'
 })
-export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BicycleComponent implements OnInit, OnDestroy {
   product: bicycle[] = []
   Product: bicycle[] = []
   brand: brand[] = []
@@ -35,7 +35,12 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
       private _Store: Store) { }
   ngOnInit(): void {
 
-    this._Store.dispatch(loadBicycle())
+    this._userService.loadBicycle().subscribe({
+      next: (res: bicycle[]) => {
+        this.product = res
+      },
+      
+    })
 
     this.productForm = this._fb.group({
       brand: ['', Validators.required],
@@ -64,27 +69,13 @@ export class BicycleComponent implements OnInit, AfterViewInit, OnDestroy {
     )
 
   }
-  ngAfterViewInit(): void {
-    this.subscribe.add(
-      this._Store.pipe(select(ProductData)).subscribe({
-        next: (res: bicycle[]) => {
-          this.product = res
-         this.Product =this.product
-        },
-        
-      })
-    )
-
-    console.log(this.product, 'after view init');
-
-  }
+  
   refersh() {
-    this._Store.dispatch(loadBicycle())
+   
     this.subscribe.add(
-      this._Store.pipe(select(ProductData)).subscribe({
+      this._userService.loadBicycle().subscribe({
         next: (res: bicycle[]) => {
           this.product = res
-          this.Product =this.product
         },
         
       })

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.development';
+import { Space } from 'src/app/validators/custom-validators';
 
 @Component({
   selector: 'app-otp-verification',
@@ -37,7 +38,8 @@ export class OtpVerificationComponent implements OnInit,OnDestroy {
     this.timer()
     this.sendMail(this.id)
     this.otpVerification = this._fb.group({
-      otpCode: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]+$/)]],
+      otpCode: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]+$/),
+      Space.noSpaceAllowed]],
     })
   }
   sendMail(id: string) {

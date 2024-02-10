@@ -19,7 +19,7 @@ export class SignupComponent implements OnDestroy {
     console.log('signup');
   }
   protected signupForm = this._fb.group({
-    name: ['', WhiteSpace.validate,Space.noSpaceAllowed],
+    name: ['', WhiteSpace.validate],
     email: ['', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9](\.?[a-z0-9]){0,}@g(oogle)?mail\.com$")]],
     Mobile: ['', [Validators.required, Validators.maxLength(10),Validators.pattern(/^\d+$/), Validators.minLength(10),WhiteSpace.validate,Space.noSpaceAllowed]],
     password: ['', [Validators.required, Validators.minLength(6),WhiteSpace.validate,Space.noSpaceAllowed]]
@@ -30,8 +30,8 @@ export class SignupComponent implements OnDestroy {
       this.subscribe.add(
       this._userService.userRegister(this.signupForm.value)
       .subscribe({
-        next: (res:user) => {    
-          this._router.navigate(['otp'], { queryParams: { id: res._id } })
+        next: (res:any) => {                
+          this._router.navigate(['otp'], { queryParams: { id: res['UserData']._id } })
         },
        
       })

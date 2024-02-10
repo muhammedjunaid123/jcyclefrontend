@@ -16,6 +16,7 @@ export class UsersService {
 
   //this is user register api call
   userRegister(userData: any): Observable<user> {
+    
     return this._http.post<user>(`/users/SignUp`, userData)
   }
 

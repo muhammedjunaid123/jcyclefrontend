@@ -20,7 +20,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
 
   constructor(private _userService: UsersService, private _router: Router, private _toastr: ToastrService,private _fb:FormBuilder) { }
   isReadOnly = true
-  service!: service[]
+  service: service[]=[]
   today=new Date()
   minDate = this.today.toISOString().split('T')[0];
   pagesize = 6

@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+
 <div class="flex justify-center mt-4">
     <form [formGroup]="serviceForm" (ngSubmit)="search()">
         <div class="w-[80vw] h-[20vh] bg-gray-100  p-10 grid grid-cols-3 ">
@@ -15,7 +16,7 @@
             <div>
                 <mat-form-field>
                     <mat-label>Choose a date</mat-label>
-                    <input formControlName="date" matInput [matDatepicker]="picker" [min]="minDate">
+                    <input  [readonly]="isReadOnly" formControlName="date" matInput [matDatepicker]="picker" [min]="minDate">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -35,30 +36,34 @@
     <button (click)="search()" class="bg-red-900 w-[7vw] text-white hover:scale-105 duration-300">Refersh</button>
 </div>
 <section class="pb-5 px-5">
-    <div class="grid grid-cols-3 gap-4 pt-[10vh]">
-        <div *ngFor="let s of service | paginate:{itemsPerPage:pagesize,currentPage:currentPage}"
-            class=" w-[30vw] h-[40vh] bg-blue-50 p-10  rounded-md drop-shadow-2xl hover:scale-105 duration-200 ">
-            <div class="flex justify-center p-3.5">
-                <h1>{{s.name}}</h1>
-            </div>
-            <div class="grid grid-cols-1 gap-2">
-                <p>servicer name :{{s.owner['name']}}</p>
-                <p>location : {{s.location}}</p>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="ring-2 ring-red-800 rounded-lg px-7">
-                        {{s.date |date}}
-                    </div>
-                    <div class="ring-2 ring-red-800 rounded-lg px-7">
-                        {{ s.time|timeConvert}}
-                    </div>
-                </div>
-                <p>price :₹{{s.price}}</p>
-                <p>details :{{s.service_Details}}</p>
-                <button (click)="razor(s)" class="bg-red-800 text-white hover:rounded-lg duration-300 ">pay now</button>
-            </div>
-        </div>
-    </div>
+    @if (service.length===0) {
+          <img src="../../../assets/not found list.svg"  class="w-[100vw] h-[100vh] flex justify-center" alt="">
+      }@else {
+          <div class="grid grid-cols-3 gap-4 pt-[10vh]">
+              <div *ngFor="let s of service | paginate:{itemsPerPage:pagesize,currentPage:currentPage}"
+                  class=" w-[30vw] h-[40vh] bg-blue-50 p-10  rounded-md drop-shadow-2xl hover:scale-105 duration-200 ">
+                  <div class="flex justify-center p-3.5">
+                      <h1>{{s.name}}</h1>
+                  </div>
+                  <div class="grid grid-cols-1 gap-2">
+                      <p>servicer name :{{s.owner['name']}}</p>
+                      <p>location : {{s.location}}</p>
+                      <div class="grid grid-cols-2 gap-3">
+                          <div class="ring-2 ring-red-800 rounded-lg px-7">
+                              {{s.date |date}}
+                          </div>
+                          <div class="ring-2 ring-red-800 rounded-lg px-7">
+                              {{ s.time|timeConvert}}
+                          </div>
+                      </div>
+                      <p>price :₹{{s.price}}</p>
+                      <p>details :{{s.service_Details}}</p>
+                      <button (click)="razor(s)" class="bg-red-800 text-white hover:rounded-lg duration-300 ">pay now</button>
+                  </div>
+              </div>
+          </div>
+          <div class="flex justify-center">
+              <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+          </div>
+      } 
 </section>
-<div class="flex justify-center">
-    <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
-</div>

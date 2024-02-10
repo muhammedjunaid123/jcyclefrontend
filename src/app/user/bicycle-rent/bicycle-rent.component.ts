@@ -31,6 +31,7 @@ export class BicycleRentComponent implements OnInit, OnDestroy {
   location!: any
   startDate!: any
   endDate!: any
+  isReadOnly=true
   minDate = this.today.toISOString().split('T')[0];
   range = new FormGroup({
     start: new FormControl<Date | null>(null),

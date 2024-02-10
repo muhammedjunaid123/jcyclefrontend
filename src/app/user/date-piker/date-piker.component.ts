@@ -23,6 +23,7 @@ export class DatePikerComponent implements OnInit, OnDestroy {
     private _router: Router
   ) { }
   private subscribe: Subscription = new Subscription()
+  isReadOnly=true
   isLinear = false;
   locationforapi!: any
   location!: string

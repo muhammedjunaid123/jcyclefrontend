@@ -76,7 +76,13 @@ this.subscribe.add(
   }
   
   refersh() {
-   
+    this.productForm = this._fb.group({
+      brand: ['', Validators.required],
+      category: ['', Validators.required],
+      gears: ['', Validators.required],
+      brake_type: ['', Validators.required],
+      suspension: ['', Validators.required]
+    })
     this.subscribe.add(
       this._userService.loadBicycle().subscribe({
         next: (res: bicycle[]) => {

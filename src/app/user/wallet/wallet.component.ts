@@ -12,7 +12,8 @@ import { wallet } from '../types/user.types';
 export class WalletComponent implements OnInit {
   @Input() wallet:wallet[]=[]
   @Input() TotalWallet:number=0
-
+  pagesize = 6
+  currentPage = 1
   constructor (private _userService:UsersService){}
 ngOnInit(): void {
   console.log(this.wallet,'this is the wallet');

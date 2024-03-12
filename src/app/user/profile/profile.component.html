@@ -60,11 +60,11 @@
         </div>
 
         <div class="col-span-5">
-            @if (wallet.length>0||walletnav!==false) {
+            @if (walletnav!==false) {
             <app-wallet [wallet]="wallet" [TotalWallet]="TotalWallet"></app-wallet>
-            }@else if (order.length>0||ordernav!==false) {
+            }@else if (ordernav!==false) {
             <app-orders-list [order]="order"></app-orders-list>
-            }@else if (address.length>0||addressnav!==false) {
+            }@else if (addressnav!==false) {
             <app-address [addressArr]="address"></app-address>
             }@else if(rentnav!==false){
             <div>
@@ -99,7 +99,7 @@
                     
                     <app-rent-history [rentHistory]="rentHistory"></app-rent-history>
                 }
-            }@else if(servicenav!==false&&service.length>0){
+            }@else if(servicenav!==false){
                <app-srevice-list [service]="service"></app-srevice-list>
             }
             @else {

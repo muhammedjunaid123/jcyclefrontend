@@ -7,9 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchFilterPipe implements PipeTransform {
 
   transform(value: any, args: string): any {
-    console.log(value,args)
     if (!args) return value
-
     args = args.toLowerCase()
     return value.filter((item: any) => {
       return JSON.stringify(item)

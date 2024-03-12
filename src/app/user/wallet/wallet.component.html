@@ -17,7 +17,7 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tbody *ngFor="let w of wallet" >
+            <tbody *ngFor="let w of wallet | paginate:{itemsPerPage:pagesize,currentPage:currentPage} " >
               
                 <tr>
                   <td>{{w.date |date}}</td>
@@ -38,4 +38,7 @@
         </div>
       </div>
     </div>
+    <div class="flex justify-center">
+      <pagination-controls (pageChange)="currentPage=$event"></pagination-controls>
+  </div>
   </div>

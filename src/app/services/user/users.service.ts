@@ -84,6 +84,10 @@ export class UsersService {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.post('/users/cheakout', orderDetails)
   }
+  Adminorder(): Observable<order[]> {
+    const user = localStorage.getItem(environment.UserSecret)
+    return this._http.get<order[]>(`/users/Adminorder?id=${user}`)
+  }
   orderLoad(): Observable<order[]> {
     const user = localStorage.getItem(environment.UserSecret)
     return this._http.get<order[]>(`/users/order?id=${user}`)

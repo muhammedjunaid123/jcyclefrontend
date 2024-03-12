@@ -43,6 +43,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this._adminService.orderLoad().subscribe({
         next: (res: order[]) => {
           this.order = res
+          console.log(this.order,'orders');
+          
 
         },
        

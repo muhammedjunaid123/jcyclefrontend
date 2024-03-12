@@ -7,8 +7,6 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-edit',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './category-edit.component.html',
   styleUrl: './category-edit.component.css'
 })

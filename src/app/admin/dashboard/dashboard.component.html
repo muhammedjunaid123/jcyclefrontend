@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="">
     <app-navbar></app-navbar>
     <div class="">
 
@@ -18,7 +18,11 @@
                         </div>
                         <div class="grid grid-cols-3">
                             <p class=""></p>
-                            <h1 class="col-span-2 p-3 text-2xl">₹{{revenue[0]['revenue']}}</h1>
+                            @if (revenue.length==0) {
+                                <h1 class="col-span-2 p-3 text-2xl">₹0</h1>
+                            }@else {
+                                <h1 class="col-span-2 p-3 text-2xl">₹{{revenue[0]['revenue']}}</h1>
+                            }
                         </div>
                     </div>
                 </section>

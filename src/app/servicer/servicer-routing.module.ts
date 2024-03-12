@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'addservice',component:ServiceInputComponent,canActivate:[servicerGuard]},
   {path:'serviceEdit',component:ServiceEditComponent,canActivate:[servicerGuard]},
   {path:'serviceOrders',component:ServiceOrderListComponent,canActivate:[servicerGuard]},
-  { path: 'chat', title: 'Chat', component: ChatComponent,canActivate:[servicerGuard] },
+  { path: 'chat', component: ChatComponent,canActivate:[servicerGuard] },
   {path:'profile', component:ServicerProfileComponent,canActivate:[servicerGuard]},
   {path:'dashboard',component:ServicerDashboardComponent,canActivate:[servicerGuard]}
 ];

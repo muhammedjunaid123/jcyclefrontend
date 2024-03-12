@@ -33,9 +33,9 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody  *ngFor="let items of order">
+                        <tbody  *ngFor="let items of order  ">
                             <tr
-                                *ngFor="let item of items['product']|paginate:{itemsPerPage:pagesize,currentPage:currentPage} |searchFilter:search">
+                                *ngFor="let item of items['product'] |paginate:{itemsPerPage:pagesize,currentPage:currentPage} | searchFilter:search">
                                 <td>{{item._id}}</td>
                                 <td>{{item.id.name || '--'}}</td>
                                 <td class="break-all overflow-hidden">{{items.Location||'--'}}</td>

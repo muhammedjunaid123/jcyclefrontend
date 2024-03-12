@@ -33,7 +33,8 @@ export class ServicerService {
     return this._http.post('/servicer/login', data)
   }
   getservice(): Observable<service[]> {
-    return this._http.get<service[]>('/servicer/Service')
+    const user = localStorage.getItem(environment.servicerSecret)
+    return this._http.get<service[]>(`/servicer/Service?id=${user}`)
   }
   blockService(id:string,isBlocked:boolean){
     return this._http.patch('/servicer/blockService',{id,isBlocked})
@@ -45,7 +46,7 @@ export class ServicerService {
   return this._http.patch('/servicer/editService',{id,data})
   }
   getUserserviceHistory(){
-    const user = localStorage.getItem(environment.UserSecret)
+    const user = localStorage.getItem(environment.servicerSecret)
     return this._http.get(`/servicer/getUserserviceHistory?id=${user}`)
   }
   serviceOrderCancel(itemId:string,userId:string,price:number){

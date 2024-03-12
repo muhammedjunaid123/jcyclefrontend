@@ -7,8 +7,6 @@ import { user } from 'src/app/user/types/user.types';
 
 @Component({
   selector: 'app-user-details',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })

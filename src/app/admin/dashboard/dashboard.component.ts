@@ -8,62 +8,60 @@ import { Subscription } from 'rxjs';
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit, AfterViewInit,OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
     private subscribe: Subscription = new Subscription()
     constructor(private _adminServcie: AdminService) { }
     basicData!: any
     basicOptions!: any
     data: any;
-    revenue!: any
+    revenue: any = []
     user!: any
     servicer!: any
     orders!: any
     brandOrderCount!: any
     brand!: any
-    category!:any
-    categoryList!:any
-    categoryCount!:any
+    category!: any
+    categoryList!: any
+    categoryCount!: any
     options: any;
     ngOnInit(): void {
         this.subscribe.add(
             this._adminServcie.getDashborad().subscribe({
                 next: (res: any) => {
+                    console.log(res,'rtesss');
                     this.revenue = res['revenue']
                     this.user = res['user']
                     this.servicer = res['servicer']
                     this.orders = res['orders']
                     this.brandOrderCount = res['brandOrderCount']
                     this.brand = res['brand']
-                      this.category=res['category'] 
+                    this.category = res['category']
                     let ar: any = []
-                    let brandCount:any=[]
-                    let categoryList1:any=[]
-                    let categoryCount1:any=[]
-                   this.category.forEach((res:any)=>{
-                    categoryList1.push( res.category_data.category_name)
-                    categoryCount1.push(res.count)
-                   })
-                   this.categoryList=categoryList1
-                    this.categoryCount=categoryCount1
-    
+                    let brandCount: any = []
+                    let categoryList1: any = []
+                    let categoryCount1: any = []
+                    this.category.forEach((res: any) => {
+                        categoryList1.push(res.category_data.category_name)
+                        categoryCount1.push(res.count)
+                    })
+                    this.categoryList = categoryList1
+                    this.categoryCount = categoryCount1
+
                     this.brand.forEach((res: any) => {
-                        let c=0
-                        this.brandOrderCount.forEach((resB:any)=>{
-                           if(res._id===resB._id){
-                            c=resB.count
-                           }
+                        let c = 0
+                        this.brandOrderCount.forEach((resB: any) => {
+                            if (res._id === resB._id) {
+                                c = resB.count
+                            }
                         })
                         brandCount.push(c)
                         ar.push(res.Brand_name)
                     });
                     this.brand = ar
-                  this.brandOrderCount= brandCount
-                    
-                  
-                    
-    
-    
-    
+                    this.brandOrderCount = brandCount
+
+                    this.chart()
+
                 }
             })
         )
@@ -71,7 +69,7 @@ export class DashboardComponent implements OnInit, AfterViewInit,OnDestroy {
 
 
     }
-    ngAfterViewInit(): void {
+    chart() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');

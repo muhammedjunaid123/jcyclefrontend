@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/user/users.service';
 import { user } from 'src/app/user/types/user.types';
 import { ServicerService } from 'src/app/services/servicer/servicer.service';
+import { Space, WhiteSpace } from 'src/app/validators/custom-validators';
 
 @Component({
   selector: 'app-servicersignup',
@@ -20,10 +21,10 @@ export class ServicersignupComponent implements OnDestroy {
     console.log('signup');
   }
   protected signupForm = this._fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    name: ['', WhiteSpace.validate],
+    email: ['', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9](\.?[a-z0-9]){0,}@g(oogle)?mail\.com$")]],
+    phone: ['', [Validators.required, Validators.maxLength(10),Validators.pattern(/^\d+$/), Validators.minLength(10),WhiteSpace.validate,Space.noSpaceAllowed]],
+    password: ['', [Validators.required, Validators.minLength(6),WhiteSpace.validate,Space.noSpaceAllowed]]
   })
   signup() {
     this.user = this.signupForm.controls

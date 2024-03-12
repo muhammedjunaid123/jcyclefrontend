@@ -19,6 +19,9 @@ import { AdminRentComponent } from './admin-rent/admin-rent.component';
 import { AdminServicersComponent, } from './servicers/servicers.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartModule } from 'primeng/chart';
+import { BrandEditComponent } from './brand-edit/brand-edit.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 
@@ -37,7 +40,10 @@ import { ChartModule } from 'primeng/chart';
     ListOrderComponent,
     AdminRentComponent,
     AdminServicersComponent,
-    DashboardComponent
+    DashboardComponent,
+    BrandEditComponent,
+    CategoryEditComponent,
+    UserDetailsComponent
 
   ],
   imports: [

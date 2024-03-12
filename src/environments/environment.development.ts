@@ -1,5 +1,5 @@
 export const environment = {
-    production:false,
+    production: true,
     APIuRL:'https://jcycle.shop',
     UserSecret:'JwtUserJcycle',
     AdminSecrect:'JwtadminJcycle',

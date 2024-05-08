@@ -75,12 +75,12 @@
     </div>
     <div class="flex absolute justify-center" *ngIf="mobMenu">
       <ul class="bg-white sm:hidden w-[75vw]">
-        <li class="border border-sol  hover:bg-red-900 hover:text-white">Home</li>
-        <li class="border border-sol  hover:bg-red-900 hover:text-white">Bicycle</li>
-        <li class="border border-sol  hover:bg-red-900 hover:text-white">Rent</li>
-        <li class="border border-sol  hover:bg-red-900 hover:text-white">Service</li>
-        <li class="border border-sol  hover:bg-red-900 hover:text-white">🛒Cart</li>
-        <li class="border border-solid hover:bg-red-900 hover:text-white">Wishlist</li>
+        <li routerLink="" class="border border-sol  hover:bg-red-900 hover:text-white">Home</li>
+        <li routerLink="/bicycle" class="border border-sol  hover:bg-red-900 hover:text-white">Bicycle</li>
+        <li routerLink="/rent" class="border border-sol  hover:bg-red-900 hover:text-white">Rent</li>
+        <li routerLink="/service" class="border border-sol  hover:bg-red-900 hover:text-white">Service</li>
+        <li routerLink="/cart" class="border border-sol  hover:bg-red-900 hover:text-white">🛒Cart</li>
+        <li routerLink="/wishlist" class="border border-solid hover:bg-red-900 hover:text-white">Wishlist</li>
       </ul>
     </div>
     <!-- Mobile menu, show/hide based on menu state. -->
